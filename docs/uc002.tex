@@ -1,0 +1,53 @@
+\chapter{Consultar dados do cliente - UC002} \label{uc002}
+
+\section{Breve descrição}
+
+Com base nos dados do cliente, no momento do pedido, o atendente realizará uma pesquisa pelo número do telefone do cliente, caso esteja cadastrado, os seus dados deverão ser exibidos, caso contrário, deverá cadastrá-lo.
+
+\section{Atores}
+
+Este caso de uso é exclusivo do funcionário da empresa - Casa das Marmitas.
+
+\section{Pré-condições}
+
+\begin{enumerate}
+	\item O funcionário deve estar logado no sistema e com acesso à função.
+\end{enumerate}
+
+\section{Fluxo de evento}
+
+\subsection{Fluxo básico}
+
+\begin{enumerate}
+	\item O funcionário informa, em tela fornecida pelo sistema, o numero de telefone do cliente	
+	\item O sistema verifica se o cliente é cadastrado
+	\item O sistema vai para a tela de pedido
+\end{enumerate}
+
+\subsection{Fluxo alternativo}
+
+\begin{enumerate}
+	\item Desistência
+	\begin{enumerate}
+		\item Se o funcionário selecionar a opção \textbf{Cancelar}, o caso de uso se encerra, voltando o
+		sistema à tela principal.
+	\end{enumerate}
+	\item Cliente não cadastrado
+	\begin{enumerate}
+		\item Se o cliente não foi cadastrado, o caso de uso se encerra, abrindo em seguida o caso de uso \nameref{uc001}.
+	\end{enumerate}
+\end{enumerate}
+
+\section{Requerimentos especiais}
+
+Não aplicável.
+
+\section{Pós-condições}
+
+\begin{enumerate}
+	\item Abre o caso de uso \nameref{uc007}, se a pesquisa pelo número do telefone do cliente foi realizada.
+\end{enumerate}
+
+\section{Pontos de extensão}
+
+Nenhum.

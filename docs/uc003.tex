@@ -1,0 +1,68 @@
+\chapter{Cadastrar dados do motoboy - UC003} \label{uc003}
+
+\section{Breve descrição}
+
+O serviço de entrega é terceirizado, onde os motoboys são vinculados a uma empresa e recebem apenas pelas entregas realizadas.
+
+Caso o motoboy não esteja cadastrado, o gerente fará o seu cadastro, informando estes dados: Nome do entregador, CPF, RG, celular e empresa vinculada (Nome da empresa que o motoboy trabalha), ou seja, também será necessário que a empresa esteja cadastrada no sistema.
+
+\section{Atores}
+
+Este caso de uso é exclusivo do gerente da empresa - Casa das Marmitas.
+
+\section{Pré-condições}
+
+\begin{enumerate}
+	\item O gerente deve estar logado no sistema e com acesso à função.
+\end{enumerate}
+
+\section{Fluxo de evento}
+
+\subsection{Fluxo básico}
+
+\begin{enumerate}
+	\item O gerente informa, em tela fornecida pelo sistema, os seguintes dados
+	\begin{enumerate}
+		\item Nome do entregador, \emph{String} até 100 caracteres, obrigatório
+		\item Número do CPF do entregador, \emph{String} até 11 caracteres, obrigatório
+		\item Número do RG do entregador, \emph{String} até 9 caracteres, obrigatório
+		\item Número do celular do entregador, \emph{String} até 11 caracteres, obrigatório		
+		\item Nome da empresa de entrega, \emph{String} até 50 caracteres, obrigatório
+	\end{enumerate}
+	\item Ao carregar o caso de uso \nameref{uc011}, o sistema verifica se foi informado um nome de empresa de entrega válido
+	\item O sistema verifica se o entregador foi cadastrado anteriormente
+	\item O sistema armazena os dados relativos ao entregador
+\end{enumerate}
+
+\subsection{Fluxo alternativo}
+
+\begin{enumerate}
+	\item Desistência
+	\begin{enumerate}
+		\item Se o gerente selecionar a opção \textbf{Cancelar}, o caso de uso se encerra, voltando o
+		sistema à tela principal.
+	\end{enumerate}
+	\item Empresa de entrega não cadastrada
+	\begin{enumerate}
+		\item Se a empresa de entrega não foi cadastrada, o caso de uso se encerra, abrindo em seguida o caso de uso \nameref{uc004}.
+	\end{enumerate}
+	\item Entregador cadastrado anteriormente
+	\begin{enumerate}
+		\item Se o entregador já foi cadastrado, o caso de uso se encerra, voltando o
+		sistema à tela principal.
+	\end{enumerate}
+\end{enumerate}
+
+\section{Requerimentos especiais}
+
+Não aplicável.
+
+\section{Pós-condições}
+
+\begin{enumerate}
+	\item Entregador incluído, se as regras de validação forem verificadas.
+\end{enumerate}
+
+\section{Pontos de extensão}
+
+Nenhum.

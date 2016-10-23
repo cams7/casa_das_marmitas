@@ -1,0 +1,72 @@
+% ---
+% Capitulo que faz uso de elementos do glossario
+% ---
+\chapter{Cadastrar cliente - UC001} \label{uc001}
+ 
+\section{Breve descrição}
+ 
+Caso o cliente não esteja cadastrado, o atendente fará o seu cadastro, informando estes dados: Nome do cliente, telefone de contato, endereço, ponto de referência e data de nascimento.
+
+\section{Atores}
+
+Este caso de uso é exclusivo do funcionário da empresa - Casa das Marmitas.
+
+\section{Pré-condições}
+
+\begin{enumerate}
+	\item O funcionário deve estar logado no sistema e com acesso à função.
+\end{enumerate}
+
+\section{Fluxo de evento}
+
+\subsection{Fluxo básico}
+
+\begin{enumerate}
+	\item O funcionário informa, em tela fornecida pelo sistema, os seguintes dados
+	\begin{enumerate}
+		\item Nome do cliente, \emph{String} até 100 caracteres, obrigatório
+		\item Data de nascimento do cliente, \emph{Date}
+		\item Número de telefone do cliente, \emph{String} até 11 caracteres, obrigatório
+		\item Endereço do cliente
+		\begin{enumerate}
+			\item CEP
+			\item Cidade
+			\item Bairro
+			\item Logradouro
+			\item Numero
+			\item Complemento
+		\end{enumerate}
+		\item Ponto de referência próximo à casa do cliente, \emph{String} até 200 caracteres
+	\end{enumerate}
+	\item O sistema verifica se o cliente foi cadastrado anteriormente
+	\item O sistema armazena os dados relativos ao cliente
+\end{enumerate}
+
+\subsection{Fluxo alternativo}
+
+\begin{enumerate}
+	\item Desistência
+	\begin{enumerate}
+		\item Se o funcionário selecionar a opção \textbf{Cancelar}, o caso de uso se encerra, voltando o
+		sistema à tela principal.
+	\end{enumerate}
+	\item Cliente cadastrado anteriormente
+	\begin{enumerate}
+		\item Se o cliente já foi cadastrado, o caso de uso se encerra, voltando o
+		sistema à tela principal.
+	\end{enumerate}
+\end{enumerate}
+
+\section{Requerimentos especiais}
+
+Não aplicável.
+
+\section{Pós-condições}
+
+\begin{enumerate}
+	\item Cliente incluído, se as regras de validação forem verificadas.
+\end{enumerate}
+
+\section{Pontos de extensão}
+
+Nenhum.

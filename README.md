@@ -1,10 +1,10 @@
 Portfólio do 4º semestre da faculdade UNOPAR
 ========================
 * Autor: César Magalhães
-* Tecnologias: **JPA 2.1**, **Hibernate 5.1.0**, **JSF 2**, **Primefaces 5.3**, **EJB 3.1**, **Jasperreports 6.2.1**
+* Tecnologias: MiKTeX 2.9.6069, TeXstudio 2.11.0, **JPA 2.1**, **Hibernate 5.1.0**, **JSF 2**, **Primefaces 5.3**, **EJB 3.1**, **Jasperreports 6.2.1**
 * Banco de dados: **PostgreSQL**, **H2**
 * Resumo: Portfólio do 4º semestre da faculdade UNOPAR
-* Linguagem: **Java 8**
+* Linguagem: TeX, **Java 8**
 * Fonte: <https://github.com/cams7/casa_das_marmitas>
 * Site: <http://crud-cams7.rhcloud.com>
 
@@ -14,6 +14,8 @@ Portfólio do 4º semestre da faculdade UNOPAR.
 
 Sistemas requeridos
 -------------------
+* [MiKTeX 2.9.6069] (http://miktex.org/)
+* [TeXstudio 2.11.0] (http://www.texstudio.org/)
 * [JDK 1.8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html?ssSourceSiteId=otnpt)
 * [Maven 3.3.9](https://maven.apache.org/download.cgi)
 * [Wildfly 10.0.0.Final](http://wildfly.org/downloads/)
@@ -22,6 +24,8 @@ Sistemas requeridos
 
 Para rodar o programa
 -------------------
+* Instale o MiKTeX 2.9.6069
+* Instale o TeXstudio 2.11.0
 * Instale os seguintes programas: **JDK 8**, **Git**, **PostgreSQL**, caso ainda não os tenha instalados.
 * No **Postgres**, crie um banco o qual o nome seja **casa_das_marmitas**.
 * Configure a variável de ambiente do **Maven 3.3.9**, em seguida, reinicie o PC.
