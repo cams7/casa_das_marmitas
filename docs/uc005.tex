@@ -2,21 +2,66 @@
 
 \section{Breve descrição}
 
+O gerente cadastra as marmitas que serão vendidas, informando os seus dados.
+
+\begin{table}[htb]
+	\ABNTEXfontereduzida
+	\caption[Dados referentes às marmitas]{Dados referentes às marmitas.}
+	\centering
+	\label{tab-marmitas}
+	\begin{tabular}{|p{4cm}|p{8cm}|p{2cm}|}
+		%\hline
+		\textbf{Nome do produto} & \textbf{Descrição}                               & \textbf{Custo} \\ \hline
+		Marmita1                           & Arroz, feijão, bife e salada de tomate           & R\$ 15,00      \\ \hline
+		Marmita2                           & Arroz, feijão, bife e ovo frito                  & R\$ 18,00      \\ \hline
+		Marmita3                           & Arroz, feijão, file de frango, creme de milho    & R\$ 14,00      \\ \hline
+		Marmita4                           & Arroz, feijão, file de frango e salada de tomate & R\$ 10,00
+	\end{tabular}
+\end{table}
+
 \section{Atores}
 
+Este caso de uso é exclusivo do gerente da empresa - Casa das Marmitas.
+
 \section{Pré-condições}
+
+\begin{enumerate}
+	\item O gerente deve estar logado no sistema e com acesso à função.
+\end{enumerate}
 
 \section{Fluxo de evento}
 
 \subsection{Fluxo básico}
 
+\begin{enumerate}
+	\item O gerente informa, em tela fornecida pelo sistema, os seguintes dados:
+	\begin{enumerate}
+		\item Nome do produto, \emph{String} até 30 caracteres, obrigatório.
+		\item Descrição dos ingredientes da marmita, \emph{String} até 200 caracteres, obrigatório.
+		\item Custo da marmita, \emph{Float}, obrigatório.
+		\item Tamanho da marmita, \emph{Enum}, obrigatório.
+	\end{enumerate}
+	\item O sistema armazena os dados relativos à marmita.
+\end{enumerate}
+
 \subsection{Fluxo alternativo}
+
+\begin{enumerate}
+	\item Desistência:
+	\begin{enumerate}
+		\item Se o gerente seleciona a opção \textbf{Cancelar}, então este caso de uso se encerra, voltando o sistema à tela principal.
+	\end{enumerate}
+\end{enumerate}
 
 \section{Requerimentos especiais}
 
 Não aplicável.
 
 \section{Pós-condições}
+
+\begin{enumerate}
+	\item Marmita incluída, se as regras de validação forem verificadas.
+\end{enumerate}
 
 \section{Pontos de extensão}
 

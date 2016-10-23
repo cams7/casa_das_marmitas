@@ -2,7 +2,7 @@
 
 \section{Breve descrição}
 
-Com base nos dados do cliente, no momento do pedido, o atendente realizará uma pesquisa pelo número do telefone do cliente, caso esteja cadastrado, os seus dados deverão ser exibidos, caso contrário, deverá cadastrá-lo.
+Com base nos dados do cliente, no momento do pedido, o atendente realizará uma pesquisa pelo número do telefone do cliente, caso esteja cadastrado, os seus dados deverão ser exibidos.
 
 \section{Atores}
 
@@ -19,22 +19,21 @@ Este caso de uso é exclusivo do funcionário da empresa - Casa das Marmitas.
 \subsection{Fluxo básico}
 
 \begin{enumerate}
-	\item O funcionário informa, em tela fornecida pelo sistema, o numero de telefone do cliente	
-	\item O sistema verifica se o cliente é cadastrado
-	\item O sistema vai para a tela de pedido
+	\item O funcionário informa, em tela fornecida pelo sistema, o numero de telefone do cliente.	
+	\item O sistema verifica se o cliente é cadastrado.
+	\item O sistema exibe os dados do cliente.
 \end{enumerate}
 
 \subsection{Fluxo alternativo}
 
 \begin{enumerate}
-	\item Desistência
+	\item Desistência:
 	\begin{enumerate}
-		\item Se o funcionário selecionar a opção \textbf{Cancelar}, o caso de uso se encerra, voltando o
-		sistema à tela principal.
+		\item Se o funcionário seleciona a opção \textbf{Cancelar}, então este caso de uso se encerra, voltando o sistema à tela principal.
 	\end{enumerate}
-	\item Cliente não cadastrado
+	\item Cliente não cadastrado:
 	\begin{enumerate}
-		\item Se o cliente não foi cadastrado, o caso de uso se encerra, abrindo em seguida o caso de uso \nameref{uc001}.
+		\item Se o cliente não foi cadastrado, então este caso de uso se encerra, abrindo em seguida o caso de uso \nameref{uc001}.
 	\end{enumerate}
 \end{enumerate}
 
@@ -45,7 +44,7 @@ Não aplicável.
 \section{Pós-condições}
 
 \begin{enumerate}
-	\item Abre o caso de uso \nameref{uc007}, se a pesquisa pelo número do telefone do cliente foi realizada.
+	\item Habilita o caso de uso \nameref{uc007} ao funcionário, se a pesquisa pelo número do telefone do cliente foi realizada.
 \end{enumerate}
 
 \section{Pontos de extensão}

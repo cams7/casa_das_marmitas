@@ -2,21 +2,66 @@
 
 \section{Breve descrição}
 
+Caso a empresa de entrega - onde os motoboys são vinculados - não esteja cadastrada, o gerente irá cadastra-la, informando os seus dados.
+
 \section{Atores}
 
+Este caso de uso é exclusivo do gerente da empresa - Casa das Marmitas.
+
 \section{Pré-condições}
+
+\begin{enumerate}
+	\item O gerente deve estar logado no sistema e com acesso à função.
+\end{enumerate}
 
 \section{Fluxo de evento}
 
 \subsection{Fluxo básico}
 
+\begin{enumerate}
+	\item O gerente informa, em tela fornecida pelo sistema, os seguintes dados:
+	\begin{enumerate}
+		\item Nome da empresa, \emph{String} até 100 caracteres, obrigatório.
+		\item Número do CNPJ da empresa, \emph{String} até 14 caracteres, obrigatório.
+		\item E-mail da empresa, \emph{String} até 30 caracteres, obrigatório.
+		\item Número do telefone da empresa, \emph{String} até 11 caracteres, obrigatório.
+		\item Endereço da empresa:
+		\begin{enumerate}
+			\item CEP.
+			\item Cidade.
+			\item Bairro.
+			\item Logradouro.
+			\item Numero.
+			\item Complemento.
+		\end{enumerate}	
+	\end{enumerate}
+	\item O sistema verifica se a empresa foi cadastrada anteriormente.
+	\item O sistema armazena os dados relativos à empresa.
+\end{enumerate}
+
 \subsection{Fluxo alternativo}
+
+\begin{enumerate}
+	\item Desistência:
+	\begin{enumerate}
+		\item Se o gerente seleciona a opção \textbf{Cancelar}, então este caso de uso se encerra, voltando o sistema à tela principal.
+	\end{enumerate}
+	\item Empresa de entrega cadastrada anteriormente:
+	\begin{enumerate}
+		\item Se a empresa de entrega já foi cadastrada, então este caso de uso se encerra, voltando o
+		sistema à tela principal.
+	\end{enumerate}
+\end{enumerate}
 
 \section{Requerimentos especiais}
 
 Não aplicável.
 
 \section{Pós-condições}
+
+\begin{enumerate}
+	\item Empresa de entrega incluída, se as regras de validação forem verificadas.
+\end{enumerate}
 
 \section{Pontos de extensão}
 
