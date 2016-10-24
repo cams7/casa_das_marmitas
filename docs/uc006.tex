@@ -1,22 +1,51 @@
-\chapter{Cadastrar taxa de entrega - UC006} \label{uc006}
+\chapter{Manter taxa de entrega - UC006} \label{uc006}
 
 \section{Breve descrição}
 
+O gerente cadastra e altera o valor da taxa de entrega.
+
+Taxa de entrega: R\$ 4,50
+
 \section{Atores}
 
+Este caso de uso é exclusivo do gerente da empresa - Casa das Marmitas.
+
 \section{Pré-condições}
+
+\begin{enumerate}
+	\item O gerente deve estar logado no sistema e com acesso à função.
+\end{enumerate}
 
 \section{Fluxo de evento}
 
 \subsection{Fluxo básico}
 
+\begin{enumerate}
+	\item O gerente informa, em tela fornecida pelo sistema, os seguintes dados:
+	\begin{enumerate}
+		\item Valor da taxa de entrega, \emph{Float}, obrigatório.
+	\end{enumerate}
+	\item O sistema armazena o novo valor da taxa de entrega.
+\end{enumerate}
+
 \subsection{Fluxo alternativo}
+
+\begin{enumerate}
+	\item Desistência:
+	\begin{enumerate}
+		\item Se o gerente seleciona a opção \textbf{Cancelar}, então este caso de uso se encerra, voltando o sistema à tela principal.
+	\end{enumerate}
+\end{enumerate}
 
 \section{Requerimentos especiais}
 
 Não aplicável.
 
 \section{Pós-condições}
+
+\begin{enumerate}
+	\item Valor da taxa de entrega alterado, se as regras de validação forem verificadas.
+\end{enumerate}
 
 \section{Pontos de extensão}
 

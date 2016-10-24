@@ -2,21 +2,50 @@
 
 \section{Breve descrição}
 
+Para gerenciar os pedidos realizados pelo cliente, o atendente deverá informar os dados do pedido.
+
 \section{Atores}
 
+Este caso de uso é exclusivo do funcionário da empresa - Casa das Marmitas.
+
 \section{Pré-condições}
+
+\begin{enumerate}
+	\item O funcionário deve estar logado no sistema e com acesso à função.
+\end{enumerate}
 
 \section{Fluxo de evento}
 
 \subsection{Fluxo básico}
 
+\begin{enumerate}
+	\item Após acessar o caso de uso \nameref{uc002}, O funcionário informa, em tela fornecida pelo sistema, os seguintes dados:
+	\begin{enumerate}
+		\item Ao carregar o caso de uso \nameref{uc012}, o sistema verifica se foi informado um nome de produto válido.
+		\item Quantidade de marmitas, \emph{Short}, obrigatório.		
+	\end{enumerate}
+	\item O sistema carrega o caso de uso \nameref{uc008}.
+	\item O sistema armazena os dados relativos ao pedido.
+\end{enumerate}
+
 \subsection{Fluxo alternativo}
+
+\begin{enumerate}
+	\item Desistência:
+	\begin{enumerate}
+		\item Se o funcionário seleciona a opção \textbf{Cancelar}, então este caso de uso se encerra, voltando o sistema à tela principal.
+	\end{enumerate}	
+\end{enumerate}
 
 \section{Requerimentos especiais}
 
 Não aplicável.
 
 \section{Pós-condições}
+
+\begin{enumerate}
+	\item Pedido incluído, se as regras de validação forem verificadas.
+\end{enumerate}
 
 \section{Pontos de extensão}
 

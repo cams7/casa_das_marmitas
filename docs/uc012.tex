@@ -1,0 +1,52 @@
+\chapter{Consultar dados da marmita - UC012} \label{uc012}
+
+\section{Breve descrição}
+
+Com base nos dados da marmita, no momento do cadastro do pedido, o funcionário realizará uma pesquisa pelo nome do produto, caso esteja cadastrada, os seus dados deverão ser exibidos.
+
+\section{Atores}
+
+Este caso de uso é exclusivo do funcionário da empresa - Casa das Marmitas.
+
+\section{Pré-condições}
+
+\begin{enumerate}
+	\item O funcionário deve estar logado no sistema e com acesso à função.
+\end{enumerate}
+
+\section{Fluxo de evento}
+
+\subsection{Fluxo básico}
+
+\begin{enumerate}
+	\item O funcionário informa, em tela fornecida pelo sistema, o nome do produto.	
+	\item O sistema verifica se a marmita é cadastrada.
+	\item O sistema exibe os dados da marmita.
+\end{enumerate}
+
+\subsection{Fluxo alternativo}
+
+\begin{enumerate}
+	\item Desistência:
+	\begin{enumerate}
+		\item Se o gerente seleciona a opção \textbf{Cancelar}, então este caso de uso se encerra, voltando o sistema à tela principal.
+	\end{enumerate}
+	\item Marmita não cadastrada:
+	\begin{enumerate}
+		\item Se a marmita não foi cadastrada, então este caso de uso se encerra, abrindo em seguida o caso de uso \nameref{uc005}.
+	\end{enumerate}
+\end{enumerate}
+
+\section{Requerimentos especiais}
+
+Não aplicável.
+
+\section{Pós-condições}
+
+\begin{enumerate}
+	\item Exibe os dados da marmita, se a pesquisa pelo nome do produto foi realizada.
+\end{enumerate}
+
+\section{Pontos de extensão}
+
+Nenhum.
