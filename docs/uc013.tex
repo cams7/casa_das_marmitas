@@ -2,15 +2,53 @@
 
 \section{Breve descrição}
 
+Após a pesquisa ou o cadastro do cliente, o sistema carrega um formulário com os dados do mesmo.
+
 \section{Atores}
 
+Este caso de uso é exclusivo do funcionário da empresa - Casa das Marmitas.
+
 \section{Pré-condições}
+
+\begin{enumerate}
+	\item O funcionário deve estar logado no sistema e com acesso à função.
+\end{enumerate}
 
 \section{Fluxo de evento}
 
 \subsection{Fluxo básico}
 
+\begin{enumerate}
+	\item Na tela fornecida pelo sistema, o funcionário visualiza:
+	\begin{enumerate}
+		\item A opção \textbf{Alterar} habilitada.
+		\item A opção \textbf{Exluir} habilitada.
+		\item A opção \textbf{Registrar Pedido} habilitada.
+	\end{enumerate}		
+\end{enumerate}
+
 \subsection{Fluxo alternativo}
+
+\begin{enumerate}
+	\item O funcionário não tem permissão de alterar os dados cliente:
+	\begin{enumerate}
+		\item A opção \textbf{Alterar} desabilitada.
+	\end{enumerate}
+	\item O funcionário não tem permissão de exluir o cliente:
+	\begin{enumerate}
+		\item A opção \textbf{Exluir} desabilitada.
+	\end{enumerate}
+	\item O funcionário não tem permissão de registrar o pedido do cliente:
+	\begin{enumerate}
+		\item A opção \textbf{Registar Pedido} desabilitada.
+	\end{enumerate}	
+	\item Desistência:
+	\begin{enumerate}
+		\item O funcionário seleciona a opção \textbf{Cancelar}.
+		\item O sistema encerra o caso de uso atual.
+		\item O sistema carrega a tela principal.
+	\end{enumerate}
+\end{enumerate}
 
 \section{Requerimentos especiais}
 

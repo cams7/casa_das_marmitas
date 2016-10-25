@@ -19,9 +19,8 @@ Este caso de uso é exclusivo do funcionário da empresa - Casa das Marmitas.
 \subsection{Fluxo básico}
 
 \begin{enumerate}
-	\item O funcionário informa, em tela fornecida pelo sistema, o nome do produto.	
-	\item O sistema verifica se a marmita é cadastrada.
-	\item O sistema exibe os dados da marmita.
+	\item O funcionário informa, no campo de pequisa, o nome do produto.
+	\item O funcionário seleciona a opção \textbf{Buscar}.
 \end{enumerate}
 
 \subsection{Fluxo alternativo}
@@ -29,11 +28,9 @@ Este caso de uso é exclusivo do funcionário da empresa - Casa das Marmitas.
 \begin{enumerate}
 	\item Desistência:
 	\begin{enumerate}
-		\item Se o gerente seleciona a opção \textbf{Cancelar}, então este caso de uso se encerra, voltando o sistema à tela principal.
-	\end{enumerate}
-	\item Marmita não cadastrada:
-	\begin{enumerate}
-		\item Se a marmita não foi cadastrada, então este caso de uso se encerra, abrindo em seguida o caso de uso \nameref{uc005}.
+		\item O funcionário seleciona a opção \textbf{Cancelar}.
+		\item O sistema encerra o caso de uso atual.
+		\item O sistema carrega a tela principal.
 	\end{enumerate}
 \end{enumerate}
 
@@ -44,7 +41,8 @@ Não aplicável.
 \section{Pós-condições}
 
 \begin{enumerate}
-	\item Exibe os dados da marmita, se a pesquisa pelo nome do produto foi realizada.
+	\item O sistema encerra o caso de uso atual.
+	\item O sistema carrega o caso de uso \nameref{uc017}.
 \end{enumerate}
 
 \section{Pontos de extensão}

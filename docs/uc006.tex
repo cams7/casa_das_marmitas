@@ -25,15 +25,23 @@ Este caso de uso é exclusivo do gerente da empresa - Casa das Marmitas.
 	\begin{enumerate}
 		\item Valor da taxa de entrega, \emph{Float}, obrigatório.
 	\end{enumerate}
+	\item O gerente seleciona a opção \textbf{Salvar}.
 	\item O sistema armazena o novo valor da taxa de entrega.
 \end{enumerate}
 
 \subsection{Fluxo alternativo}
 
 \begin{enumerate}
+	\item Dados incorretos:
+	\begin{enumerate}
+		\item O gerente informa algum dado incorreto no formulário de cadastro. 
+		\item O sistema exibe uma mensagem de advertência especifica ao erro.
+	\end{enumerate}	
 	\item Desistência:
 	\begin{enumerate}
-		\item Se o gerente seleciona a opção \textbf{Cancelar}, então este caso de uso se encerra, voltando o sistema à tela principal.
+		\item O gerente seleciona a opção \textbf{Cancelar}.
+		\item O sistema encerra o caso de uso atual.
+		\item O sistema carrega a tela principal.
 	\end{enumerate}
 \end{enumerate}
 
@@ -42,10 +50,6 @@ Este caso de uso é exclusivo do gerente da empresa - Casa das Marmitas.
 Não aplicável.
 
 \section{Pós-condições}
-
-\begin{enumerate}
-	\item Valor da taxa de entrega alterado, se as regras de validação forem verificadas.
-\end{enumerate}
 
 \section{Pontos de extensão}
 

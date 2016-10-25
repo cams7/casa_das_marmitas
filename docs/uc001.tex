@@ -35,21 +35,29 @@ Este caso de uso é exclusivo do funcionário da empresa - Casa das Marmitas.
 		\end{enumerate}
 		\item Ponto de referência próximo à casa do cliente, \emph{String} até 200 caracteres.
 	\end{enumerate}
-	\item O sistema verifica se o cliente foi cadastrado anteriormente.
+%	\item O sistema verifica se o cliente foi cadastrado anteriormente.
+	\item O funcionário seleciona a opção \textbf{Salvar}. 
 	\item O sistema armazena os dados relativos ao cliente.
 \end{enumerate}
 
 \subsection{Fluxo alternativo}
 
 \begin{enumerate}
-	\item Desistência:
+	\item Dados incorretos:
 	\begin{enumerate}
-		\item Se o funcionário seleciona a opção \textbf{Cancelar}, então este caso de uso se encerra, voltando o sistema à tela principal.
+		\item O funcionário informa algum dado incorreto no formulário de cadastro. 
+		\item O sistema exibe uma mensagem de advertência especifica ao erro.
 	\end{enumerate}
 	\item Cliente cadastrado anteriormente:
 	\begin{enumerate}
-		\item Se o cliente já foi cadastrado, então este caso de uso se encerra, voltando o
-		sistema à tela principal.
+		\item O funcionário informa os dados de um cliente já cadastrado. 
+		\item O sistema exibe a mensagem de advertência - \textbf{O cliente informado já foi cadastrado anteriormente no sistema}.
+	\end{enumerate}	
+	\item Desistência:
+	\begin{enumerate}
+		\item O funcionário seleciona a opção \textbf{Cancelar}.
+		\item O sistema encerra o caso de uso atual.
+		\item O sistema carrega a tela principal.
 	\end{enumerate}
 \end{enumerate}
 
@@ -60,7 +68,8 @@ Não aplicável.
 \section{Pós-condições}
 
 \begin{enumerate}
-	\item Cliente incluído, se as regras de validação forem verificadas.
+	\item O sistema encerra o caso de uso atual.
+	\item O sistema carrega o caso de uso \nameref{uc013}.
 \end{enumerate}
 
 \section{Pontos de extensão}

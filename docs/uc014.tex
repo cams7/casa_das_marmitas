@@ -2,15 +2,48 @@
 
 \section{Breve descrição}
 
+Após a pesquisa ou o cadastro da empresa de entrega, o sistema carrega um formulário com os dados da mesma.
+
 \section{Atores}
 
+Este caso de uso é exclusivo do gerente da empresa - Casa das Marmitas.
+
 \section{Pré-condições}
+
+\begin{enumerate}
+	\item O gerente deve estar logado no sistema e com acesso à função.
+\end{enumerate}
 
 \section{Fluxo de evento}
 
 \subsection{Fluxo básico}
 
+\begin{enumerate}
+	\item Na tela fornecida pelo sistema, o gerente visualiza:
+	\begin{enumerate}
+		\item A opção \textbf{Alterar} habilitada.
+		\item A opção \textbf{Exluir} habilitada.
+	\end{enumerate}		
+\end{enumerate}
+
 \subsection{Fluxo alternativo}
+
+\begin{enumerate}
+	\item O gerente não tem permissão de alterar os dados da empresa:
+	\begin{enumerate}
+		\item A opção \textbf{Alterar} desabilitada.
+	\end{enumerate}
+	\item O gerente não tem permissão de exluir a empresa:
+	\begin{enumerate}
+		\item A opção \textbf{Exluir} desabilitada.
+	\end{enumerate}	
+	\item Desistência:
+	\begin{enumerate}
+		\item O gerente seleciona a opção \textbf{Cancelar}.
+		\item O sistema encerra o caso de uso atual.
+		\item O sistema carrega a tela principal.
+	\end{enumerate}
+\end{enumerate}
 
 \section{Requerimentos especiais}
 

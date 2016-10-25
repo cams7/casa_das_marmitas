@@ -15,15 +15,46 @@ Como regra de negócio, o sistema deverá calcular automaticamente o valor total
 	\end{itemize}
 \end{itemize}
 
+Caso necessário, é registrado no sistema o troco.
+
 \section{Atores}
 
+Este caso de uso é exclusivo do atendente da empresa - Casa das Marmitas.
+
 \section{Pré-condições}
+
+\begin{enumerate}
+	\item O atendente deve estar logado no sistema e com acesso à função.
+	\item O atendente carrega o caso de uso \nameref{uc007}.
+\end{enumerate}
 
 \section{Fluxo de evento}
 
 \subsection{Fluxo básico}
 
+\begin{enumerate}
+	\item O atendente informa, em tela fornecida pelo sistema, os seguintes dados:
+	\begin{enumerate}
+		\item Valor recebido em dinheiro, \emph{Float}, obrigatório.		
+	\end{enumerate}
+	\item O atendente seleciona a opção \textbf{Calcular Troco}.
+\end{enumerate}
+
 \subsection{Fluxo alternativo}
+
+\begin{enumerate}
+	\item Dados incorretos:
+	\begin{enumerate}
+		\item O atendente informa algum dado incorreto no formulário. 
+		\item O sistema exibe uma mensagem de advertência especifica ao erro.
+	\end{enumerate}	
+	\item Desistência:
+	\begin{enumerate}
+		\item O atendente seleciona a opção \textbf{Cancelar}.
+		\item O sistema encerra o caso de uso atual.
+		\item O sistema retorna ao caso de uso anterior.
+	\end{enumerate}
+\end{enumerate}
 
 \section{Requerimentos especiais}
 

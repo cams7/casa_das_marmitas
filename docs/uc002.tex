@@ -2,7 +2,7 @@
 
 \section{Breve descrição}
 
-Com base nos dados do cliente, no momento do pedido, o atendente realizará uma pesquisa pelo número do telefone do cliente, caso esteja cadastrado, os seus dados deverão ser exibidos.
+Com base nos dados do cliente, no momento do pedido, o atendente realizará uma pesquisa pelo número de telefone do cliente, caso esteja cadastrado, os seus dados deverão ser exibidos.
 
 \section{Atores}
 
@@ -19,21 +19,30 @@ Este caso de uso é exclusivo do funcionário da empresa - Casa das Marmitas.
 \subsection{Fluxo básico}
 
 \begin{enumerate}
-	\item O funcionário informa, em tela fornecida pelo sistema, o numero de telefone do cliente.	
-	\item O sistema verifica se o cliente é cadastrado.
-	\item O sistema exibe os dados do cliente.
+	\item O funcionário informa, no campo de pequisa, o numero de telefone do cliente.	
+%	\item O sistema verifica se o cliente é cadastrado.
+%	\item O sistema exibe os dados do cliente.
+	\item O funcionário seleciona a opção \textbf{Buscar}.
 \end{enumerate}
 
 \subsection{Fluxo alternativo}
 
 \begin{enumerate}
+	\item Número de telefone inválido:
+	\begin{enumerate}
+		\item O funcionário informa, no campo de pesquisa, caracteres incorretos.
+		\item O sistema exibe a mensagem de advertência - \textbf{O número de telefone informado não é válido}.
+	\end{enumerate}
+	%\item Número de telefone não cadastrado:
+	%\begin{enumerate}
+	%	\item O funcionário informa um numero de telefone não cadastrado.
+	%	\item O sistema exibe a mensagem de advertência - \textbf{O numero de telefone informado não foi cadastrado no sistema}.
+	%\end{enumerate}
 	\item Desistência:
 	\begin{enumerate}
-		\item Se o funcionário seleciona a opção \textbf{Cancelar}, então este caso de uso se encerra, voltando o sistema à tela principal.
-	\end{enumerate}
-	\item Cliente não cadastrado:
-	\begin{enumerate}
-		\item Se o cliente não foi cadastrado, então este caso de uso se encerra, abrindo em seguida o caso de uso \nameref{uc001}.
+		\item O funcionário seleciona a opção \textbf{Cancelar}.
+		\item O sistema encerra o caso de uso atual.
+		\item O sistema carrega a tela principal.
 	\end{enumerate}
 \end{enumerate}
 
@@ -44,7 +53,8 @@ Não aplicável.
 \section{Pós-condições}
 
 \begin{enumerate}
-	\item Habilita o caso de uso \nameref{uc007} ao funcionário, se a pesquisa pelo número do telefone do cliente foi realizada.
+	\item O sistema encerra o caso de uso atual.
+	\item O sistema carrega o caso de uso \nameref{uc013}.
 \end{enumerate}
 
 \section{Pontos de extensão}

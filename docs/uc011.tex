@@ -19,9 +19,8 @@ Este caso de uso é exclusivo do gerente da empresa - Casa das Marmitas.
 \subsection{Fluxo básico}
 
 \begin{enumerate}
-	\item O gerente informa, em tela fornecida pelo sistema, o nome da empresa de entrega.	
-	\item O sistema verifica se a empresa de entrega é cadastrada.
-	\item O sistema exibe os dados da empresa de entrega.
+	\item O gerente informa, no campo de pequisa, o nome ou CNPJ da empresa.
+	\item O gerente seleciona a opção \textbf{Buscar}.
 \end{enumerate}
 
 \subsection{Fluxo alternativo}
@@ -29,11 +28,9 @@ Este caso de uso é exclusivo do gerente da empresa - Casa das Marmitas.
 \begin{enumerate}
 	\item Desistência:
 	\begin{enumerate}
-		\item Se o gerente seleciona a opção \textbf{Cancelar}, então este caso de uso se encerra, voltando o sistema à tela principal.
-	\end{enumerate}
-	\item Empresa de entrega não cadastrada:
-	\begin{enumerate}
-		\item Se a empresa de entrega não foi cadastrada, então este caso de uso se encerra, abrindo em seguida o caso de uso \nameref{uc004}.
+		\item O gerente seleciona a opção \textbf{Cancelar}.
+		\item O sistema encerra o caso de uso atual.
+		\item O sistema carrega a tela principal.
 	\end{enumerate}
 \end{enumerate}
 
@@ -44,7 +41,8 @@ Não aplicável.
 \section{Pós-condições}
 
 \begin{enumerate}
-	\item Exibe os dados da empresa de entrega, se a pesquisa pelo nome foi realizada.
+	\item O sistema encerra o caso de uso atual.
+	\item O sistema carrega o caso de uso \nameref{uc014}.
 \end{enumerate}
 
 \section{Pontos de extensão}

@@ -13,13 +13,37 @@ Os pedidos serão atendidos com base nas ligações recebidas e o atendimento ao
 
 \section{Atores}
 
+Este caso de uso é exclusivo do atendente da empresa - Casa das Marmitas.
+
 \section{Pré-condições}
+
+\begin{enumerate}
+	\item O atendente deve estar logado no sistema e com acesso à função.
+\end{enumerate}
 
 \section{Fluxo de evento}
 
 \subsection{Fluxo básico}
 
+\begin{enumerate}
+	\item O atendente informa, em tela fornecida pelo sistema, os seguintes dados:
+	\begin{enumerate}
+		\item Status do pedido, \emph{Enum}, obrigatório.		
+	\end{enumerate}
+	\item O atendente seleciona a opção \textbf{Atualizar}.
+	\item O sistema atualiza os dados relativos ao pedido.
+\end{enumerate}
+
 \subsection{Fluxo alternativo}
+
+\begin{enumerate}
+	\item Desistência:
+	\begin{enumerate}
+		\item O atendente seleciona a opção \textbf{Cancelar}.
+		\item O sistema encerra o caso de uso atual.
+		\item O sistema carrega a tela principal.
+	\end{enumerate}
+\end{enumerate}
 
 \section{Requerimentos especiais}
 

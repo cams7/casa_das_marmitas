@@ -27,17 +27,19 @@ Este caso de uso é exclusivo do gerente da empresa - Casa das Marmitas.
 		\item Número do celular do entregador, \emph{String} até 11 caracteres, obrigatório.	
 		\item Nome da empresa de entrega, \emph{String} até 50 caracteres, obrigatório.
 	\end{enumerate}
-	\item Ao carregar o caso de uso \nameref{uc011}, o sistema verifica se foi informado um nome de empresa de entrega válido.
-	\item O sistema verifica se o entregador foi cadastrado anteriormente.
+	\item O sistema carrega o caso de uso \nameref{uc011}.
+%	\item O sistema verifica se o entregador foi cadastrado anteriormente.
+	\item O gerente seleciona a opção \textbf{Salvar}.
 	\item O sistema armazena os dados relativos ao entregador.
 \end{enumerate}
 
 \subsection{Fluxo alternativo}
 
 \begin{enumerate}
-	\item Desistência:
+	\item Dados incorretos:
 	\begin{enumerate}
-		\item Se o gerente seleciona a opção \textbf{Cancelar}, então este caso de uso se encerra, voltando o sistema à tela principal.
+		\item O gerente informa algum dado incorreto no formulário de cadastro. 
+		\item O sistema exibe uma mensagem de advertência especifica ao erro.
 	\end{enumerate}
 %	\item Empresa de entrega não cadastrada:
 %	\begin{enumerate}
@@ -45,8 +47,14 @@ Este caso de uso é exclusivo do gerente da empresa - Casa das Marmitas.
 %	\end{enumerate}
 	\item Entregador cadastrado anteriormente:
 	\begin{enumerate}
-		\item Se o entregador já foi cadastrado, então este caso de uso se encerra, voltando o
-		sistema à tela principal.
+		\item O gerente informa os dados de um entregador já cadastrado. 
+		\item O sistema exibe a mensagem de advertência - \textbf{O entregador informado já foi cadastrado anteriormente no sistema}.
+	\end{enumerate}	
+	\item Desistência:
+	\begin{enumerate}
+		\item O gerente seleciona a opção \textbf{Cancelar}.
+		\item O sistema encerra o caso de uso atual.
+		\item O sistema carrega a tela principal.
 	\end{enumerate}
 \end{enumerate}
 
@@ -57,7 +65,8 @@ Não aplicável.
 \section{Pós-condições}
 
 \begin{enumerate}
-	\item Entregador incluído, se as regras de validação forem verificadas.
+	\item O sistema encerra o caso de uso atual.
+	\item O sistema carrega o caso de uso \nameref{uc016}.
 \end{enumerate}
 
 \section{Pontos de extensão}

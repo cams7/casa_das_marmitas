@@ -2,21 +2,48 @@
 
 \section{Breve descrição}
 
+Com base nos dados do entregador, o funcionário realizará uma pesquisa pelo nome, CPF ou RG do entregador, caso esteja cadastrado, os seus dados deverão ser exibidos.
+
 \section{Atores}
 
+Este caso de uso é exclusivo do funcionário da empresa - Casa das Marmitas.
+
 \section{Pré-condições}
+
+\begin{enumerate}
+	\item O funcionário deve estar logado no sistema e com acesso à função.
+\end{enumerate}
 
 \section{Fluxo de evento}
 
 \subsection{Fluxo básico}
 
+\begin{enumerate}
+	\item O funcionário informa, no campo de pequisa, o nome, CPF ou RG do entregador.
+	\item O funcionário seleciona a opção \textbf{Buscar}.
+\end{enumerate}
+
 \subsection{Fluxo alternativo}
+
+\begin{enumerate}
+	\item Desistência:
+	\begin{enumerate}
+		\item O funcionário seleciona a opção \textbf{Cancelar}.
+		\item O sistema encerra o caso de uso atual.
+		\item O sistema carrega a tela principal.
+	\end{enumerate}
+\end{enumerate}
 
 \section{Requerimentos especiais}
 
 Não aplicável.
 
 \section{Pós-condições}
+
+\begin{enumerate}
+	\item O sistema encerra o caso de uso atual.
+	\item O sistema carrega o caso de uso \nameref{uc016}.
+\end{enumerate}
 
 \section{Pontos de extensão}
 

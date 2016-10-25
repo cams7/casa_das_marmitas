@@ -6,12 +6,13 @@ Para gerenciar os pedidos realizados pelo cliente, o atendente deverá informar 
 
 \section{Atores}
 
-Este caso de uso é exclusivo do funcionário da empresa - Casa das Marmitas.
+Este caso de uso é exclusivo do atendente da empresa - Casa das Marmitas.
 
 \section{Pré-condições}
 
 \begin{enumerate}
-	\item O funcionário deve estar logado no sistema e com acesso à função.
+	\item O atendente deve estar logado no sistema e com acesso à função.
+	\item O atendente carrega o caso de uso \nameref{uc002}.
 \end{enumerate}
 
 \section{Fluxo de evento}
@@ -19,22 +20,31 @@ Este caso de uso é exclusivo do funcionário da empresa - Casa das Marmitas.
 \subsection{Fluxo básico}
 
 \begin{enumerate}
-	\item Após acessar o caso de uso \nameref{uc002}, O funcionário informa, em tela fornecida pelo sistema, os seguintes dados:
+	\item O atendente informa, em tela fornecida pelo sistema, os seguintes dados:
 	\begin{enumerate}
-		\item Ao carregar o caso de uso \nameref{uc012}, o sistema verifica se foi informado um nome de produto válido.
+		\item Nome do produto, \emph{String} até 30 caracteres, obrigatório.
+		\item Tamanho da marmita, \emph{Enum}, obrigatório.
 		\item Quantidade de marmitas, \emph{Short}, obrigatório.		
 	\end{enumerate}
-	\item O sistema carrega o caso de uso \nameref{uc008}.
+	\item O sistema carrega o caso de uso \nameref{uc012}.
+	\item O atendente seleciona a opção \textbf{Salvar}.
 	\item O sistema armazena os dados relativos ao pedido.
 \end{enumerate}
 
 \subsection{Fluxo alternativo}
 
 \begin{enumerate}
+	\item Dados incorretos:
+	\begin{enumerate}
+		\item O atendente informa algum dado incorreto no formulário de cadastro. 
+		\item O sistema exibe uma mensagem de advertência especifica ao erro.
+	\end{enumerate}	
 	\item Desistência:
 	\begin{enumerate}
-		\item Se o funcionário seleciona a opção \textbf{Cancelar}, então este caso de uso se encerra, voltando o sistema à tela principal.
-	\end{enumerate}	
+		\item O atendente seleciona a opção \textbf{Cancelar}.
+		\item O sistema encerra o caso de uso atual.
+		\item O sistema carrega a tela principal.
+	\end{enumerate}
 \end{enumerate}
 
 \section{Requerimentos especiais}
@@ -44,7 +54,8 @@ Não aplicável.
 \section{Pós-condições}
 
 \begin{enumerate}
-	\item Pedido incluído, se as regras de validação forem verificadas.
+	\item O sistema encerra o caso de uso atual.
+	\item O sistema carrega o caso de uso \nameref{uc009}.
 \end{enumerate}
 
 \section{Pontos de extensão}

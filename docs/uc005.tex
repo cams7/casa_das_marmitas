@@ -41,15 +41,28 @@ Este caso de uso é exclusivo do gerente da empresa - Casa das Marmitas.
 		\item Custo da marmita, \emph{Float}, obrigatório.
 		\item Tamanho da marmita, \emph{Enum}, obrigatório.
 	\end{enumerate}
+	\item O gerente seleciona a opção \textbf{Salvar}.
 	\item O sistema armazena os dados relativos à marmita.
 \end{enumerate}
 
 \subsection{Fluxo alternativo}
 
 \begin{enumerate}
+	\item Dados incorretos:
+	\begin{enumerate}
+		\item O gerente informa algum dado incorreto no formulário de cadastro. 
+		\item O sistema exibe uma mensagem de advertência especifica ao erro.
+	\end{enumerate}	
+	\item Marmita cadastrada anteriormente:
+	\begin{enumerate}
+		\item O gerente informa os dados de uma marmita já cadastrada. 
+		\item O sistema exibe a mensagem de advertência - \textbf{A marmita informada já foi cadastrada anteriormente no sistema}.
+	\end{enumerate}	
 	\item Desistência:
 	\begin{enumerate}
-		\item Se o gerente seleciona a opção \textbf{Cancelar}, então este caso de uso se encerra, voltando o sistema à tela principal.
+		\item O gerente seleciona a opção \textbf{Cancelar}.
+		\item O sistema encerra o caso de uso atual.
+		\item O sistema carrega a tela principal.
 	\end{enumerate}
 \end{enumerate}
 
@@ -60,7 +73,8 @@ Não aplicável.
 \section{Pós-condições}
 
 \begin{enumerate}
-	\item Marmita incluída, se as regras de validação forem verificadas.
+	\item O sistema encerra o caso de uso atual.
+	\item O sistema carrega o caso de uso \nameref{uc017}.
 \end{enumerate}
 
 \section{Pontos de extensão}
