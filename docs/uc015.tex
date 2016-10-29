@@ -2,49 +2,63 @@
 
 \section{Breve descrição}
 
-Com base nos dados do entregador, o funcionário realizará uma pesquisa pelo nome, CPF ou RG do entregador, caso esteja cadastrado, os seus dados deverão ser exibidos.
+O sistema exibirá os entregadores que foram pesquisados pelo funcionário.
 
 \section{Atores}
 
-Este caso de uso é exclusivo do funcionário da empresa - Casa das Marmitas.
+\begin{enumerate}
+	\item Funcionário da empresa, Casa das Marmitas.
+\end{enumerate}
 
 \section{Pré-condições}
 
 \begin{enumerate}
-	\item O funcionário deve estar logado no sistema e com acesso à função.
+	\item O funcionário deve estar logado no sistema.
+	\item O funcionário deve ter permissão em seu login para realizar a pesquisa de entregadores.
 \end{enumerate}
 
-\section{Fluxo de evento}
+\section{Fluxo de eventos}
 
 \subsection{Fluxo básico}
 
-\begin{enumerate}
-	\item O funcionário informa, no campo de pequisa, o nome, CPF ou RG do entregador.
+\begin{enumerate}[label=P\arabic*]
+	\item O funcionário aciona a opção \textbf{Listar Entregadores} no menu do sistema.
+	\item O sistema apresenta a tela \textbf{Lista de Entregadores}. \label{uc015_p:2}	
+	\item O funcionário informa, no campo de pequisa, o nome, CPF, RG ou empresa do entregador.
 	\item O funcionário seleciona a opção \textbf{Buscar}.
+	\item O sistema exibe a lista de entregadores: código, nome, empresa, celular e data de cadastro. \label{uc015_p:5}\ref{uc015_e:1}
+	\item O funcionário seleciona o entregador.
+	\item O sistema executa o caso de uso \nameref{uc016}, de acordo com o entregador selecionado no passo anterior.
+	\item O caso de uso é encerrado.
 \end{enumerate}
 
-\subsection{Fluxo alternativo}
+\subsection{Fluxos alternativos}
 
-\begin{enumerate}
-	\item Desistência:
-	\begin{enumerate}
-		\item O funcionário seleciona a opção \textbf{Cancelar}.
-		\item O sistema encerra o caso de uso atual.
-		\item O sistema carrega a tela principal.
+\begin{enumerate}[label=A\arabic*]
+	\item Desistência
+	\begin{enumerate}[label*=.\arabic*]
+		\item O funcionário seleciona a opção \textbf{Voltar}.
+		\item O sistema volta à tela anterior.
+		\item O caso de uso é encerrado.		
+	\end{enumerate}	
+\end{enumerate}
+
+\subsection{Exceções}
+
+\begin{enumerate}[label=E\arabic*]
+	\item Entregador não cadastrado \label{uc015_e:1}
+	\begin{enumerate}[label*=.\arabic*]
+		\item[] No passo \ref{uc015_p:5}, o funcionário informou o nome, CPF, RG ou empresa de um entregador não cadastrado no sistema.
+		\item O sistema exibe a mensagem \textbf{Entregador não cadastrado}.
+		\item O sistema retorna ao passo \ref{uc015_p:2}.
 	\end{enumerate}
 \end{enumerate}
-
-\section{Requerimentos especiais}
-
-Não aplicável.
 
 \section{Pós-condições}
 
 \begin{enumerate}
-	\item O sistema encerra o caso de uso atual.
-	\item O sistema carrega o caso de uso \nameref{uc016}.
+	\item Entregador encontrado
+	\begin{enumerate}
+		\item O sistema carregará uma tela com os dados do entregador.
+	\end{enumerate}
 \end{enumerate}
-
-\section{Pontos de extensão}
-
-Nenhum.

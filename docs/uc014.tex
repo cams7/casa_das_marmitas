@@ -2,55 +2,111 @@
 
 \section{Breve descrição}
 
-Após a pesquisa ou o cadastro da empresa de entrega, o sistema carrega um formulário com os dados da mesma.
+Após a pesquisa ou o cadastro de uma empresa, o sistema carregará um formulário com os dados da mesma.
 
 \section{Atores}
 
-Este caso de uso é exclusivo do gerente da empresa - Casa das Marmitas.
+\begin{enumerate}
+	\item Funcionário da empresa, Casa das Marmitas.
+\end{enumerate}
 
 \section{Pré-condições}
 
 \begin{enumerate}
-	\item O gerente deve estar logado no sistema e com acesso à função.
+	\item O funcionário deve estar logado no sistema.
+	\item O funcionário deve ter permissão em seu login para visualizar os dados da empresa.
 \end{enumerate}
 
-\section{Fluxo de evento}
+\section{Fluxo de eventos}
 
 \subsection{Fluxo básico}
 
-\begin{enumerate}
-	\item Na tela fornecida pelo sistema, o gerente visualiza:
-	\begin{enumerate}
-		\item A opção \textbf{Alterar} habilitada.
-		\item A opção \textbf{Exluir} habilitada.
-	\end{enumerate}		
+\begin{enumerate}[label=P\arabic*]
+	\item O sistema exibe as informações da empresa conforme à \ref{uc014_ed:1}. \label{uc014_p:1}
+	\item O sistema exibe a opção \textbf{Alterar} habilitada.\label{uc014_p:2} \ref{uc014_a:1} 
+	\item O sistema exibe a opção \textbf{Excluir} habilitada.\label{uc014_p:3} \ref{uc014_a:2}
+	\item O caso de uso é encerrado.
 \end{enumerate}
 
-\subsection{Fluxo alternativo}
+\subsection{Fluxos alternativos}
 
-\begin{enumerate}
-	\item O gerente não tem permissão de alterar os dados da empresa:
-	\begin{enumerate}
-		\item A opção \textbf{Alterar} desabilitada.
+\begin{enumerate}[label=A\arabic*]
+	\item Alternativa ao passo \ref{uc014_p:2} - O funcionário não tem permissão de alterar os dados da empresa \label{uc014_a:1}
+	\begin{enumerate}[label*=.\arabic*]
+		\item O sistema exibe a opção \textbf{Alterar} desabilitada.
 	\end{enumerate}
-	\item O gerente não tem permissão de exluir a empresa:
-	\begin{enumerate}
-		\item A opção \textbf{Exluir} desabilitada.
-	\end{enumerate}	
-	\item Desistência:
-	\begin{enumerate}
-		\item O gerente seleciona a opção \textbf{Cancelar}.
-		\item O sistema encerra o caso de uso atual.
-		\item O sistema carrega a tela principal.
+	
+	\item Alternativa ao passo \ref{uc016_p:3} - O funcionário não tem permissão de excluir a empresa \label{uc014_a:2}
+	\begin{enumerate}[label*=.\arabic*]
+		\item O sistema exibe a opção \textbf{Excluir} desabilitada.
+	\end{enumerate}
+	
+	\item Alterar empresa
+	\begin{enumerate}[label*=.\arabic*]
+		\item O funcionário aciona a opção \textbf{Alterar}, caso essa funcionalidade esteja habilitada.
+		\item O sistema executa o caso de uso \nameref{uc004}.
+		\item O caso de uso é encerrado.
+	\end{enumerate}
+	
+	\item Excluir empresa
+	\begin{enumerate}[label*=.\arabic*]
+		\item O funcionário aciona a opção \textbf{Excluir}, caso essa funcionalidade esteja habilitada.
+		\item O sistema remove os dados da empresa. \label{uc014_a:4:2}\ref{uc014_e:1}
+		\item O sistema volta à tela anterior.
+		\item O caso de uso é encerrado.
+	\end{enumerate}
+	
+	\item Desistência
+	\begin{enumerate}[label*=.\arabic*]
+		\item O funcionário aciona a opção \textbf{Voltar}.
+		\item O sistema volta à tela anterior.
+		\item O caso de uso é encerrado.		
 	\end{enumerate}
 \end{enumerate}
 
-\section{Requerimentos especiais}
+\subsection{Exceções}
 
-Não aplicável.
+\begin{enumerate}[label=E\arabic*]
+	\item Empresa tem entregador vinculado \label{uc014_e:1}
+	\begin{enumerate}[label*=.\arabic*]
+		\item[] No passo \ref{uc014_a:4:2}, o funcionário tentou remover a empresa, mas isso não foi possível, por que essa tinha pelo menos um entregador vinculado a mesma.
+		\item O sistema exibe a mensagem \textbf{A empresa tem entregador vinculado}.
+		\item O sistema retorna ao passo \ref{uc014_p:1}.
+	\end{enumerate}
+\end{enumerate}
 
 \section{Pós-condições}
 
-\section{Pontos de extensão}
+\begin{enumerate}
+	\item Os dados da empresa exibidos.
+	\begin{enumerate}
+		\item O sistema carregará os dados da empresa, numa tela, com todas as funcionalidades ativas.
+	\end{enumerate}
+\end{enumerate}
 
-Nenhum.
+\section{Estrutura de dados}
+
+\begin{enumerate}[label=ED\arabic*]
+	\item Os dados da empresa deverão esta de acordo com a tabela \ref{uc014_tb_rn1}. \label{uc014_ed:1}
+	\begin{table}[htb]
+		\ABNTEXfontereduzida
+		\caption[Dados da empresa]{Dados da empresa.}
+		\label{uc014_tb_rn1}
+		\begin{tabular}{|p{4.0cm}|p{3.0cm}|p{7.25cm}|}
+			\hline
+			\textbf{Campo}  & \textbf{Tipo} & \textbf{Descrição}                                      \\ \hline
+			Cód. da empresa & Número        & Código da empresa.                                      \\ \hline
+			Data cadastro   & dd/mm/aaaa    & Data de cadastro da empresa no sistema.                 \\ \hline
+			Nome            & Texto         & Nome da empresa.                                        \\ \hline
+			CNPJ            & Número        & CNPJ da empresa.                                        \\ \hline
+			E-mail          & Texto         & E-mail da empresa.                                      \\ \hline
+			Telefone        & Número        & Número de telefone da empresa.                          \\ \hline
+			Logradouro      & Texto         & Logradouro (rua, avenida, beco, ...) da empresa.        \\ \hline
+			CEP             & Número        & CEP da empresa.                           \\ \hline
+			Bairro          & Texto         & Bairro onde está localizada a empresa.                  \\ \hline
+			Cidade          & Texto         & Cidade onde está localizada a empresa.                  \\ \hline
+			Número          & Texto         & Número do imóvel da empresa.                            \\ \hline
+			Complemento     & Texto         & Informação relevante em relação ao endereço da empresa. \\ \hline
+		\end{tabular}
+	\end{table}
+\end{enumerate}

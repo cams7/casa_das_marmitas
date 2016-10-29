@@ -1,77 +1,163 @@
-\chapter{Cadastrar Cliente - UC001} \label{uc001}
+\chapter{Manter Cliente - UC001} \label{uc001}
  
 \section{Breve descrição}
  
-Caso o cliente não esteja registrado no sistema, o atendente irá cadastra-lo, informando os seus dados.
+O sistema permitirá o cadastro e a alteração dos dados do cliente.
 
 \section{Atores}
 
-Este caso de uso é exclusivo do funcionário da empresa - Casa das Marmitas.
+\begin{enumerate}
+	\item Funcionário da empresa, Casa das Marmitas.
+\end{enumerate}
 
 \section{Pré-condições}
 
 \begin{enumerate}
-	\item O funcionário deve estar logado no sistema e com acesso à função.
+	\item O funcionário deve estar logado no sistema.
+	\item O funcionário deve ter permissão em seu login para realizar o cadastro e a alteração dos dados do cliente.
 \end{enumerate}
 
-\section{Fluxo de evento}
+\section{Fluxo de eventos}
 
 \subsection{Fluxo básico}
 
-\begin{enumerate}
-	\item O funcionário informa, em tela fornecida pelo sistema, os seguintes dados:
-	\begin{enumerate}
-		\item Nome do cliente, \emph{String} até 100 caracteres, obrigatório.
-		\item Data de nascimento do cliente, \emph{Date}.
-		\item Número de telefone do cliente, \emph{String} até 11 caracteres, obrigatório.
-		\item Endereço do cliente:
-		\begin{enumerate}
-			\item CEP.
-			\item Cidade.
-			\item Bairro.
-			\item Logradouro.
-			\item Numero.
-			\item Complemento.
-		\end{enumerate}
-		\item Ponto de referência próximo à casa do cliente, \emph{String} até 200 caracteres.
-	\end{enumerate}
-%	\item O sistema verifica se o cliente foi cadastrado anteriormente.
-	\item O funcionário seleciona a opção \textbf{Salvar}. 
-	\item O sistema armazena os dados relativos ao cliente.
+\begin{enumerate}[label=P\arabic*]
+	\item O funcionário aciona a opção \textbf{Cadastrar Cliente} no menu do sistema. \ref{uc001_a:1}
+	\item O sistema apresenta a tela \textbf{Incluir Cliente} com os campos \ref{uc001_rn:1}. \label{uc001_p:2}
+	\item O funcionário preenche os campos da tela e aciona a opção \textbf{Salvar}. \label{uc001_p:3} \ref{uc001_a:2}
+	\item O sistema valida os dados dos campos. \ref{uc001_e:1} \ref{uc001_e:2} \ref{uc001_e:3} \ref{uc001_e:4} \ref{uc001_e:5} \ref{uc001_e:6} \ref{uc001_e:7}
+	\item O sistema realiza a inclusão com sucesso.
+	\item O sistema executa o caso de uso \nameref{uc013}.
+	\item O caso de uso é encerrado.	
 \end{enumerate}
 
-\subsection{Fluxo alternativo}
+\subsection{Fluxos alternativos}
 
-\begin{enumerate}
-	\item Dados incorretos:
-	\begin{enumerate}
-		\item O funcionário informa algum dado incorreto no formulário de cadastro. 
-		\item O sistema exibe uma mensagem de advertência especifica ao erro.
+\begin{enumerate}[label=A\arabic*]
+	\item Alterar cliente \label{uc001_a:1}
+	\begin{enumerate}[label*=.\arabic*]
+		\item Na tela fornecida pelo sistema através do caso de uso \nameref{uc013}, o funcionário aciona a opção \textbf{Alterar}. 
+		\item O sistema apresenta a tela \textbf{Alterar Cliente} com os campos \ref{uc001_rn:1}. \label{uc001_a:1:2}
+		\item O funcionário preenche os campos da tela e aciona a opção \textbf{Salvar}. \label{uc001_a:1:3} \ref{uc001_a:2}
+		\item O sistema valida os dados dos campos. \ref{uc001_e:1} \ref{uc001_e:2} \ref{uc001_e:3} \ref{uc001_e:4} \ref{uc001_e:5} \ref{uc001_e:6}
+		\item O sistema altera os dados com sucesso.
+		\item O sistema executa o caso de uso \nameref{uc013}.
+		\item O caso de uso é encerrado.
 	\end{enumerate}
-	\item Cliente cadastrado anteriormente:
-	\begin{enumerate}
-		\item O funcionário informa os dados de um cliente já cadastrado. 
-		\item O sistema exibe a mensagem de advertência - \textbf{O cliente informado já foi cadastrado anteriormente no sistema}.
-	\end{enumerate}	
-	\item Desistência:
-	\begin{enumerate}
-		\item O funcionário seleciona a opção \textbf{Cancelar}.
-		\item O sistema encerra o caso de uso atual.
-		\item O sistema carrega a tela principal.
+
+	\item Cancelar inclusão ou alteração \label{uc001_a:2}
+	\begin{enumerate}[label*=.\arabic*]
+		\item No passo \ref{uc001_p:3} ou \ref{uc001_a:1:3}, o funcionário aciona a opção \textbf{Cancelar}.
+		\item O sistema exibe a mensagem \textbf{Operação cancelada}.
+		\item O sistema retorna ao passo anterior.
 	\end{enumerate}
+
+	\item Desistência
+	\begin{enumerate}[label*=.\arabic*]
+		\item O funcionário seleciona a opção \textbf{Voltar}.
+		\item O sistema volta à tela anterior.
+		\item O caso de uso é encerrado.		
+	\end{enumerate}		 	
 \end{enumerate}
 
-\section{Requerimentos especiais}
+\subsection{Exceções}
 
-Não aplicável.
+\begin{enumerate}[label=E\arabic*]
+	\item O funcionário não informou algum campo obrigatório \label{uc001_e:1}
+	\begin{enumerate}[label*=.\arabic*]
+		\item[] No passo \ref{uc001_p:3} ou \ref{uc001_a:1:3}, o funcionário deixou em branco pelo menos um campo obrigatório.
+		\item O sistema exibe a mensagem \textbf{Favor preencher o campo obrigatório}.
+		\item O sistema destaca os campos não informados pelo funcionário.
+		\item O sistema retorna ao passo anterior.
+	\end{enumerate}
+
+	\item O funcionário preencheu de forma errada o campo da data de nascimento \label{uc001_e:2}
+	\begin{enumerate}[label*=.\arabic*]
+			\item[] No passo \ref{uc001_p:3} ou \ref{uc001_a:1:3}, o funcionário não preencheu de forma correta o campo da data de nascimento, por exemplo, usou somente letras.				
+		\item O sistema exibe a mensagem \textbf{A data de nascimento informada não é válida}.
+		\item O sistema destaca o campo \textbf{Data de nascimento}.
+		\item O sistema retorna ao passo anterior.
+	\end{enumerate}
+
+	\item O funcionário preencheu de forma errada o campo de telefone \label{uc001_e:3}
+	\begin{enumerate}[label*=.\arabic*]		
+		\item[] No passo \ref{uc001_p:3} ou \ref{uc001_a:1:3}, o funcionário não preencheu de forma correta o campo de telefone, usando letras ou qualquer outro carácter diferente de número.		
+		\item O sistema exibe a mensagem \textbf{O número de telefone informado não é válido}.
+		\item O sistema destaca o campo \textbf{Telefone}.
+		\item O sistema retorna ao passo anterior.
+	\end{enumerate}
+
+	\item O funcionário preencheu de forma errada o campo de logradouro \label{uc001_e:4}
+	\begin{enumerate}[label*=.\arabic*]		
+		\item[] No passo \ref{uc001_p:3} ou \ref{uc001_a:1:3}, o funcionário não preencheu de forma correta o campo de logradouro (rua, avenida, beco, ...), por exemplo, usou somente números.		
+		\item O sistema exibe a mensagem \textbf{O nome do logradouro informado não é válido}.
+		\item O sistema destaca o campo \textbf{Logradouro}.
+		\item O sistema retorna ao passo anterior.
+	\end{enumerate}
+
+	\item O funcionário preencheu de forma errada o campo de CEP \label{uc001_e:5}
+	\begin{enumerate}[label*=.\arabic*]		
+		\item[] No passo \ref{uc001_p:3} ou \ref{uc001_a:1:3}, o funcionário não preencheu de forma correta o campo de CEP, usando letras ou menos de 8 dígitos.		
+		\item O sistema exibe a mensagem \textbf{O CEP informado não é válido}.
+		\item O sistema destaca o campo \textbf{CEP}.
+		\item O sistema retorna ao passo anterior.
+	\end{enumerate}
+
+	\item O funcionário preencheu de forma errada o campo de cidade \label{uc001_e:6}
+	\begin{enumerate}[label*=.\arabic*]		
+		\item[] No passo \ref{uc001_p:3} ou \ref{uc001_a:1:3}, o funcionário não preencheu de forma correta o campo de cidade, por exemplo, usou somente números.		
+		\item O sistema exibe a mensagem \textbf{O nome da cidade informado não é válido}.
+		\item O sistema destaca o campo \textbf{Cidade}.
+		\item O sistema retorna ao passo anterior.
+	\end{enumerate}
+
+	\item Cliente cadastrado anteriormente \label{uc001_e:7}
+	\begin{enumerate}[label*=.\arabic*]
+		\item[] No passo \ref{uc001_p:3} do fluxo básico, após acionamento da opção \textbf{Salvar} pelo funcionário.
+		\item O sistema exibe a mensagem \textbf{O cliente informado já foi cadastrado anteriormente no sistema}.
+		\item O sistema retorna ao passo anterior.
+	\end{enumerate}
+\end{enumerate}
 
 \section{Pós-condições}
 
 \begin{enumerate}
-	\item O sistema encerra o caso de uso atual.
-	\item O sistema carrega o caso de uso \nameref{uc013}.
+	\item Cliente cadastrado
+	\begin{enumerate}
+		\item O cliente estará, devidamente, cadastrado no banco de dados.
+		\item O sistema carregará a tela com os dados do cliente.
+	\end{enumerate}
+
+	\item Cliente alterado
+	\begin{enumerate}
+		\item Os dados do cliente estarão, devidamente, atualizados no banco de dados.
+		\item O sistema carregará a tela com os dados do cliente.
+	\end{enumerate}
 \end{enumerate}
 
-\section{Pontos de extensão}
+\section{Regras de negócios especiais}
 
-Nenhum.
+\begin{enumerate}[label=RN\arabic*]
+	\item Campos apresentados na tela de inclusão e alteração dos dados do cliente deverão esta de acordo com a tabela \ref{uc001_tb_rn1}. \label{uc001_rn:1}
+	\begin{table}[htb]
+		\ABNTEXfontereduzida
+		\caption[Dados do cliente]{Dados do cliente.}
+		\label{uc001_tb_rn1}
+		\begin{tabular}{|p{3.0cm}|p{2.0cm}|p{1.5cm}|p{2.0cm}|p{5.75cm}|}
+			\hline
+			\textbf{Campo}      & \textbf{Tipo} & \textbf{Tamanho} & \textbf{Obrigatório} & \textbf{Observação}                                                                                                                                \\ \hline
+			Cód. do cliente     & Número        & 18               & SIM                  & Atributo identificador, chave primária, responsável por identificar o id da tabela de clientes.                                                    \\ \hline
+			Data cadastro       & dd/mm/aaaa    & 10               & SIM                  & Atributo simples da tabela de clientes responsável por armazenar, no banco e dados, a data em que o cliente foi cadastrado no sistema.                \\ \hline
+			Nome                & Texto         & 60               & SIM                  & Atributo simples da tabela de clientes responsável por armazenar, no banco e dados, o nome do cliente.                                             \\ \hline
+			Data de nascimento  & dd/mm/aaaa    & 10               & NÃO                  & Atributo simples da tabela de clientes responsável por armazenar, no banco e dados,  a data de nascimento do cliente.                              \\ \hline
+			Telefone            & Número        & 10               & SIM                  & Atributo simples da tabela de clientes responsável por armazenar, no banco e dados, o número de telefone do cliente.                               \\ \hline
+			Logradouro          & Texto         & 100              & SIM                  & Atributo simples da tabela de clientes responsável por armazenar, no banco e dados, o logradouro do cliente.                                       \\ \hline
+			CEP                 & Número        & 10               & SIM                  & Atributo simples da tabela de clientes responsável por armazenar, no banco e dados, o CEP do cliente.                                              \\ \hline
+			Bairro              & Texto         & 60               & SIM                  & Atributo simples da tabela de clientes responsável por armazenar, no banco e dados, o bairro no qual o cliente está situado.                       \\ \hline
+			Cidade              & Texto         & 60               & SIM                  & Atributo simples da tabela de clientes responsável por armazenar, no banco e dados, a cidade na qual o cliente esta situado.                       \\ \hline
+			Número              & Texo          & 30               & SIM                  & Atributo simples da tabela de clientes responsável por armazenar, no banco e dados, o numero da residência do cliente.                             \\ \hline
+			Complemento         & Texto         & 30               & NÃO                  & Atributo simples da tabela de clientes responsável por armazenar, no banco e dados, alguma informação relevante em relação ao endereço do cliente. \\ \hline
+			Ponto de referência & Texto         & 50               & NÃO                  & Atributo simples da tabela de clientes responsável por armazenar, no banco e dados, algum ponto de referência próximo à casa do cliente            \\ \hline
+		\end{tabular}
+	\end{table}
+\end{enumerate}

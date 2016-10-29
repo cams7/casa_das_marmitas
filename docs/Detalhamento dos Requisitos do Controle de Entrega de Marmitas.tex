@@ -29,7 +29,7 @@
 	% -- opções da classe memoir --
 	12pt,				% tamanho da fonte
 	openright,			% capítulos começam em pág ímpar (insere página vazia caso preciso)
-	twoside,			% para impressão em recto e verso. Oposto a oneside
+	oneside,			% para impressão em recto e verso. Oposto a oneside
 	a4paper,			% tamanho do papel. 
 	% -- opções da classe abntex2 --
 	%chapter=TITLE,		% títulos de capítulos convertidos em letras maiúsculas
@@ -77,7 +77,7 @@
 % ---
 % Informações de dados para CAPA e FOLHA DE ROSTO
 % ---
-\titulo{Caso de uso - Controle de Entrega de Marmitas}
+\titulo{Detalhamento dos Requisitos do Controle de Entrega de Marmitas}
 \autor{Ariana Cristina Oliveira (0729560304) \and César Antônio de Magalhães (1029959701) \and
 Débora Coutinho Rodrigues (0745192504) \and Fábio Siqueira Mendes (0740427304) \and Yuri Sausmickat Barreto (0741955404)}
 \local{Brasil}
@@ -86,10 +86,10 @@ Débora Coutinho Rodrigues (0745192504) \and Fábio Siqueira Mendes (0740427304)
 %\coorientador{Equipe \abnTeX}
 \instituicao{%
   Universidade Norte do Paraná -- UNOPAR}
-%\tipotrabalho{Tese (Doutorado)}
+\tipotrabalho{Especificação de Caso de Uso}
 % O preambulo deve conter o tipo do trabalho, o objetivo,
 % o nome da instituição e a área de concentração
-\preambulo{Especificação do caso de uso.}
+%\preambulo{Especificação de Caso de Uso.}
 % ---
  
  
@@ -213,7 +213,6 @@ Débora Coutinho Rodrigues (0745192504) \and Fábio Siqueira Mendes (0740427304)
 \tableofcontents*
 \cleardoublepage
 % ---
-  
  
 % ----------------------------------------------------------
 % ELEMENTOS TEXTUAIS
@@ -235,20 +234,24 @@ Com base no levantamento realizado pelo analista de sistemas, foi possível iden
 \input{uc001}
 \input{uc002}
 \input{uc013}
+
 \input{uc003}
 \input{uc015}
 \input{uc016}
+
 \input{uc004}
 \input{uc011}
 \input{uc014}
+
 \input{uc005}
 \input{uc012}
 \input{uc017}
+
 \input{uc006}
 \input{uc007}
 \input{uc008}
 \input{uc009}
-\input{uc010}'
+\input{uc010}
  
 % ----------------------------------------------------------
 % ELEMENTOS PÓS-TEXTUAIS

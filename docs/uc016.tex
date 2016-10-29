@@ -2,55 +2,95 @@
 
 \section{Breve descrição}
 
-Após a pesquisa ou o cadastro do entregador, o sistema carrega um formulário com os dados do mesmo.
+Após a pesquisa ou o cadastro de um entregador, o sistema carregará um formulário com os dados do mesmo.
 
 \section{Atores}
 
-Este caso de uso é exclusivo do funcionário da empresa - Casa das Marmitas.
+\begin{enumerate}
+	\item Funcionário da empresa, Casa das Marmitas.
+\end{enumerate}
 
 \section{Pré-condições}
 
 \begin{enumerate}
-	\item O funcionário deve estar logado no sistema e com acesso à função.
+	\item O funcionário deve estar logado no sistema.
+	\item O funcionário deve ter permissão em seu login para visualizar os dados do entregador.
 \end{enumerate}
 
-\section{Fluxo de evento}
+\section{Fluxo de eventos}
 
 \subsection{Fluxo básico}
 
-\begin{enumerate}
-	\item Na tela fornecida pelo sistema, o funcionário visualiza:
-	\begin{enumerate}
-		\item A opção \textbf{Alterar} habilitada.
-		\item A opção \textbf{Exluir} habilitada.
-	\end{enumerate}		
+\begin{enumerate}[label=P\arabic*]
+	\item O sistema exibe as informações do entregador conforme à \ref{uc016_ed:1}. \label{uc016_p:1}
+	\item O sistema exibe a opção \textbf{Alterar} habilitada.\label{uc016_p:2} \ref{uc016_a:1} 
+	\item O sistema exibe a opção \textbf{Excluir} habilitada.\label{uc016_p:3} \ref{uc016_a:2}
+	\item O caso de uso é encerrado.
 \end{enumerate}
 
-\subsection{Fluxo alternativo}
+\subsection{Fluxos alternativos}
 
-\begin{enumerate}
-	\item O funcionário não tem permissão de alterar os dados do entregador:
-	\begin{enumerate}
-		\item A opção \textbf{Alterar} desabilitada.
+\begin{enumerate}[label=A\arabic*]
+	\item Alternativa ao passo \ref{uc016_p:2} - O funcionário não tem permissão de alterar os dados do entregador \label{uc016_a:1}
+	\begin{enumerate}[label*=.\arabic*]
+		\item O sistema exibe a opção \textbf{Alterar} desabilitada.
 	\end{enumerate}
-	\item O funcionário não tem permissão de exluir o entregador:
-	\begin{enumerate}
-		\item A opção \textbf{Exluir} desabilitada.
-	\end{enumerate}	
-	\item Desistência:
-	\begin{enumerate}
-		\item O funcionário seleciona a opção \textbf{Cancelar}.
-		\item O sistema encerra o caso de uso atual.
-		\item O sistema carrega a tela principal.
+	
+	\item Alternativa ao passo \ref{uc016_p:3} - O funcionário não tem permissão de excluir o entregador \label{uc016_a:2}
+	\begin{enumerate}[label*=.\arabic*]
+		\item O sistema exibe a opção \textbf{Excluir} desabilitada.
+	\end{enumerate}
+		
+	\item Alterar entregador
+	\begin{enumerate}[label*=.\arabic*]
+		\item O funcionário aciona a opção \textbf{Alterar}, caso essa funcionalidade esteja habilitada.
+		\item O sistema executa o caso de uso \nameref{uc003}.
+		\item O caso de uso é encerrado.
+	\end{enumerate}
+	
+	\item Excluir entregador
+	\begin{enumerate}[label*=.\arabic*]
+		\item O funcionário aciona a opção \textbf{Excluir}, caso essa funcionalidade esteja habilitada.
+		\item O sistema remove os dados do entregador. \label{uc016_a:4:2}
+		\item O sistema volta à tela anterior.
+		\item O caso de uso é encerrado.
+	\end{enumerate}
+		
+	\item Desistência
+	\begin{enumerate}[label*=.\arabic*]
+		\item O funcionário aciona a opção \textbf{Voltar}.
+		\item O sistema volta à tela anterior.
+		\item O caso de uso é encerrado.		
 	\end{enumerate}
 \end{enumerate}
-
-\section{Requerimentos especiais}
-
-Não aplicável.
 
 \section{Pós-condições}
 
-\section{Pontos de extensão}
+\begin{enumerate}
+	\item Os dados do entregador exibidos.
+	\begin{enumerate}
+		\item O sistema carregará os dados do entregador, numa tela, com todas as funcionalidades ativas.
+	\end{enumerate}
+\end{enumerate}
 
-Nenhum.
+\section{Estrutura de dados}
+
+\begin{enumerate}[label=ED\arabic*]
+	\item Os dados do entregador deverão esta de acordo com a tabela \ref{uc016_tb_rn1}. \label{uc016_ed:1}
+	\begin{table}[htb]
+		\ABNTEXfontereduzida
+		\caption[Dados do entregador]{Dados do entregador.}
+		\label{uc016_tb_rn1}
+		\begin{tabular}{|p{4.0cm}|p{3.0cm}|p{7.25cm}|}
+			\hline
+			\textbf{Campo}     & \textbf{Tipo} & \textbf{Descrição}                         \\ \hline
+			Cód. do entregador & Número        & Código do entregador.                      \\ \hline
+			Empresa            & Texto         & Nome da empresa.                           \\ \hline
+			Data cadastro      & dd/mm/aaaa    & Data de cadastro do entregador no sistema. \\ \hline
+			Nome               & Texto         & Nome do entregador.                        \\ \hline
+			CPF                & Número        & CPF do entregador.                         \\ \hline
+			RG                 & Número        & RG do entregador.                          \\ \hline
+			Celular            & Número        & Número de telefone do cliente.             \\ \hline
+		\end{tabular}
+	\end{table}
+\end{enumerate}
