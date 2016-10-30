@@ -13,8 +13,8 @@ Após a pesquisa ou o cadastro de um entregador, o sistema carregará um formul�
 \section{Pré-condições}
 
 \begin{enumerate}
-	\item O funcionário deve estar logado no sistema.
-	\item O funcionário deve ter permissão em seu login para visualizar os dados do entregador.
+	\item O funcionário deverá possuir login e senha de acesso autenticados pelo sistema.
+	\item O funcionário deverá ter executado, anteriormente, o caso de uso \nameref{uc003} ou \nameref{uc015}.
 \end{enumerate}
 
 \section{Fluxo de eventos}
@@ -22,10 +22,10 @@ Após a pesquisa ou o cadastro de um entregador, o sistema carregará um formul�
 \subsection{Fluxo básico}
 
 \begin{enumerate}[label=P\arabic*]
-	\item O sistema exibe as informações do entregador conforme à \ref{uc016_ed:1}. \label{uc016_p:1}
-	\item O sistema exibe a opção \textbf{Alterar} habilitada.\label{uc016_p:2} \ref{uc016_a:1} 
-	\item O sistema exibe a opção \textbf{Excluir} habilitada.\label{uc016_p:3} \ref{uc016_a:2}
-	\item O caso de uso é encerrado.
+	\item O sistema apresenta a tela \textbf{Exibir Entregador} com os campos \ref{uc016_rn:1}. \label{uc016_p:1}
+	\item O sistema habilita a opção \textbf{Alterar}. \label{uc016_p:2}\ref{uc016_a:1} 
+	\item O sistema habilita a opção \textbf{Excluir}. \label{uc016_p:3}\ref{uc016_a:2}
+	\item Esse caso de uso é encerrado. \label{uc016_p:4}\ref{uc016_a:3} \ref{uc016_a:4}
 \end{enumerate}
 
 \subsection{Fluxos alternativos}
@@ -33,64 +33,56 @@ Após a pesquisa ou o cadastro de um entregador, o sistema carregará um formul�
 \begin{enumerate}[label=A\arabic*]
 	\item Alternativa ao passo \ref{uc016_p:2} - O funcionário não tem permissão de alterar os dados do entregador \label{uc016_a:1}
 	\begin{enumerate}[label*=.\arabic*]
-		\item O sistema exibe a opção \textbf{Alterar} desabilitada.
+		\item O sistema desabilita a opção \textbf{Alterar}.
+		\item O sistema vai para o próximo passo.
 	\end{enumerate}
 	
 	\item Alternativa ao passo \ref{uc016_p:3} - O funcionário não tem permissão de excluir o entregador \label{uc016_a:2}
 	\begin{enumerate}[label*=.\arabic*]
-		\item O sistema exibe a opção \textbf{Excluir} desabilitada.
+		\item O sistema desabilita a opção \textbf{Excluir}.
+		\item O sistema vai para o próximo passo.
 	\end{enumerate}
 		
-	\item Alterar entregador
+	\item Alternativa ao passo \ref{uc016_p:4} - Alterar entregador \label{uc016_a:3}
 	\begin{enumerate}[label*=.\arabic*]
 		\item O funcionário aciona a opção \textbf{Alterar}, caso essa funcionalidade esteja habilitada.
 		\item O sistema executa o caso de uso \nameref{uc003}.
-		\item O caso de uso é encerrado.
+		\item Esse caso de uso é encerrado.
 	\end{enumerate}
 	
-	\item Excluir entregador
+	\item Alternativa ao passo \ref{uc016_p:4} - Excluir entregador \label{uc016_a:4}
 	\begin{enumerate}[label*=.\arabic*]
 		\item O funcionário aciona a opção \textbf{Excluir}, caso essa funcionalidade esteja habilitada.
 		\item O sistema remove os dados do entregador. \label{uc016_a:4:2}
 		\item O sistema volta à tela anterior.
-		\item O caso de uso é encerrado.
-	\end{enumerate}
-		
-	\item Desistência
-	\begin{enumerate}[label*=.\arabic*]
-		\item O funcionário aciona a opção \textbf{Voltar}.
-		\item O sistema volta à tela anterior.
-		\item O caso de uso é encerrado.		
+		\item Esse caso de uso é encerrado.
 	\end{enumerate}
 \end{enumerate}
 
 \section{Pós-condições}
 
 \begin{enumerate}
-	\item Os dados do entregador exibidos.
-	\begin{enumerate}
-		\item O sistema carregará os dados do entregador, numa tela, com todas as funcionalidades ativas.
-	\end{enumerate}
+	\item O sistema exibirá os dados do entregador.	
 \end{enumerate}
 
-\section{Estrutura de dados}
+\section{Regras de negócios especiais}
 
-\begin{enumerate}[label=ED\arabic*]
-	\item Os dados do entregador deverão esta de acordo com a tabela \ref{uc016_tb_rn1}. \label{uc016_ed:1}
+\begin{enumerate}[label=RN\arabic*]
+	\item Exibe os campos de dados do entregador de acordo com a tabela \ref{uc016_tb_rn1}. \label{uc016_rn:1}
 	\begin{table}[htb]
 		\ABNTEXfontereduzida
-		\caption[Dados do entregador]{Dados do entregador.}
+		\caption[Campos de dados do entregador]{Campos de dados do entregador.}
 		\label{uc016_tb_rn1}
 		\begin{tabular}{|p{4.0cm}|p{3.0cm}|p{7.25cm}|}
 			\hline
-			\textbf{Campo}     & \textbf{Tipo} & \textbf{Descrição}                         \\ \hline
-			Cód. do entregador & Número        & Código do entregador.                      \\ \hline
-			Empresa            & Texto         & Nome da empresa.                           \\ \hline
-			Data cadastro      & dd/mm/aaaa    & Data de cadastro do entregador no sistema. \\ \hline
-			Nome               & Texto         & Nome do entregador.                        \\ \hline
-			CPF                & Número        & CPF do entregador.                         \\ \hline
-			RG                 & Número        & RG do entregador.                          \\ \hline
-			Celular            & Número        & Número de telefone do cliente.             \\ \hline
+			\textbf{Campo}     & \textbf{Tipo} & \textbf{Observação}                                                        \\ \hline
+			Cód. do entregador & Integer       & N.A                                                                        \\ \hline
+			Empresa            & String        & N.A                                                                        \\ \hline
+			Data cadastro      & Date          & O sistema exibirá a data de cadastro no formato \textbf{dia/mês/ano}.      \\ \hline
+			Nome               & String        & N.A                                                                        \\ \hline
+			CPF                & String        & O sistema exibirá o CPF no formato \textbf{999.999.999-99}.                \\ \hline
+			RG                 & String        & N.A                                                                        \\ \hline
+			Celular            & String        & O sistema exibirá o número de celular no formato \textbf{(99) 99999-9999}. \\ \hline
 		\end{tabular}
 	\end{table}
 \end{enumerate}

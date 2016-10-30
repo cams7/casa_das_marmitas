@@ -13,8 +13,8 @@ Após a pesquisa ou o cadastro de uma marmita, o sistema carregará um formulár
 \section{Pré-condições}
 
 \begin{enumerate}
-	\item O funcionário deve estar logado no sistema.
-	\item O funcionário deve ter permissão em seu login para visualizar os dados da marmita.
+	\item O funcionário deverá possuir login e senha de acesso autenticados pelo sistema.
+	\item O funcionário deverá ter executado, anteriormente, o caso de uso \nameref{uc005} ou \nameref{uc012}.
 \end{enumerate}
 
 \section{Fluxo de eventos}
@@ -22,10 +22,10 @@ Após a pesquisa ou o cadastro de uma marmita, o sistema carregará um formulár
 \subsection{Fluxo básico}
 
 \begin{enumerate}[label=P\arabic*]
-	\item O sistema exibe as informações da marmita conforme à \ref{uc017_ed:1}. \label{uc017_p:1}
-	\item O sistema exibe a opção \textbf{Alterar} habilitada.\label{uc017_p:2} \ref{uc017_a:1} 
-	\item O sistema exibe a opção \textbf{Excluir} habilitada.\label{uc017_p:3} \ref{uc017_a:2}
-	\item O caso de uso é encerrado.
+	\item O sistema apresenta a tela \textbf{Exibir Marmita} com os campos \ref{uc017_rn:1}. \label{uc017_p:1}
+	\item O sistema habilita a opção \textbf{Alterar}. \label{uc017_p:2}\ref{uc017_a:1} 
+	\item O sistema habilita a opção \textbf{Excluir}. \label{uc017_p:3}\ref{uc017_a:2}
+	\item Esse caso de uso é encerrado. \label{uc017_p:4}\ref{uc017_a:3} \ref{uc017_a:4}
 \end{enumerate}
 
 \subsection{Fluxos alternativos}
@@ -33,34 +33,29 @@ Após a pesquisa ou o cadastro de uma marmita, o sistema carregará um formulár
 \begin{enumerate}[label=A\arabic*]
 	\item Alternativa ao passo \ref{uc017_p:2} - O funcionário não tem permissão de alterar os dados da marmita \label{uc017_a:1}
 	\begin{enumerate}[label*=.\arabic*]
-		\item O sistema exibe a opção \textbf{Alterar} desabilitada.
+		\item O sistema desabilita a opção \textbf{Alterar}.
+		\item O sistema vai para o próximo passo.
 	\end{enumerate}
 	
 	\item Alternativa ao passo \ref{uc017_p:3} - O funcionário não tem permissão de excluir a marmita \label{uc017_a:2}
 	\begin{enumerate}[label*=.\arabic*]
-		\item O sistema exibe a opção \textbf{Excluir} desabilitada.
+		\item O sistema desabilita a opção \textbf{Excluir}.
+		\item O sistema vai para o próximo passo.
 	\end{enumerate}
 	
-	\item Alterar marmita
+	\item Alternativa ao passo \ref{uc017_p:4} - Alterar marmita \label{uc017_a:3}
 	\begin{enumerate}[label*=.\arabic*]
 		\item O funcionário aciona a opção \textbf{Alterar}, caso essa funcionalidade esteja habilitada.
 		\item O sistema executa o caso de uso \nameref{uc005}.
-		\item O caso de uso é encerrado.
+		\item Esse caso de uso é encerrado.
 	\end{enumerate}
 	
-	\item Excluir marmita
+	\item Alternativa ao passo \ref{uc017_p:4} - Excluir marmita \label{uc017_a:4}
 	\begin{enumerate}[label*=.\arabic*]
 		\item O funcionário aciona a opção \textbf{Excluir}, caso essa funcionalidade esteja habilitada.
 		\item O sistema remove os dados da marmita. \label{uc017_a:4:2}\ref{uc017_e:1}
 		\item O sistema volta à tela anterior.
-		\item O caso de uso é encerrado.
-	\end{enumerate}
-	
-	\item Desistência
-	\begin{enumerate}[label*=.\arabic*]
-		\item O funcionário aciona a opção \textbf{Voltar}.
-		\item O sistema volta à tela anterior.
-		\item O caso de uso é encerrado.		
+		\item Esse caso de uso é encerrado.
 	\end{enumerate}
 \end{enumerate}
 
@@ -78,29 +73,26 @@ Após a pesquisa ou o cadastro de uma marmita, o sistema carregará um formulár
 \section{Pós-condições}
 
 \begin{enumerate}
-	\item Os dados da marmita exibidos.
-	\begin{enumerate}
-		\item O sistema carregará os dados da marmita, numa tela, com todas as funcionalidades ativas.
-	\end{enumerate}
+	\item O sistema exibirá os dados da marmita.	
 \end{enumerate}
 
-\section{Estrutura de dados}
+\section{Regras de negócios especiais}
 
 \begin{enumerate}[label=ED\arabic*]
-	\item Os dados da marmita deverão esta de acordo com a tabela \ref{uc017_tb_rn1}. \label{uc017_ed:1}
+	\item Exibe os campos de dados da marmita de acordo com a tabela \ref{uc017_tb_rn1}. \label{uc017_rn:1}
 	\begin{table}[htb]
 		\ABNTEXfontereduzida
-		\caption[Dados da marmita]{Dados da marmita.}
+		\caption[Campos de dados da marmita]{Campos de dados da marmita.}
 		\label{uc017_tb_rn1}
 		\begin{tabular}{|p{4.0cm}|p{3.0cm}|p{7.25cm}|}
 			\hline
-			\textbf{Campo}  & \textbf{Tipo} & \textbf{Descrição}                      \\ \hline
-			Cód. do produto & Número        & Código da marmita.                      \\ \hline
-			Data cadastro   & dd/mm/aaaa    & Data de cadastro do produto no sistema. \\ \hline
-			Nome            & Texto         & Nome descritivo para a marmita.         \\ \hline
-			Ingrediente     & Texto         & Descrição dos ingredientes da marmita.  \\ \hline
-			Custo           & Moeda         & Custo de venda da marmita.              \\ \hline
-			Tamanho         & Número        & Tamanho da marmita.                     \\ \hline
+			\textbf{Campo}  & \textbf{Tipo} & \textbf{Observação}                                                   \\ \hline
+			Cód. do produto & Integer       & N.A                                                                   \\ \hline
+			Data cadastro   & Date          & O sistema exibirá a data de cadastro no formato \textbf{dia/mês/ano}. \\ \hline
+			Nome            & String        & N.A                                                                   \\ \hline
+			Ingrediente     & String        & N.A                                                                   \\ \hline
+			Custo           & Float         & O sistema exibirá o custo da marmita no formato moeda.                \\ \hline
+			Tamanho         & Enum          & N.A                                                                   \\ \hline
 		\end{tabular}
 	\end{table}
 \end{enumerate}

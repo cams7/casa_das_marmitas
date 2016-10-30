@@ -13,8 +13,8 @@ O sistema exibirá os entregadores que foram pesquisados pelo funcionário.
 \section{Pré-condições}
 
 \begin{enumerate}
-	\item O funcionário deve estar logado no sistema.
-	\item O funcionário deve ter permissão em seu login para realizar a pesquisa de entregadores.
+	\item O funcionário deverá possuir login e senha de acesso autenticados pelo sistema.
+	\item O funcionário deverá ter permissão para realizar a consulta de entregadores.
 \end{enumerate}
 
 \section{Fluxo de eventos}
@@ -29,18 +29,7 @@ O sistema exibirá os entregadores que foram pesquisados pelo funcionário.
 	\item O sistema exibe a lista de entregadores: código, nome, empresa, celular e data de cadastro. \label{uc015_p:5}\ref{uc015_e:1}
 	\item O funcionário seleciona o entregador.
 	\item O sistema executa o caso de uso \nameref{uc016}, de acordo com o entregador selecionado no passo anterior.
-	\item O caso de uso é encerrado.
-\end{enumerate}
-
-\subsection{Fluxos alternativos}
-
-\begin{enumerate}[label=A\arabic*]
-	\item Desistência
-	\begin{enumerate}[label*=.\arabic*]
-		\item O funcionário seleciona a opção \textbf{Voltar}.
-		\item O sistema volta à tela anterior.
-		\item O caso de uso é encerrado.		
-	\end{enumerate}	
+	\item Esse caso de uso é encerrado.
 \end{enumerate}
 
 \subsection{Exceções}
@@ -57,8 +46,5 @@ O sistema exibirá os entregadores que foram pesquisados pelo funcionário.
 \section{Pós-condições}
 
 \begin{enumerate}
-	\item Entregador encontrado
-	\begin{enumerate}
-		\item O sistema carregará uma tela com os dados do entregador.
-	\end{enumerate}
+	\item O sistema executará o caso de uso \nameref{uc016}.	
 \end{enumerate}

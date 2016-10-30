@@ -28,8 +28,8 @@ O gerente cadastra as marmitas que serão vendidas, informando os seus dados.
 \section{Pré-condições}
 
 \begin{enumerate}
-	\item O gerente deve estar logado no sistema.
-	\item O gerente deve ter permissão em seu login para realizar o cadastro e a alteração dos dados da marmita.
+	\item O gerente deverá possuir login e senha de acesso autenticados pelo sistema.
+	\item O gerente deverá ter permissão para realizar o cadastro e a alteração dos dados da marmita.
 \end{enumerate}
 
 \section{Fluxo de eventos}
@@ -37,42 +37,40 @@ O gerente cadastra as marmitas que serão vendidas, informando os seus dados.
 \subsection{Fluxo básico}
 
 \begin{enumerate}[label=P\arabic*]
-	\item O gerente aciona a opção \textbf{Cadastrar Marmita} no menu do sistema. \ref{uc005_a:1}
+	\item O gerente aciona a opção \textbf{Cadastrar Marmita} no menu do sistema. \label{uc005_p:1}\ref{uc005_a:1}
 	\item O sistema apresenta a tela \textbf{Incluir Marmita} com os campos \ref{uc005_rn:1}. \label{uc005_p:2}
-	\item O gerente preenche os campos da tela e aciona a opção \textbf{Salvar}. \label{uc005_p:3} \ref{uc005_a:2}
+	\item O gerente preenche os campos da tela. \label{uc005_p:3}
+	\item O gerente aciona a opção \textbf{Salvar}. \label{uc005_p:4}\ref{uc005_a:2}
 	\item O sistema valida os dados dos campos. \ref{uc005_e:1} \ref{uc005_e:2} \ref{uc005_e:3}
 	\item O sistema realiza a inclusão com sucesso.
 	\item O sistema executa o caso de uso \nameref{uc017}.
-	\item O caso de uso é encerrado.	
+	\item Esse caso de uso é encerrado.	
 \end{enumerate}
 
 \subsection{Fluxos alternativos}
 
 \begin{enumerate}[label=A\arabic*]
-	\item Alterar marmita \label{uc005_a:1}
+	\item Alternativa ao passo \ref{uc005_p:1} - Alterar marmita \label{uc005_a:1}
 	\begin{enumerate}[label*=.\arabic*]
 		\item Na tela fornecida pelo sistema através do caso de uso \nameref{uc017}, o gerente aciona a opção \textbf{Alterar}. 
 		\item O sistema apresenta a tela \textbf{Alterar Marmita} com os campos \ref{uc005_rn:1}. \label{uc005_a:1:2}
-		\item O gerente preenche os campos da tela e aciona a opção \textbf{Salvar}. \label{uc005_a:1:3} \ref{uc005_a:2}
+		\item O gerente preenche os campos da tela. \label{uc005_a:1:3}
+		\item O gerente aciona a opção \textbf{Salvar}. \label{uc005_a:1:4}\ref{uc005_a:2}
 		\item O sistema valida os dados dos campos. \ref{uc005_e:1} \ref{uc005_e:2}
 		\item O sistema altera os dados com sucesso.
 		\item O sistema executa o caso de uso \nameref{uc017}.
-		\item O caso de uso é encerrado.
+		\item Esse caso de uso é encerrado.
 	\end{enumerate}
 	
-	\item Cancelar inclusão ou alteração \label{uc005_a:2}
+	\item Alternativa ao passo \ref{uc005_p:4} ou \ref{uc005_a:1:4} - Cancelar inclusão ou alteração \label{uc005_a:2}
 	\begin{enumerate}[label*=.\arabic*]
-		\item No passo \ref{uc005_p:3} ou \ref{uc005_a:1:3}, o gerente aciona a opção \textbf{Cancelar}.
+		\item O gerente aciona a opção \textbf{Cancelar}.
 		\item O sistema exibe a mensagem \textbf{Operação cancelada}.
-		\item O sistema retorna ao passo anterior.
-	\end{enumerate}
-	
-	\item Desistência
-	\begin{enumerate}[label*=.\arabic*]
-		\item O gerente seleciona a opção \textbf{Voltar}.
-		\item O sistema volta à tela anterior.
-		\item O caso de uso é encerrado.		
-	\end{enumerate}		 	
+		\item O gerente aciona a opção \textbf{Ok}.
+		\item O sistema fecha a tela atual.
+		\item O sistema retorna à tela anterior.
+		\item Esse caso de uso é encerrado.
+	\end{enumerate}	 	
 \end{enumerate}
 
 \subsection{Exceções}
@@ -96,7 +94,7 @@ O gerente cadastra as marmitas que serão vendidas, informando os seus dados.
 		
 	\item Marmita cadastrada anteriormente \label{uc005_e:3}
 	\begin{enumerate}[label*=.\arabic*]
-		\item[] No passo \ref{uc005_p:3} do fluxo básico, após acionamento da opção \textbf{Salvar} pelo gerente.
+		\item[] No passo \ref{uc005_p:3} do fluxo básico, o gerente preencheu os dados de uma marmita já cadastrado no sistema.
 		\item O sistema exibe a mensagem \textbf{A marmita informada já foi cadastrada anteriormente no sistema}.
 		\item O sistema retorna ao passo anterior.
 	\end{enumerate}
@@ -105,36 +103,25 @@ O gerente cadastra as marmitas que serão vendidas, informando os seus dados.
 \section{Pós-condições}
 
 \begin{enumerate}
-	\item Marmita cadastrada
-	\begin{enumerate}
-		\item A marmita estará, devidamente, cadastrada no banco de dados.
-		\item O sistema carregará a tela com os dados da marmita.
-	\end{enumerate}
-	
-	\item Marmita alterada
-	\begin{enumerate}
-		\item Os dados do marmita estarão, devidamente, atualizados no banco de dados.
-		\item O sistema carregará a tela com os dados da marmita.
-	\end{enumerate}
+	\item O gerente terá cadastrado ou alterado os dados da marmita.
+	\item O sistema executará o caso de uso \nameref{uc017}.	
 \end{enumerate}
 
 \section{Regras de negócios especiais}
 
 \begin{enumerate}[label=RN\arabic*]
-	\item Campos apresentados na tela de inclusão e alteração dos dados da marmita deverão esta de acordo com a tabela \ref{uc005_tb_rn1}. \label{uc005_rn:1}
+	\item Exibe os campos de dados da marmita de acordo com a tabela \ref{uc005_tb_rn1}. \label{uc005_rn:1}
 	\begin{table}[htb]
 		\ABNTEXfontereduzida
-		\caption[Dados da marmita]{Dados da marmita.}
+		\caption[Campos de dados da marmita]{Campos de dados da marmita.}
 		\label{uc005_tb_rn1}
 		\begin{tabular}{|p{3.0cm}|p{2.0cm}|p{1.5cm}|p{2.0cm}|p{5.75cm}|}
 			\hline
-			\textbf{Campo}  & \textbf{Tipo} & \textbf{Tamanho} & \textbf{Obrigatório} & \textbf{Observação}                                                                                                                    \\ \hline
-			Cód. do produto & Número        & 10               & SIM                  & Atributo identificador, chave primária, responsável por identificar o id da tabela de produtos.                                        \\ \hline
-			Data cadastro   & dd/mm/aaaa    & 10               & SIM                  & Atributo simples da tabela de produtos responsável por armazenar, no banco e dados, a data em que o produto foi cadastrado no sistema. \\ \hline
-			Nome            & Texto         & 60               & SIM                  & Atributo simples da tabela de produtos responsável por armazenar, no banco e dados, um nome descritivo para a marmita.                 \\ \hline
-			Ingredientes    & Texto         & 250              & SIM                  & Atributo simples da tabela de produtos responsável por armazenar, no banco e dados, a descrição dos ingredientes da marmita.           \\ \hline
-			Custo           & Moeda         & 10               & SIM                  & Atributo simples da tabela de produtos responsável por armazenar, no banco e dados, o custo de venda da marmita.                       \\ \hline
-			Tamanho         & Número        & 3                & SIM                  & Atributo simples da tabela de clientes responsável por armazenar, no banco e dados, o tamanho da marmita.                              \\ \hline
+			\textbf{Campo} & \textbf{Tipo} & \textbf{Tamanho} & \textbf{Obrigatório} & \textbf{Observação}                                              \\ \hline
+			Nome           & String        & 60               & SIM                  & N.A                                                              \\ \hline
+			Ingredientes   & String        & 250              & SIM                  & N.A                                                              \\ \hline
+			Custo          & Float         & N.A              & SIM                  & O gerente terá que fornecer o custo da marmita no formato moeda. \\ \hline
+			Tamanho        & Enum          & N.A              & SIM                  & N.A                                                              \\ \hline
 		\end{tabular}
 	\end{table}
 \end{enumerate}

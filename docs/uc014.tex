@@ -13,8 +13,8 @@ Após a pesquisa ou o cadastro de uma empresa, o sistema carregará um formulár
 \section{Pré-condições}
 
 \begin{enumerate}
-	\item O funcionário deve estar logado no sistema.
-	\item O funcionário deve ter permissão em seu login para visualizar os dados da empresa.
+	\item O funcionário deverá possuir login e senha de acesso autenticados pelo sistema.
+	\item O funcionário deverá ter executado, anteriormente, o caso de uso \nameref{uc004} ou \nameref{uc011}.
 \end{enumerate}
 
 \section{Fluxo de eventos}
@@ -22,10 +22,10 @@ Após a pesquisa ou o cadastro de uma empresa, o sistema carregará um formulár
 \subsection{Fluxo básico}
 
 \begin{enumerate}[label=P\arabic*]
-	\item O sistema exibe as informações da empresa conforme à \ref{uc014_ed:1}. \label{uc014_p:1}
-	\item O sistema exibe a opção \textbf{Alterar} habilitada.\label{uc014_p:2} \ref{uc014_a:1} 
-	\item O sistema exibe a opção \textbf{Excluir} habilitada.\label{uc014_p:3} \ref{uc014_a:2}
-	\item O caso de uso é encerrado.
+	\item O sistema apresenta a tela \textbf{Exibir Empresa} com os campos \ref{uc014_rn:1}. \label{uc014_p:1}
+	\item O sistema habilita a opção \textbf{Alterar}. \label{uc014_p:2}\ref{uc014_a:1} 
+	\item O sistema habilita a opção \textbf{Excluir}. \label{uc014_p:3}\ref{uc014_a:2}
+	\item Esse caso de uso é encerrado. \label{uc014_p:4}\ref{uc014_a:3} \ref{uc014_a:4}
 \end{enumerate}
 
 \subsection{Fluxos alternativos}
@@ -33,34 +33,29 @@ Após a pesquisa ou o cadastro de uma empresa, o sistema carregará um formulár
 \begin{enumerate}[label=A\arabic*]
 	\item Alternativa ao passo \ref{uc014_p:2} - O funcionário não tem permissão de alterar os dados da empresa \label{uc014_a:1}
 	\begin{enumerate}[label*=.\arabic*]
-		\item O sistema exibe a opção \textbf{Alterar} desabilitada.
+		\item O sistema desabilita a opção \textbf{Alterar}.
+		\item O sistema vai para o próximo passo.
 	\end{enumerate}
 	
-	\item Alternativa ao passo \ref{uc016_p:3} - O funcionário não tem permissão de excluir a empresa \label{uc014_a:2}
+	\item Alternativa ao passo \ref{uc014_p:3} - O funcionário não tem permissão de excluir a empresa \label{uc014_a:2}
 	\begin{enumerate}[label*=.\arabic*]
-		\item O sistema exibe a opção \textbf{Excluir} desabilitada.
+		\item O sistema desabilita a opção \textbf{Excluir}.
+		\item O sistema vai para o próximo passo.
 	\end{enumerate}
 	
-	\item Alterar empresa
+	\item Alternativa ao passo \ref{uc014_p:4} - Alterar empresa \label{uc014_a:3}
 	\begin{enumerate}[label*=.\arabic*]
 		\item O funcionário aciona a opção \textbf{Alterar}, caso essa funcionalidade esteja habilitada.
 		\item O sistema executa o caso de uso \nameref{uc004}.
-		\item O caso de uso é encerrado.
+		\item Esse caso de uso é encerrado.
 	\end{enumerate}
 	
-	\item Excluir empresa
+	\item Alternativa ao passo \ref{uc014_p:4} - Excluir empresa \label{uc014_a:4}
 	\begin{enumerate}[label*=.\arabic*]
 		\item O funcionário aciona a opção \textbf{Excluir}, caso essa funcionalidade esteja habilitada.
 		\item O sistema remove os dados da empresa. \label{uc014_a:4:2}\ref{uc014_e:1}
 		\item O sistema volta à tela anterior.
-		\item O caso de uso é encerrado.
-	\end{enumerate}
-	
-	\item Desistência
-	\begin{enumerate}[label*=.\arabic*]
-		\item O funcionário aciona a opção \textbf{Voltar}.
-		\item O sistema volta à tela anterior.
-		\item O caso de uso é encerrado.		
+		\item Esse caso de uso é encerrado.
 	\end{enumerate}
 \end{enumerate}
 
@@ -78,35 +73,32 @@ Após a pesquisa ou o cadastro de uma empresa, o sistema carregará um formulár
 \section{Pós-condições}
 
 \begin{enumerate}
-	\item Os dados da empresa exibidos.
-	\begin{enumerate}
-		\item O sistema carregará os dados da empresa, numa tela, com todas as funcionalidades ativas.
-	\end{enumerate}
+	\item O sistema exibirá os dados da empresa.
 \end{enumerate}
 
-\section{Estrutura de dados}
+\section{Regras de negócios especiais}
 
 \begin{enumerate}[label=ED\arabic*]
-	\item Os dados da empresa deverão esta de acordo com a tabela \ref{uc014_tb_rn1}. \label{uc014_ed:1}
+	\item Exibe os campos de dados da empresa de acordo com a tabela \ref{uc014_tb_rn1}. \label{uc014_rn:1}
 	\begin{table}[htb]
 		\ABNTEXfontereduzida
-		\caption[Dados da empresa]{Dados da empresa.}
+		\caption[Campos de dados da empresa]{Campos de dados da empresa.}
 		\label{uc014_tb_rn1}
 		\begin{tabular}{|p{4.0cm}|p{3.0cm}|p{7.25cm}|}
 			\hline
-			\textbf{Campo}  & \textbf{Tipo} & \textbf{Descrição}                                      \\ \hline
-			Cód. da empresa & Número        & Código da empresa.                                      \\ \hline
-			Data cadastro   & dd/mm/aaaa    & Data de cadastro da empresa no sistema.                 \\ \hline
-			Nome            & Texto         & Nome da empresa.                                        \\ \hline
-			CNPJ            & Número        & CNPJ da empresa.                                        \\ \hline
-			E-mail          & Texto         & E-mail da empresa.                                      \\ \hline
-			Telefone        & Número        & Número de telefone da empresa.                          \\ \hline
-			Logradouro      & Texto         & Logradouro (rua, avenida, beco, ...) da empresa.        \\ \hline
-			CEP             & Número        & CEP da empresa.                           \\ \hline
-			Bairro          & Texto         & Bairro onde está localizada a empresa.                  \\ \hline
-			Cidade          & Texto         & Cidade onde está localizada a empresa.                  \\ \hline
-			Número          & Texto         & Número do imóvel da empresa.                            \\ \hline
-			Complemento     & Texto         & Informação relevante em relação ao endereço da empresa. \\ \hline
+			\textbf{Campo}  & \textbf{Tipo} & \textbf{Observação}                                                        \\ \hline
+			Cód. da empresa & Integer       & N.A                                                                        \\ \hline
+			Data cadastro   & Date          & O sistema exibirá a data de cadastro no formato \textbf{dia/mês/ano}.      \\ \hline
+			Nome            & String        & N.A                                                                        \\ \hline
+			CNPJ            & String        & O sistema exibirá o CNPJ no formato \textbf{99.999.999/9999-99}.           \\ \hline
+			E-mail          & String        & N.A                                                                        \\ \hline
+			Telefone        & String        & O sistema exibirá o número de telefone no formato \textbf{(99) 9999-9999}. \\ \hline
+			Logradouro      & String        & N.A                                                                        \\ \hline
+			CEP             & String        & O sistema exibirá o CEP no formato \textbf{99.999-999}.                    \\ \hline
+			Bairro          & String        & N.A                                                                        \\ \hline
+			Cidade          & String        & N.A                                                                        \\ \hline
+			Número          & String        & N.A                                                                        \\ \hline
+			Complemento     & String        & N.A                                                                        \\ \hline
 		\end{tabular}
 	\end{table}
 \end{enumerate}

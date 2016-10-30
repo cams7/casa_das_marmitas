@@ -13,8 +13,8 @@ O sistema exibirá as marmitas que foram pesquisadas pelo funcionário.
 \section{Pré-condições}
 
 \begin{enumerate}
-	\item O funcionário deve estar logado no sistema.
-	\item O funcionário deve ter permissão em seu login para realizar a pesquisa de marmitas.
+	\item O funcionário deverá possuir login e senha de acesso autenticados pelo sistema.
+	\item O funcionário deverá ter permissão para realizar a busca de marmitas.
 \end{enumerate}
 
 \section{Fluxo de eventos}
@@ -29,18 +29,7 @@ O sistema exibirá as marmitas que foram pesquisadas pelo funcionário.
 	\item O sistema exibe a lista de marmitas: código, nome, custo, tamanho e data de cadastro. \label{uc012_p:5}\ref{uc012_e:1}
 	\item O funcionário seleciona a marmita.
 	\item O sistema executa o caso de uso \nameref{uc017}, de acordo com a marmita selecionada no passo anterior.
-	\item O caso de uso é encerrado.
-\end{enumerate}
-
-\subsection{Fluxos alternativos}
-
-\begin{enumerate}[label=A\arabic*]
-	\item Desistência
-	\begin{enumerate}[label*=.\arabic*]
-		\item O funcionário seleciona a opção \textbf{Voltar}.
-		\item O sistema volta à tela anterior.
-		\item O caso de uso é encerrado.		
-	\end{enumerate}	
+	\item Esse caso de uso é encerrado.
 \end{enumerate}
 
 \subsection{Exceções}
@@ -57,8 +46,5 @@ O sistema exibirá as marmitas que foram pesquisadas pelo funcionário.
 \section{Pós-condições}
 
 \begin{enumerate}
-	\item Marmita encontrada
-	\begin{enumerate}
-		\item O sistema carregará uma tela com os dados da marmita.
-	\end{enumerate}
+	\item O sistema executará o caso de uso \nameref{uc017}.	
 \end{enumerate}

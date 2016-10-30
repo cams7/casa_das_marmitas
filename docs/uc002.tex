@@ -13,8 +13,8 @@ O sistema exibirá os clientes que foram pesquisados pelo funcionário.
 \section{Pré-condições}
 
 \begin{enumerate}
-	\item O funcionário deve estar logado no sistema.
-	\item O funcionário deve ter permissão em seu login para realizar a pesquisa de clientes.
+	\item O funcionário deverá possuir login e senha de acesso autenticados pelo sistema.
+	\item O funcionário deverá ter permissão para realizar a consulta de clientes.
 \end{enumerate}
 
 \section{Fluxo de eventos}
@@ -25,22 +25,11 @@ O sistema exibirá os clientes que foram pesquisados pelo funcionário.
 	\item O funcionário aciona a opção \textbf{Listar Clientes} no menu do sistema.
 	\item O sistema apresenta a tela \textbf{Lista de Clientes}. \label{uc002_p:2}	
 	\item O funcionário informa, no campo de pequisa, o número de telefone ou o nome do cliente.
-	\item O funcionário seleciona a opção \textbf{Buscar}.
+	\item O funcionário seleciona a opção \textbf{Buscar}. \label{uc002_p:4}
 	\item O sistema exibe a lista de clientes: código, nome, telefone e data de cadastro. \label{uc002_p:5}\ref{uc002_e:1}
 	\item O funcionário seleciona o cliente.
 	\item O sistema executa o caso de uso \nameref{uc013}, de acordo com o cliente selecionado no passo anterior.
-	\item O caso de uso é encerrado.
-\end{enumerate}
-
-\subsection{Fluxos alternativos}
-
-\begin{enumerate}[label=A\arabic*]
-	\item Desistência
-	\begin{enumerate}[label*=.\arabic*]
-		\item O funcionário seleciona a opção \textbf{Voltar}.
-		\item O sistema volta à tela anterior.
-		\item O caso de uso é encerrado.		
-	\end{enumerate}	
+	\item Esse caso de uso é encerrado.
 \end{enumerate}
 
 \subsection{Exceções}
@@ -57,8 +46,5 @@ O sistema exibirá os clientes que foram pesquisados pelo funcionário.
 \section{Pós-condições}
 
 \begin{enumerate}
-	\item Cliente encontrado
-	\begin{enumerate}
-		\item O sistema carregará uma tela com os dados do cliente.
-	\end{enumerate}
+	\item O sistema executará o caso de uso \nameref{uc013}.	
 \end{enumerate}

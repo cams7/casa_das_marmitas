@@ -13,8 +13,8 @@ Caso a empresa de entrega, onde os motoboys são vinculados, não esteja registr
 \section{Pré-condições}
 
 \begin{enumerate}
-	\item O gerente deve estar logado no sistema.
-	\item O gerente deve ter permissão em seu login para realizar o cadastro e a alteração dos dados da empresa.
+	\item O gerente deverá possuir login e senha de acesso autenticados pelo sistema.
+	\item O gerente deverá ter permissão para realizar o cadastro e a alteração dos dados da empresa.
 \end{enumerate}
 
 \section{Fluxo de eventos}
@@ -22,42 +22,40 @@ Caso a empresa de entrega, onde os motoboys são vinculados, não esteja registr
 \subsection{Fluxo básico}
 
 \begin{enumerate}[label=P\arabic*]
-	\item O gerente aciona a opção \textbf{Cadastrar Empresa} no menu do sistema. \ref{uc004_a:1}
+	\item O gerente aciona a opção \textbf{Cadastrar Empresa} no menu do sistema. \label{uc004_p:1}\ref{uc004_a:1}
 	\item O sistema apresenta a tela \textbf{Incluir Empresa} com os campos \ref{uc004_rn:1}. \label{uc004_p:2}
-	\item O gerente preenche os campos da tela e aciona a opção \textbf{Salvar}. \label{uc004_p:3} \ref{uc004_a:2}
+	\item O gerente preenche os campos da tela. \label{uc004_p:3}
+	\item O gerente aciona a opção \textbf{Salvar}. \label{uc004_p:4}\ref{uc004_a:2}
 	\item O sistema valida os dados dos campos. \ref{uc004_e:1} \ref{uc004_e:2} \ref{uc004_e:3} \ref{uc004_e:4} \ref{uc004_e:5} \ref{uc004_e:6} \ref{uc004_e:7} \ref{uc004_e:8}
 	\item O sistema realiza a inclusão com sucesso.
 	\item O sistema executa o caso de uso \nameref{uc014}.
-	\item O caso de uso é encerrado.	
+	\item Esse caso de uso é encerrado.	
 \end{enumerate}
 
 \subsection{Fluxos alternativos}
 
 \begin{enumerate}[label=A\arabic*]
-	\item Alterar empresa \label{uc004_a:1}
+	\item Alternativa ao passo \ref{uc004_p:1} - Alterar empresa \label{uc004_a:1}
 	\begin{enumerate}[label*=.\arabic*]
 		\item Na tela fornecida pelo sistema através do caso de uso \nameref{uc014}, o gerente aciona a opção \textbf{Alterar}. 
 		\item O sistema apresenta a tela \textbf{Alterar Empresa} com os campos \ref{uc004_rn:1}. \label{uc004_a:1:2}
-		\item O gerente preenche os campos da tela e aciona a opção \textbf{Salvar}. \label{uc004_a:1:3} \ref{uc004_a:2}
+		\item O gerente preenche os campos da tela. \label{uc004_a:1:3}
+		\item O gerente aciona a opção \textbf{Salvar}. \label{uc004_a:1:4}\ref{uc004_a:2}
 		\item O sistema valida os dados dos campos. \ref{uc004_e:1} \ref{uc004_e:2} \ref{uc004_e:3} \ref{uc004_e:4} \ref{uc004_e:5} \ref{uc004_e:6} \ref{uc004_e:7}
 		\item O sistema altera os dados com sucesso.
 		\item O sistema executa o caso de uso \nameref{uc014}.
-		\item O caso de uso é encerrado.
+		\item Esse caso de uso é encerrado.
 	\end{enumerate}
 	
-	\item Cancelar inclusão ou alteração \label{uc004_a:2}
+	\item Alternativa ao passo \ref{uc004_p:4} ou \ref{uc004_a:1:4} - Cancelar inclusão ou alteração \label{uc004_a:2}
 	\begin{enumerate}[label*=.\arabic*]
-		\item No passo \ref{uc004_p:3} ou \ref{uc004_a:1:3}, o gerente aciona a opção \textbf{Cancelar}.
+		\item O gerente aciona a opção \textbf{Cancelar}.
 		\item O sistema exibe a mensagem \textbf{Operação cancelada}.
-		\item O sistema retorna ao passo anterior.
-	\end{enumerate}
-	
-	\item Desistência
-	\begin{enumerate}[label*=.\arabic*]
-		\item O gerente seleciona a opção \textbf{Voltar}.
-		\item O sistema volta à tela anterior.
-		\item O caso de uso é encerrado.		
-	\end{enumerate}		 	
+		\item O gerente aciona a opção \textbf{Ok}.
+		\item O sistema fecha a tela atual.
+		\item O sistema retorna à tela anterior.
+		\item Esse caso de uso é encerrado.
+	\end{enumerate}	 	
 \end{enumerate}
 
 \subsection{Exceções}
@@ -121,7 +119,7 @@ Caso a empresa de entrega, onde os motoboys são vinculados, não esteja registr
 	
 	\item Empresa cadastrada anteriormente \label{uc004_e:8}
 	\begin{enumerate}[label*=.\arabic*]
-		\item[] No passo \ref{uc004_p:3} do fluxo básico, após acionamento da opção \textbf{Salvar} pelo gerente.
+		\item[] No passo \ref{uc004_p:3} do fluxo básico, o gerente preencheu os dados de uma empresa já cadastrado no sistema.
 		\item O sistema exibe a mensagem \textbf{A empresa informada já foi cadastrada anteriormente no sistema}.
 		\item O sistema retorna ao passo anterior.
 	\end{enumerate}
@@ -130,43 +128,31 @@ Caso a empresa de entrega, onde os motoboys são vinculados, não esteja registr
 \section{Pós-condições}
 
 \begin{enumerate}
-	\item Empresa cadastrada
-	\begin{enumerate}
-		\item O empresa estará, devidamente, cadastrada no banco de dados.
-		\item O sistema carregará a tela com os dados da empresa.
-	\end{enumerate}
-	
-	\item Empresa alterada
-	\begin{enumerate}
-		\item Os dados do empresa estarão, devidamente, atualizados no banco de dados.
-		\item O sistema carregará a tela com os dados da empresa.
-	\end{enumerate}
+	\item O gerente terá cadastrado ou alterado os dados da empresa.
+	\item O sistema executará o caso de uso \nameref{uc014}.	
 \end{enumerate}
 
 \section{Regras de negócios especiais}
 
 \begin{enumerate}[label=RN\arabic*]
-	\item Campos apresentados na tela de inclusão e alteração dos dados da empresa deverão esta de acordo com a tabela \ref{uc004_tb_rn1}. \label{uc004_rn:1}
+	\item Exibe os campos de dados da empresa de acordo com a tabela \ref{uc004_tb_rn1}. \label{uc004_rn:1}
 	\begin{table}[htb]
 		\ABNTEXfontereduzida
-		\caption[Dados da empresa]{Dados da empresa.}
+		\caption[Campos de dados da empresa]{Campos de dados da empresa.}
 		\label{uc004_tb_rn1}
 		\begin{tabular}{|p{3.0cm}|p{2.0cm}|p{1.5cm}|p{2.0cm}|p{5.75cm}|}
 			\hline
-			\textbf{Campo}  & \textbf{Tipo} & \textbf{Tamanho} & \textbf{Obrigatório} & \textbf{Observação}                                                                                                                                \\ \hline
-			Cód. da empresa & Número        & 10               & SIM                  & Atributo identificador, chave primária, responsável por identificar o id da tabela de empresas.                                                    \\ \hline
-			Data cadastro   & dd/mm/aaaa    & 10               & SIM                  & Atributo simples da tabela de empresa responsável por armazenar, no banco e dados, a data em que a empresa foi cadastrada no sistema.              \\ \hline
-			Nome            & Texto         & 60               & SIM                  & Atributo simples da tabela de empresas responsável por armazenar, no banco e dados, o nome da empresa.                                             \\ \hline
-			CNPJ            & Número        & 14               & SIM                  & Atributo simples da tabela de empresas responsável por armazenar, no banco e dados, o CNPJ da empresa.                                             \\ \hline
-			E-mail          & Texto         & 30               & SIM                  & Atributo simples da tabela de empresas responsável por armazenar, no banco e dados, o e-mail da empresa.                                           \\ \hline
-			Telefone        & Número        & 10               & SIM                  & Atributo simples da tabela de empresas responsável por armazenar, no banco e dados,  o número de telefone da empresa.                              \\ \hline
-			Logradouro      & Texto         & 100              & SIM                  & Atributo simples da tabela de empresas responsável por armazenar, no banco e dados, o logradouro da empresa.                                       \\ \hline
-			CEP             & Número        & 10               & SIM                  & Atributo simples da tabela de empresas responsável por armazenar, no banco e dados, o CEP da empresa.                                              \\ \hline
-			Bairro          & Texto         & 60               & SIM                  & Atributo simples da tabela de empresas responsável por armazenar, no banco e dados, o bairro no qual a empresa está situada.                       \\ \hline
-			Cidade          & Texto         & 60               & SIM                  & Atributo simples da tabela de empresas responsável por armazenar, no banco e dados, a cidade na qual a empresa está situada.                       \\ \hline
-			Número          & Texto         & 30               & SIM                  & Atributo simples da tabela de empresas responsável por armazenar, no banco e dados, o numero do imóvel da empresa.                                 \\ \hline
-			Complemento     & Texto         & 30               & NÃO                  & Atributo simples da tabela de empresas responsável por armazenar, no banco e dados, alguma informação relevante em relação ao endereço da empresa. \\ \hline
+			\textbf{Campo} & \textbf{Tipo} & \textbf{Tamanho} & \textbf{Obrigatório} & \textbf{Observação}                                                                  \\ \hline
+			Nome           & String        & 60               & SIM                  & N.A                                                                                  \\ \hline
+			CNPJ           & String        & 14               & SIM                  & O gerente terá que fornecer o CNPJ no formato \textbf{99.999.999/9999-99}.           \\ \hline
+			E-mail         & String        & 30               & SIM                  & N.A                                                                                  \\ \hline
+			Telefone       & String        & 10               & SIM                  & O gerente terá que fornecer o número de telefone no formato \textbf{(99) 9999-9999}. \\ \hline
+			Logradouro     & String        & 100              & SIM                  & N.A                                                                                  \\ \hline
+			CEP            & String        & 10               & SIM                  & O gerente terá que fornecer o CEP no formato \textbf{99.999-999}.                    \\ \hline
+			Bairro         & String        & 60               & SIM                  & N.A                                                                                  \\ \hline
+			Cidade         & String        & 60               & SIM                  & N.A                                                                                  \\ \hline
+			Número         & String        & 30               & SIM                  & N.A                                                                                  \\ \hline
+			Complemento    & String        & 30               & NÃO                  & N.A                                                                                  \\ \hline
 		\end{tabular}
 	\end{table}
 \end{enumerate}
-

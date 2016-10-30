@@ -13,44 +13,76 @@ Os pedidos serão atendidos com base nas ligações recebidas e o atendimento ao
 
 \section{Atores}
 
-Este caso de uso é exclusivo do atendente da empresa - Casa das Marmitas.
+\begin{enumerate}
+	\item Atendente da empresa, Casa das Marmitas.
+\end{enumerate}
 
 \section{Pré-condições}
 
 \begin{enumerate}
-	\item O atendente deve estar logado no sistema e com acesso à função.
+	\item O atendente deverá possuir login e senha de acesso autenticados pelo sistema.
+	\item O atendente deverá ter permissão para alterar o status do pedido do cliente.
+	\item O atendente deverá ter executado, anteriormente, o caso de uso \nameref{uc013}.
+	\item O atendente deverá ter selecionado o pedido na lista de pedidos da tela \textbf{Exibir Cliente}.
 \end{enumerate}
 
 \section{Fluxo de eventos}
 
 \subsection{Fluxo básico}
 
-\begin{enumerate}
-	\item O atendente informa, em tela fornecida pelo sistema, os seguintes dados:
-	\begin{enumerate}
-		\item Status do pedido, \emph{Enum}, obrigatório.		
-	\end{enumerate}
-	\item O atendente seleciona a opção \textbf{Atualizar}.
-	\item O sistema atualiza os dados relativos ao pedido.
+\begin{enumerate}[label=P\arabic*]
+	\item O sistema apresenta a tela \textbf{Realizar Entrega} com os campos \ref{uc009_rn:1}. \label{uc009_p:1}
+	\item No campo \textbf{Status}, o atendente informa a situação do pedido. \label{uc009_p:2}		
+	\item O atendente aciona a opção \textbf{Salvar}. \label{uc009_p:3}\ref{uc009_a:1}
+	\item O sistema valida os dados dos campos. 
+	\item O sistema grava a alteração.
+	\item O sistema atualiza a lista de pedidos do cliente na tela \textbf{Exibir Cliente}.
+	\item O sistema fecha a tela atual.
+	\item O sistema retorna ao caso de uso \nameref{uc013}.
+	\item Esse caso de uso é encerrado.	
 \end{enumerate}
 
 \subsection{Fluxos alternativos}
 
-\begin{enumerate}
-	\item Desistência:
-	\begin{enumerate}
-		\item O atendente seleciona a opção \textbf{Cancelar}.
-		\item O sistema encerra o caso de uso atual.
-		\item O sistema carrega a tela principal.
-	\end{enumerate}
+\begin{enumerate}[label=A\arabic*]
+	\item Alternativa ao passo \ref{uc009_p:3} - Cancelar alteração \label{uc009_a:1}
+	\begin{enumerate}[label*=.\arabic*]
+		\item O atendente aciona a opção \textbf{Cancelar}.
+		\item O sistema fecha a tela atual.
+		\item O sistema retorna ao caso de uso \nameref{uc013}.
+		\item Esse caso de uso é encerrado.
+	\end{enumerate} 
 \end{enumerate}
-
-%\section{Requerimentos especiais}
-
-%Não aplicável.
 
 \section{Pós-condições}
 
-%\section{Pontos de extensão}
+\begin{enumerate}
+	\item O atendente terá atualizado o status do pedido do cliente.
+	\item O sistema terá retornado ao caso de uso \nameref{uc013}.	
+\end{enumerate}
 
-%Nenhum.
+\section{Regras de negócios especiais}
+
+\begin{enumerate}[label=RN\arabic*]
+	\item Exibe os campos de dados do pedido de acordo com a tabela \ref{uc009_tb_rn1}. \label{uc009_rn:1}
+	\begin{table}[htb]
+		\ABNTEXfontereduzida
+		\caption[Campos de dados do pedido]{Campos de dados do pedido.}
+		\label{uc009_tb_rn1}
+		\begin{tabular}{|p{3.0cm}|p{2.0cm}|p{1.5cm}|p{2.0cm}|p{5.75cm}|}
+			\hline
+			\textbf{Campo}   & \textbf{Tipo} & \textbf{Tamanho} & \textbf{Obrigatório} & \textbf{Observação}                                                                                                                                              \\ \hline
+			Cód. do pedido   & Long          & N.A & SIM & N.A                                                                                                                                                              \\ \hline
+			Data cadastro    & Date          & N.A & SIM & O sistema exibirá a data de cadastro no formato \textbf{dia/mês/ano hora:minuto}.                                                                                \\ \hline
+			Quantidade total & Short         & N.A & SIM & N.A                                                                                                                                                              \\ \hline
+			Total do pedido  & Float         & N.A & SIM & O sistema exibirá, no formato moeda, o valor total do pedido.                                                                                                    \\ \hline
+			Status           & Enum          & N.A & SIM & O sistema exibirá uma das seguintes opções: 	
+			\begin{enumerate}
+				\item PENDENTE (pedido pendente);
+				\item TRANSITO (pedido em trânsito);
+				\item CANCELADO (pedido cancelado);
+				\item ENTREGUE (pedido entregue).
+			\end{enumerate}\\ \hline
+		\end{tabular}
+	\end{table}
+\end{enumerate}

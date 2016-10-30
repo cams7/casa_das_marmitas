@@ -13,8 +13,8 @@ Após a pesquisa ou o cadastro de um cliente, o sistema carregará um formulári
 \section{Pré-condições}
 
 \begin{enumerate}
-	\item O funcionário deve estar logado no sistema.
-	\item O funcionário deve ter permissão em seu login para visualizar os dados do cliente.
+	\item O funcionário deverá possuir login e senha de acesso autenticados pelo sistema.
+	\item O funcionário deverá ter executado, anteriormente, o caso de uso \nameref{uc001} ou \nameref{uc002}.
 \end{enumerate}
 
 \section{Fluxo de eventos}
@@ -22,67 +22,85 @@ Após a pesquisa ou o cadastro de um cliente, o sistema carregará um formulári
 \subsection{Fluxo básico}
 
 \begin{enumerate}[label=P\arabic*]
-	\item O sistema exibe as informações do cliente conforme à \ref{uc013_ed:1}. \label{uc013_p:1}
-	\item O sistema exibe a opção \textbf{Alterar} habilitada.\label{uc013_p:2} \ref{uc013_a:1} 
-	\item O sistema exibe a opção \textbf{Excluir} habilitada.\label{uc013_p:3} \ref{uc013_a:2}
-	\item O sistema exibe a opção \textbf{Registrar Pedido} habilitada.\label{uc013_p:4} \ref{uc013_a:3}
-	\item O caso de uso é encerrado.
+	\item O sistema apresenta a tela \textbf{Exibir Cliente} com os campos \ref{uc013_rn:1}. \label{uc013_p:1}
+	\item O sistema exibe a lista de pedidos com os campos \ref{uc013_rn:2}. \label{uc013_p:2}\ref{uc013_e:1}
+	\item O sistema habilita a opção \textbf{Alterar}. \label{uc013_p:3}\ref{uc013_a:1} 
+	\item O sistema habilita a opção \textbf{Excluir}. \label{uc013_p:4}\ref{uc013_a:2}
+	\item O sistema habilita opção \textbf{Registrar Pedido}. \label{uc013_p:5}\ref{uc013_a:3}
+	\item O sistema habilita a seleção da lista de pedidos. \label{uc013_p:6}\ref{uc013_a:4}
+	\item Esse caso de uso é encerrado. \label{uc013_p:7}\ref{uc013_a:5} \ref{uc013_a:6} \ref{uc013_a:7}  \ref{uc013_a:8}
 \end{enumerate}
 
 \subsection{Fluxos alternativos}
 
 \begin{enumerate}[label=A\arabic*]
-	\item Alternativa ao passo \ref{uc013_p:2} - O funcionário não tem permissão de alterar os dados do cliente \label{uc013_a:1}
+	\item Alternativa ao passo \ref{uc013_p:3} - O funcionário não tem permissão de alterar os dados do cliente \label{uc013_a:1}
 	\begin{enumerate}[label*=.\arabic*]
-		\item O sistema exibe a opção \textbf{Alterar} desabilitada.
+		\item O sistema desabilita a opção \textbf{Alterar}.
+		\item O sistema vai para o próximo passo.
 	\end{enumerate}
 
-	\item Alternativa ao passo \ref{uc013_p:3} - O funcionário não tem permissão de excluir o cliente \label{uc013_a:2}
+	\item Alternativa ao passo \ref{uc013_p:4} - O funcionário não tem permissão de excluir o cliente \label{uc013_a:2}
 	\begin{enumerate}[label*=.\arabic*]
-		\item O sistema exibe a opção \textbf{Excluir} desabilitada.
+		\item O sistema desabilita a opção \textbf{Excluir}.
+		\item O sistema vai para o próximo passo.
 	\end{enumerate}
 
-	\item Alternativa ao passo \ref{uc013_p:4} - O funcionário não tem permissão de registrar o pedido do cliente \label{uc013_a:3}
+	\item Alternativa ao passo \ref{uc013_p:5} - O funcionário não tem permissão de registrar pedidos para o cliente \label{uc013_a:3}
 	\begin{enumerate}[label*=.\arabic*]
-		\item O sistema exibe a opção \textbf{Registrar Pedido} desabilitada.
+		\item O sistema desabilita a opção \textbf{Registrar Pedido}.
+		\item O sistema vai para o próximo passo.
 	\end{enumerate}
 	
-	\item Alterar cliente
+	\item Alternativa ao passo \ref{uc013_p:6} - O funcionário não tem permissão de alterar o status dos pedidos do cliente \label{uc013_a:4}
+	\begin{enumerate}[label*=.\arabic*]
+		\item O sistema desabilita a seleção da lista de pedidos.
+		\item O sistema vai para o próximo passo.
+	\end{enumerate}
+	
+	\item Alternativa ao passo \ref{uc013_p:7} - Alterar cliente \label{uc013_a:5}
 	\begin{enumerate}[label*=.\arabic*]
 		\item O funcionário aciona a opção \textbf{Alterar}, caso essa funcionalidade esteja habilitada.
 		\item O sistema executa o caso de uso \nameref{uc001}.
-		\item O caso de uso é encerrado.
+		\item Esse caso de uso é encerrado.
 	\end{enumerate}
 
-	\item Excluir cliente
+	\item Alternativa ao passo \ref{uc013_p:7} - Excluir cliente \label{uc013_a:6}
 	\begin{enumerate}[label*=.\arabic*]
 		\item O funcionário aciona a opção \textbf{Excluir}, caso essa funcionalidade esteja habilitada.
-		\item O sistema remove os dados do cliente. \label{uc013_a:5:2}\ref{uc013_e:1}
+		\item O sistema remove os dados do cliente. \label{uc013_a:6:2}\ref{uc013_e:2}
 		\item O sistema volta à tela anterior.
-		\item O caso de uso é encerrado.
+		\item Esse caso de uso é encerrado.
 	\end{enumerate}
 
-	\item Registrar pedido do cliente
+	\item Alternativa ao passo \ref{uc013_p:7} - Registrar pedido \label{uc013_a:7}
 	\begin{enumerate}[label*=.\arabic*]
 		\item O funcionário aciona a opção \textbf{Registrar Pedido}, caso essa funcionalidade esteja habilitada.
 		\item O sistema executa o caso de uso \nameref{uc007}.
-		\item O caso de uso é encerrado.
+		\item Esse caso de uso é suspenso.
 	\end{enumerate}
-		
-	\item Desistência
+	
+	\item Alternativa ao passo \ref{uc013_p:7} - Alterar status do pedido \label{uc013_a:8}
 	\begin{enumerate}[label*=.\arabic*]
-		\item O funcionário aciona a opção \textbf{Voltar}.
-		\item O sistema volta à tela anterior.
-		\item O caso de uso é encerrado.		
+		\item O funcionário seleciona o pedido, caso essa funcionalidade esteja habilitada.
+		\item O sistema executa o caso de uso \nameref{uc009}.
+		\item Esse caso de uso é suspenso.
 	\end{enumerate}
 \end{enumerate}
 
 \subsection{Exceções}
 
 \begin{enumerate}[label=E\arabic*]
-	\item Cliente tem pedido registrado \label{uc013_e:1}
+	\item Cliente não tem pedido cadastrado \label{uc013_e:1}
 	\begin{enumerate}[label*=.\arabic*]
-		\item[] No passo \ref{uc013_a:5:2}, o funcionário tentou remover o cliente, mas isso não foi possível, por que esse tinha pelo menos um pedido cadastrado.
+		\item[] No passo \ref{uc013_p:2}, não foi encontrado nenhum pedido vinculado à conta do cliente.
+		\item O sistema exibe a mensagem \textbf{O cliente não tem pedidos cadastrados}.
+		\item O sistema vai para o próximo passo.
+	\end{enumerate}
+
+	\item Cliente tem pedido registrado \label{uc013_e:2}
+	\begin{enumerate}[label*=.\arabic*]
+		\item[] No passo \ref{uc013_a:6:2}, o funcionário tentou remover o cliente, mas isso não foi possível, por que esse tinha pelo menos um pedido cadastrado.
 		\item O sistema exibe a mensagem \textbf{O cliente tem pedido registrado}.
 		\item O sistema retorna ao passo \ref{uc013_p:1}.
 	\end{enumerate}
@@ -91,35 +109,54 @@ Após a pesquisa ou o cadastro de um cliente, o sistema carregará um formulári
 \section{Pós-condições}
 
 \begin{enumerate}
-	\item Os dados do cliente exibidos.
-	\begin{enumerate}
-		\item O sistema carregará os dados do cliente, numa tela, com todas as funcionalidades ativas.
-	\end{enumerate}
+	\item O sistema exibirá os dados do cliente.	
 \end{enumerate}
 
-\section{Estrutura de dados}
+\section{Regras de negócios especiais}
 
-\begin{enumerate}[label=ED\arabic*]
-	\item Os dados do cliente deverão esta de acordo com a tabela \ref{uc013_tb_rn1}. \label{uc013_ed:1}
+\begin{enumerate}[label=RN\arabic*]
+	\item Exibe os campos de dados do cliente de acordo com a tabela \ref{uc013_tb_rn1}. \label{uc013_rn:1}
 	\begin{table}[htb]
 		\ABNTEXfontereduzida
-		\caption[Dados do cliente]{Dados do cliente.}
+		\caption[Campos de dados do cliente]{Campos de dados do cliente.}
 		\label{uc013_tb_rn1}
 		\begin{tabular}{|p{4.0cm}|p{3.0cm}|p{7.25cm}|}
 			\hline
-			\textbf{Campo}      & \textbf{Tipo} & \textbf{Descrição}                                      \\ \hline
-			Cód. do cliente     & Número        & Código do cliente.                                      \\ \hline
-			Data cadastro       & dd/mm/aaaa    & Data de cadastro do cliente no sistema.                 \\ \hline
-			Nome                & Texto         & Nome do cliente.                                        \\ \hline
-			Data de nascimento  & dd/mm/aaaa    & Data de nascimento do cliente.                          \\ \hline
-			Telefone            & Número        & Número de telefone do cliente.                          \\ \hline
-			Logradouro          & Texto         & Logradouro (rua, avenida, beco, ...) do cliente.        \\ \hline
-			CEP                 & Número        & CEP da residência do cliente.                           \\ \hline
-			Bairro              & Texto         & Bairro onde reside o cliente.                           \\ \hline
-			Cidade              & Texto         & Cidade onde reside o cliente.                           \\ \hline
-			Número              & Texo          & Número da residência do cliente.                        \\ \hline
-			Complemento         & Texto         & Informação relevante em relação ao endereço do cliente. \\ \hline
-			Ponto de referência & Texto         & Ponto de referência próximo à residencia do cliente.    \\ \hline
+			\textbf{Campo}      & \textbf{Tipo} & \textbf{Observação}                                                        \\ \hline
+			Cód. do cliente     & Integer       & N.A                                                                        \\ \hline
+			Data cadastro       & Date          & O sistema exibirá a data de cadastro no formato \textbf{dia/mês/ano}.      \\ \hline
+			Nome                & String        & N.A                                                                        \\ \hline
+			Data de nascimento  & Date          & O sistema exibirá a data de nascimento no formato \textbf{dia/mês/ano}.    \\ \hline
+			Telefone            & String        & O sistema exibirá o número de telefone no formato \textbf{(99) 9999-9999}. \\ \hline
+			Logradouro          & String        & N.A                                                                        \\ \hline
+			CEP                 & String        & O sistema exibirá o CEP no formato \textbf{99.999-999}.                    \\ \hline
+			Bairro              & String        & N.A                                                                        \\ \hline
+			Cidade              & String        & N.A                                                                        \\ \hline
+			Número              & String        & N.A                                                                        \\ \hline
+			Complemento         & String        & N.A                                                                        \\ \hline
+			Ponto de referência & String        & N.A                                                                        \\ \hline
+		\end{tabular}
+	\end{table}
+	
+	\item Exibe os campos de dados do pedido de acordo com a tabela \ref{uc013_tb_rn2}. \label{uc013_rn:2}
+	\begin{table}[htb]
+		\ABNTEXfontereduzida
+		\caption[Campos de dados do pedido]{Campos de dados do pedido.}
+		\label{uc013_tb_rn2}
+		\begin{tabular}{|p{4.0cm}|p{3.0cm}|p{7.25cm}|}
+			\hline
+			\textbf{Campo}   & \textbf{Tipo} & \textbf{Observação}                                                                                                                                              \\ \hline
+			Cód. do pedido   & Long          & N.A                                                                                                                                                              \\ \hline
+			Data cadastro    & Date          & O sistema exibirá a data de cadastro no formato \textbf{dia/mês/ano hora:minuto}.                                                                                \\ \hline
+			Quantidade total & Short         & N.A                                                                                                                                                              \\ \hline
+			Total do pedido  & Float         & O sistema exibirá, no formato moeda, o valor total do pedido.                                                                                                    \\ \hline
+			Status           & Enum          & O sistema exibirá uma das seguintes opções: 
+			\begin{enumerate}
+				\item PENDENTE (pedido pendente);
+				\item TRANSITO (pedido em trânsito);
+				\item CANCELADO (pedido cancelado);
+				\item ENTREGUE (pedido entregue).
+			\end{enumerate}\\ \hline
 		\end{tabular}
 	\end{table}
 \end{enumerate}
