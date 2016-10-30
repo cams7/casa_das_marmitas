@@ -2,20 +2,7 @@
 
 \section{Breve descrição}
 
-O sistema deverá calcular automaticamente o valor total do pedido, por exemplo:
-
-\begin{itemize}
-	\item Pedido 1
-	\begin{itemize}
-		\item Marmita3: R\$ 14,00
-		\item Marmita4: R\$ 10,00
-		\item SubTotal do pedido: R\$ 24,00
-		\item Taxa de entrega: R\$ 4,50
-		\item Valor Total do pedido: R\$ 28,50
-	\end{itemize}
-\end{itemize}
-
-Caso necessário, é registrado no sistema o troco.
+Quando o pagamento for em dinheiro, o atendente calculará o troco do cliente.
 
 \section{Atores}
 
@@ -40,9 +27,9 @@ Caso necessário, é registrado no sistema o troco.
 	\item O sistema apresenta a tela \textbf{Calcular Troco} com os campos \ref{uc008_rn:1}. \label{uc008_p:1}
 	\item No campo \textbf{Quantia recebida}, o atendente informa a quantia recebida em dinheiro. \label{uc008_p:2}	
 	\item O atendente aciona a opção \textbf{Calcular}. \label{uc008_p:3}\ref{uc008_a:1}
-	\item O sistema preenche o campo \textbf{Troco} com valor calculado na RN2. \ref{uc008_e:1}
+	\item O sistema preenche o campo \textbf{Troco} com valor calculado. \ref{uc008_e:1}
 	\item O atendente visualiza o valor calculado.
-	\item Pula para o passo \ref{uc008_a:1}.	
+	\item O atendente vai para o passo \ref{uc008_a:1}.	
 \end{enumerate}
 
 \subsection{Fluxos alternativos}

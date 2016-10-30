@@ -22,9 +22,9 @@ O serviço de entrega é terceirizado, com isso, os motoboys são vinculados a u
 \subsection{Fluxo básico}
 
 \begin{enumerate}[label=P\arabic*]
-	\item O gerente aciona a opção \textbf{Cadastrar Entregador} no menu do sistema. \label{uc003_p:1}\ref{uc003_a:1}
+	\item O gerente aciona a opção \textbf{Entregador >> Incluir} no menu do sistema. \label{uc003_p:1}\ref{uc003_a:1}
 	\item O sistema apresenta a tela \textbf{Incluir Entregador} com os campos \ref{uc003_rn:1}.
-	\item No campo \textbf{Empresa}, o gerente informa o nome da empresa de entrega. \label{uc003_p:3}
+	\item No campo \textbf{Empresa}, o gerente informa o nome ou CNPJ da empresa. \label{uc003_p:3}
 	\item O sistema carrega o caso de uso \nameref{uc011} de acordo com o dado informado no passo anterior.
 	\item O gerente seleciona a empresa de entrega. \label{uc003_p:5}
 	\item O gerente preenche os outros campos da tela. \label{uc003_p:6}	
@@ -56,8 +56,7 @@ O serviço de entrega é terceirizado, com isso, os motoboys são vinculados a u
 		\item O gerente aciona a opção \textbf{Cancelar}.
 		\item O sistema exibe a mensagem \textbf{Operação cancelada}.
 		\item O gerente aciona a opção \textbf{Ok}.
-		\item O sistema fecha a tela atual.
-		\item O sistema retorna à tela anterior.
+		\item O sistema retorna à tela principal.
 		\item Esse caso de uso é encerrado.
 	\end{enumerate} 	
 \end{enumerate}

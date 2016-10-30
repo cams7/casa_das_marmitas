@@ -22,11 +22,11 @@ O sistema exibirá os entregadores que foram pesquisados pelo funcionário.
 \subsection{Fluxo básico}
 
 \begin{enumerate}[label=P\arabic*]
-	\item O funcionário aciona a opção \textbf{Listar Entregadores} no menu do sistema.
-	\item O sistema apresenta a tela \textbf{Lista de Entregadores}. \label{uc015_p:2}	
-	\item O funcionário informa, no campo de pequisa, o nome, CPF, RG ou empresa do entregador.
+	\item O funcionário aciona a opção \textbf{Entregador >> Listar} no menu do sistema.
+	\item O sistema apresenta a tela \textbf{Lista de Entregadores}.	
+	\item O funcionário informa, no campo de pequisa, o nome, CPF, RG ou empresa do entregador. \label{uc015_p:3}
 	\item O funcionário seleciona a opção \textbf{Buscar}.
-	\item O sistema exibe a lista de entregadores: código, nome, empresa, celular e data de cadastro. \label{uc015_p:5}\ref{uc015_e:1}
+	\item O sistema exibe a lista de entregadores com os campos \ref{uc015_rn:1}. \ref{uc015_e:1}
 	\item O funcionário seleciona o entregador.
 	\item O sistema executa o caso de uso \nameref{uc016}, de acordo com o entregador selecionado no passo anterior.
 	\item Esse caso de uso é encerrado.
@@ -37,9 +37,9 @@ O sistema exibirá os entregadores que foram pesquisados pelo funcionário.
 \begin{enumerate}[label=E\arabic*]
 	\item Entregador não cadastrado \label{uc015_e:1}
 	\begin{enumerate}[label*=.\arabic*]
-		\item[] No passo \ref{uc015_p:5}, o funcionário informou o nome, CPF, RG ou empresa de um entregador não cadastrado no sistema.
+		\item[] No passo \ref{uc015_p:3}, o funcionário informou o nome, CPF, RG ou empresa de um entregador não cadastrado no sistema.
 		\item O sistema exibe a mensagem \textbf{Entregador não cadastrado}.
-		\item O sistema retorna ao passo \ref{uc015_p:2}.
+		\item O sistema retorna ao passo anterior.
 	\end{enumerate}
 \end{enumerate}
 
@@ -47,4 +47,24 @@ O sistema exibirá os entregadores que foram pesquisados pelo funcionário.
 
 \begin{enumerate}
 	\item O sistema executará o caso de uso \nameref{uc016}.	
+\end{enumerate}
+
+\section{Regras de negócios especiais}
+
+\begin{enumerate}[label=RN\arabic*]
+	\item Exibe os campos de dados do entregador de acordo com a tabela \ref{uc015_tb_rn1}. \label{uc015_rn:1}
+	\begin{table}[htb]
+		\ABNTEXfontereduzida
+		\caption[Campos de dados do entregador]{Campos de dados do entregador.}
+		\label{uc015_tb_rn1}
+		\begin{tabular}{|p{4.0cm}|p{3.0cm}|p{7.25cm}|}
+			\hline
+			\textbf{Campo}     & \textbf{Tipo} & \textbf{Observação}                                                        \\ \hline
+			Cód. do entregador & Integer       & N.A                                                                        \\ \hline
+			Empresa            & String        & N.A                                                                        \\ \hline
+			Data cadastro      & Date          & O sistema exibirá a data de cadastro no formato \textbf{dia/mês/ano}.      \\ \hline
+			Nome               & String        & N.A                                                                        \\ \hline
+			Celular            & String        & O sistema exibirá o número de celular no formato \textbf{(99) 99999-9999}. \\ \hline
+		\end{tabular}
+	\end{table}
 \end{enumerate}

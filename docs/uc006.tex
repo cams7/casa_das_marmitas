@@ -2,9 +2,11 @@
 
 \section{Breve descrição}
 
-O gerente altera o valor da taxa de entrega.
+O gerente altera o valor da taxa de entrega, por exemplo:
 
-Taxa de entrega: R\$ 4,50
+\begin{itemize}
+	\item Taxa de entrega: R\$ 4,50
+\end{itemize}
 
 \section{Atores}
 
@@ -24,7 +26,7 @@ Taxa de entrega: R\$ 4,50
 \subsection{Fluxo básico}
 
 \begin{enumerate}[label=P\arabic*]
-	\item O gerente aciona a opção \textbf{Alterar Taxa de Entrega} no menu do sistema.
+	\item O gerente aciona a opção \textbf{Taxa de Entrega >> Alterar} no menu do sistema.
 	\item O sistema apresenta a tela \textbf{Alterar Taxa de Entrega} com os campos \ref{uc006_rn:1}. \label{uc006_p:2}
 	\item O gerente preenche os campos da tela. \label{uc006_p:3}
 	\item O gerente aciona a opção \textbf{Salvar}. \label{uc006_p:4}\ref{uc006_a:2}
@@ -36,14 +38,13 @@ Taxa de entrega: R\$ 4,50
 
 \subsection{Fluxos alternativos}
 
-\begin{enumerate}
+\begin{enumerate}[label=A\arabic*]
 	\item Alternativa ao passo \ref{uc006_p:4} - Cancelar alteração \label{uc006_a:2}
 	\begin{enumerate}[label*=.\arabic*]
 		\item O gerente aciona a opção \textbf{Cancelar}.
 		\item O sistema exibe a mensagem \textbf{Operação cancelada}.
 		\item O gerente aciona a opção \textbf{Ok}.
-		\item O sistema fecha a tela atual.
-		\item O sistema retorna à tela anterior.
+		\item O sistema retorna à tela principal.
 		\item Esse caso de uso é encerrado.
 	\end{enumerate}	
 \end{enumerate}
@@ -59,11 +60,11 @@ Taxa de entrega: R\$ 4,50
 		\item O sistema retorna ao passo anterior.
 	\end{enumerate}
 	
-	\item O gerente preencheu de forma errada o campo de Valor \label{uc006_e:2}
+	\item O gerente preencheu de forma errada o campo de taxa de entrega \label{uc006_e:2}
 	\begin{enumerate}[label*=.\arabic*]		
-		\item[] No passo \ref{uc006_p:3}, o gerente não preencheu de forma correta o campo de valor.		
-		\item O sistema exibe a mensagem \textbf{Valor informado não é válido}.
-		\item O sistema destaca o campo \textbf{Valor}.
+		\item[] No passo \ref{uc006_p:3}, o gerente não preencheu de forma correta o campo de taxa de entrega.		
+		\item O sistema exibe a mensagem \textbf{Taxa de entrega informada não é válida}.
+		\item O sistema destaca o campo \textbf{Taxa de entrega}.
 		\item O sistema retorna ao passo anterior.
 	\end{enumerate}
 \end{enumerate}
@@ -71,7 +72,7 @@ Taxa de entrega: R\$ 4,50
 \section{Pós-condições}
 
 \begin{enumerate}
-	\item O gerente terá cadastrado ou alterado os dados da taxa de entrega.
+	\item O gerente terá alterado a taxa de entrega.
 	\item O sistema carregará a tela principal.	
 \end{enumerate}
 
@@ -85,9 +86,9 @@ Taxa de entrega: R\$ 4,50
 		\label{uc006_tb_rn1}
 		\begin{tabular}{|p{3.0cm}|p{2.0cm}|p{1.5cm}|p{2.0cm}|p{5.75cm}|}
 			\hline
-			\textbf{Campo} & \textbf{Tipo} & \textbf{Tamanho} & \textbf{Obrigatório} & \textbf{Observação}                                                      \\ \hline
-			Valor          & Float         & N.A              & SIM                  & O gerente terá que fornecer o valor da taxa de entrega no formato moeda. \\ \hline
-			Tipo           & Enum          & N.A              & SIM                  & N.A                                                                      \\ \hline
+			\textbf{Campo}  & \textbf{Tipo} & \textbf{Tamanho} & \textbf{Obrigatório} & \textbf{Observação}                                             \\ \hline
+			Taxa de entrega & Float         & N.A              & SIM                  & O gerente terá que fornecer a taxa de entrega no formato moeda. \\ \hline
+			Tipo            & Enum          & N.A              & SIM                  & O sistema exibirá a opção \textbf{ENTREGA}.                     \\ \hline
 		\end{tabular}
 	\end{table}
 \end{enumerate}

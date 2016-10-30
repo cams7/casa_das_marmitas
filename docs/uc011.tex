@@ -22,14 +22,37 @@ O sistema exibirá as empresas que foram pesquisadas pelo funcionário.
 \subsection{Fluxo básico}
 
 \begin{enumerate}[label=P\arabic*]
-	\item O funcionário aciona a opção \textbf{Listar Empresas} no menu do sistema.
-	\item O sistema apresenta a tela \textbf{Lista de Empresas}. \label{uc011_p:2}	
-	\item O funcionário informa, no campo de pequisa, o nome ou CNPJ da empresa.
+	\item O funcionário aciona a opção \textbf{Empresa >> Listar} no menu do sistema. \label{uc011_p:1}\ref{uc011_a:1}
+	\item O sistema apresenta a tela \textbf{Lista de Empresas}.	
+	\item O funcionário informa, no campo de pequisa, o nome ou CNPJ da empresa. \label{uc011_p:3}
 	\item O funcionário seleciona a opção \textbf{Buscar}.
-	\item O sistema exibe a lista de empresas: código, nome, cnpj, e-mail, telefone e data de cadastro. \label{uc011_p:5}\ref{uc011_e:1}
+	\item O sistema exibe a lista de empresas com os campos \ref{uc011_rn:1}. \ref{uc011_e:1}
 	\item O funcionário seleciona a empresa.
 	\item O sistema executa o caso de uso \nameref{uc014}, de acordo com a empresa selecionada no passo anterior.
 	\item Esse caso de uso é encerrado.
+\end{enumerate}
+
+\subsection{Fluxos alternativos}
+
+\begin{enumerate}[label=A\arabic*]
+	\item Alternativa ao passo \ref{uc011_p:1} - Relacionar empresa ao entregador \label{uc011_a:1}
+	\begin{enumerate}[label*=.\arabic*]
+		\item Na tela fornecida pelo sistema através do caso de uso \nameref{uc003}, o funcionário preenche o campo \textbf{Empresa}. \label{uc011_a:1:1}
+		\item O sistema exibe a lista de empresas, em uma tela, com os campos \ref{uc011_rn:1}. \ref{uc011_e:1}
+		\item O funcionário seleciona a empresa. \label{uc011_a:1:3}
+		\item O sistema atualiza o campo \textbf{Empresa} na tela \textbf{Incluir Entregador}.
+		\item O sistema fecha a tela atual.
+		\item O sistema retorna ao caso de uso \nameref{uc003}.
+		\item Esse caso de uso é encerrado.
+	\end{enumerate}
+	
+	\item Alternativa ao passo \ref{uc011_a:1:3} - Cancelar seleção
+	\begin{enumerate}[label*=.\arabic*]
+		\item O funcionário aciona a opção \textbf{Cancelar}.
+		\item O sistema fecha a tela atual.
+		\item O sistema retorna ao caso de uso \nameref{uc003}.
+		\item Esse caso de uso é encerrado.
+	\end{enumerate}
 \end{enumerate}
 
 \subsection{Exceções}
@@ -37,14 +60,43 @@ O sistema exibirá as empresas que foram pesquisadas pelo funcionário.
 \begin{enumerate}[label=E\arabic*]
 	\item Empresa não cadastrada \label{uc011_e:1}
 	\begin{enumerate}[label*=.\arabic*]
-		\item[] No passo \ref{uc011_p:5}, o funcionário informou o nome ou CNPJ de uma empresa não cadastrada no sistema.
+		\item[] No passo \ref{uc011_p:3} ou \ref{uc011_a:1:1}, o funcionário informou o nome ou CNPJ de uma empresa não cadastrada no sistema.
 		\item O sistema exibe a mensagem \textbf{Empresa não cadastrada}.
-		\item O sistema retorna ao passo \ref{uc011_p:2}.
+		\item O sistema retorna ao passo anterior.
 	\end{enumerate}
 \end{enumerate}
 
 \section{Pós-condições}
 
-\begin{enumerate}
-	\item O sistema executará o caso de uso \nameref{uc014}.	
+\begin{itemize}
+	\item Empresa selecionada na tela \textbf{Lista de Empresas}
+	\begin{enumerate}
+		\item O sistema executará o caso de uso \nameref{uc014}.	
+	\end{enumerate}
+
+	\item Empresa selecionada através da tela \textbf{Incluir Entregador}
+	\begin{enumerate}
+		\item O sistema carregará, no campo \textbf{Empresa}, o nome da empresa de entrega. 
+	\end{enumerate}
+\end{itemize}
+
+\section{Regras de negócios especiais}
+
+\begin{enumerate}[label=ED\arabic*]
+	\item Exibe os campos de dados da empresa de acordo com a tabela \ref{uc011_tb_rn1}. \label{uc011_rn:1}
+	\begin{table}[htb]
+		\ABNTEXfontereduzida
+		\caption[Campos de dados da empresa]{Campos de dados da empresa.}
+		\label{uc011_tb_rn1}
+		\begin{tabular}{|p{4.0cm}|p{3.0cm}|p{7.25cm}|}
+			\hline
+			\textbf{Campo}  & \textbf{Tipo} & \textbf{Observação}                                                        \\ \hline
+			Cód. da empresa & Integer       & N.A                                                                        \\ \hline
+			Data cadastro   & Date          & O sistema exibirá a data de cadastro no formato \textbf{dia/mês/ano}.      \\ \hline
+			Nome            & String        & N.A                                                                        \\ \hline
+			CNPJ            & String        & O sistema exibirá o CNPJ no formato \textbf{99.999.999/9999-99}.           \\ \hline
+			E-mail          & String        & N.A                                                                        \\ \hline
+			Telefone        & String        & O sistema exibirá o número de telefone no formato \textbf{(99) 9999-9999}. \\ \hline			
+		\end{tabular}
+	\end{table}
 \end{enumerate}

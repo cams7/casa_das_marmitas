@@ -4,6 +4,19 @@
 
 Para gerenciar os pedidos realizados pelo cliente, o atendente deverá informar os dados do pedido.
 
+O sistema deverá calcular automaticamente o valor total do pedido, por exemplo:
+
+\begin{itemize}
+	\item Pedido 1
+	\begin{itemize}
+		\item Marmita3: R\$ 14,00
+		\item Marmita4: R\$ 10,00
+		\item SubTotal do pedido: R\$ 24,00
+		\item Taxa de entrega: R\$ 4,50
+		\item Valor Total do pedido: R\$ 28,50
+	\end{itemize}
+\end{itemize}
+
 \section{Atores}
 
 \begin{enumerate}
@@ -25,13 +38,17 @@ Para gerenciar os pedidos realizados pelo cliente, o atendente deverá informar 
 
 \begin{enumerate}[label=P\arabic*]
 	\item O sistema apresenta a tela \textbf{Registrar Pedido} com os campos \ref{uc007_rn:1}. \label{uc007_p:1}
-	\item No campo \textbf{Produto}, o atendente informa o nome ou ou código da marmita. \label{uc007_p:2}
+	\item No campo \textbf{Produto}, o atendente informa o código ou nome de uma marmita. \label{uc007_p:2}
 	\item O sistema carrega o caso de uso \nameref{uc012} de acordo com o dado informado no passo anterior.
 	\item O atendente seleciona a marmita. \label{uc007_p:4}
 	\item O atendente preenche os outros campos da tela. \label{uc007_p:5}	
-	\item O atendente aciona a opção \textbf{Salvar}. \label{uc007_p:6}\ref{uc007_a:1} \ref{uc007_a:2}
+	\item O atendente aciona a opção \textbf{Incluir item}.
 	\item O sistema valida os dados dos campos. \ref{uc007_e:1} \ref{uc007_e:2} \ref{uc007_e:3}
-	\item O sistema registra um novo pedido para com o status pendente.
+	\item O sistema atualiza a lista de itens de pedido.
+	\item O sistema atualiza o valor total do pedido.
+	\item O sistema limpa o formulário, com exceção do campo \textbf{Total do pedido}, preenchido pelo atendente.
+	\item O atendente aciona a opção \textbf{Salvar}. \label{uc007_a:11}\ref{uc007_a:1} \ref{uc007_a:2} \ref{uc007_a:3}
+	\item O sistema registra, com status \textbf{PENDENTE}, o pedido.
 	\item O sistema atualiza a lista de pedidos do cliente na tela \textbf{Exibir Cliente}.
 	\item O sistema fecha a tela atual.
 	\item O sistema retorna ao caso de uso \nameref{uc013}.
@@ -41,14 +58,19 @@ Para gerenciar os pedidos realizados pelo cliente, o atendente deverá informar 
 \subsection{Fluxos alternativos}
 
 \begin{enumerate}[label=A\arabic*]
-	\item Alternativa ao passo \ref{uc007_p:6} - Calcular Troco \label{uc007_a:1}
+	\item Alternativa ao passo \ref{uc007_a:11} - Incluir novo item de pedido \label{uc007_a:1}
+	\begin{enumerate}[label*=.\arabic*]
+		\item O atendente volta ao passo \ref{uc007_p:2}.
+	\end{enumerate}
+	
+	\item Alternativa ao passo \ref{uc007_a:11} - Calcular Troco \label{uc007_a:2}
 	\begin{enumerate}[label*=.\arabic*]
 		\item O atendente aciona a opção \textbf{Calcular Troco}.
 		\item O sistema executa o caso de uso \nameref{uc008}.
 		\item Esse caso de uso é suspenso.
 	\end{enumerate} 
 		
-	\item Alternativa ao passo \ref{uc007_p:6} - Cancelar inclusão \label{uc007_a:2}
+	\item Alternativa ao passo \ref{uc007_a:11} - Cancelar inclusão \label{uc007_a:3}
 	\begin{enumerate}[label*=.\arabic*]
 		\item O atendente aciona a opção \textbf{Cancelar}.
 		\item O sistema exibe a mensagem \textbf{Operação cancelada}.
@@ -78,7 +100,7 @@ Para gerenciar os pedidos realizados pelo cliente, o atendente deverá informar 
 		\item O sistema retorna ao passo anterior.
 	\end{enumerate}
 	
-	\item O atendente preencheu de forma errada o campo de Quantidade \label{uc007_e:3}
+	\item O atendente preencheu de forma errada o campo de quantidade \label{uc007_e:3}
 	\begin{enumerate}[label*=.\arabic*]		
 		\item[] No passo \ref{uc007_p:5}, o atendente não preencheu de forma correta o campo de quantidade.		
 		\item O sistema exibe a mensagem \textbf{Quantidade informada não é válida}.
@@ -97,24 +119,18 @@ Para gerenciar os pedidos realizados pelo cliente, o atendente deverá informar 
 \section{Regras de negócios especiais}
 
 \begin{enumerate}[label=RN\arabic*]
-	\item Exibe os campos de dados do pedido de acordo com a tabela \ref{uc007_tb_rn1}. \label{uc007_rn:1}
+	\item Exibe os campos de dados do item de pedido de acordo com a tabela \ref{uc007_tb_rn1}. \label{uc007_rn:1}
 	\begin{table}[htb]
 		\ABNTEXfontereduzida
-		\caption[Campos de dados do pedido]{Campos de dados do pedido.}
+		\caption[Campos de dados do item de pedido]{Campos de dados do item de pedido.}
 		\label{uc007_tb_rn1}
 		\begin{tabular}{|p{3.0cm}|p{2.0cm}|p{1.5cm}|p{2.0cm}|p{5.75cm}|}
 			\hline
-			\textbf{Campo} & \textbf{Tipo} & \textbf{Tamanho} & \textbf{Obrigatório} & \textbf{Observação}                                                                                                                                                  \\ \hline
-			Produto        & String        & 60               & SIM                  & N.A                                                                                                                                                                  \\ \hline
-			Tamanho        & Enum          & N.A              & SIM                  & N.A                                                                                                                                                                  \\ \hline
-			Quantidade     & Short         & N.A              & SIM                  & N.A                                                                                                                                                                  \\ \hline
-			Status         & Enum          & N.A              & SIM                  & O funcionário terá que fornecer uma das seguintes opções:  
-			\begin{enumerate}
-				\item PENDENTE (pedido pendente);
-				\item TRANSITO (pedido em trânsito);
-				\item CANCELADO (pedido cancelado);
-				\item ENTREGUE (pedido entregue).
-			\end{enumerate}\\ \hline
+			\textbf{Campo}  & \textbf{Tipo} & \textbf{Tamanho} & \textbf{Obrigatório} & \textbf{Observação}                                           \\ \hline
+			Produto         & String        & 60               & SIM                  & N.A                                                           \\ \hline
+			Tamanho         & Enum          & N.A              & SIM                  & N.A                                                           \\ \hline
+			Quantidade      & Short         & N.A              & SIM                  & N.A                                                           \\ \hline
+			Total do pedido & Float         & N.A              & SIM                  & O sistema exibirá, no formato moeda, o valor total do pedido. \\ \hline
 		\end{tabular}
 	\end{table}
 \end{enumerate}
