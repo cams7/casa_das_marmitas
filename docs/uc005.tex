@@ -119,8 +119,13 @@ O gerente cadastra as marmitas que serão vendidas, informando os seus dados.
 			\textbf{Campo} & \textbf{Tipo} & \textbf{Tamanho} & \textbf{Obrigatório} & \textbf{Observação}                                              \\ \hline
 			Nome           & String        & 60               & SIM                  & N.A                                                              \\ \hline
 			Ingredientes   & String        & 250              & SIM                  & N.A                                                              \\ \hline
-			Custo          & Float         & N.A              & SIM                  & O gerente terá que fornecer o custo da marmita no formato moeda. \\ \hline
-			Tamanho        & Enum          & N.A              & SIM                  & N.A                                                              \\ \hline
+			Custo          & Float         & N.A              & SIM                  & O gerente terá que informar o custo da marmita no formato moeda. \\ \hline
+			Tamanho        & Enum          & N.A              & SIM                  & O gerente terá que informar uma das seguintes opções: 	
+			\begin{enumerate}
+				\item GRANDE (tamanho grande);
+				\item MEDIO (tamanho médio);
+				\item PEQUENO (tamanho pequeno).
+			\end{enumerate}\\ \hline
 		\end{tabular}
 	\end{table}
 \end{enumerate}
