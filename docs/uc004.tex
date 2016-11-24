@@ -1,0 +1,157 @@
+\chapter{Manter Empresa - UC004} \label{uc004}
+
+\section{Breve descrição}
+
+Caso a empresa de entrega, onde os motoboys são vinculados, não esteja registrada, o gerente irá cadastra-la, informando os seus dados.
+
+\section{Atores}
+
+\begin{enumerate}
+	\item Gerente da empresa, Casa das Marmitas.
+\end{enumerate}
+
+\section{Pré-condições}
+
+\begin{enumerate}
+	\item O gerente deverá possuir login e senha de acesso autenticados pelo sistema.
+	\item O gerente deverá ter permissão para realizar o cadastro e a alteração dos dados da empresa.
+\end{enumerate}
+
+\section{Fluxo de eventos}
+
+\subsection{Fluxo básico}
+
+\begin{enumerate}[label=P\arabic*]
+	\item O gerente aciona a opção \textbf{Empresa >> Incluir} no menu do sistema. \label{uc004_p:1}\ref{uc004_a:1}
+	\item O sistema apresenta a tela \textbf{Incluir Empresa} com os campos \ref{uc004_rn:1}. \label{uc004_p:2}
+	\item O gerente preenche os campos da tela. \label{uc004_p:3}
+	\item O gerente aciona a opção \textbf{Salvar}. \label{uc004_p:4}\ref{uc004_a:2}
+	\item O sistema valida os dados dos campos. \ref{uc004_e:1} \ref{uc004_e:2} \ref{uc004_e:3} \ref{uc004_e:4} \ref{uc004_e:5} \ref{uc004_e:6} \ref{uc004_e:7} \ref{uc004_e:8}
+	\item O sistema realiza a inclusão com sucesso.
+	\item O sistema executa o caso de uso \nameref{uc014}.
+	\item Esse caso de uso é encerrado.	
+\end{enumerate}
+
+\subsection{Fluxos alternativos}
+
+\begin{enumerate}[label=A\arabic*]
+	\item Alternativa ao passo \ref{uc004_p:1} - Alterar empresa \label{uc004_a:1}
+	\begin{enumerate}[label*=.\arabic*]
+		\item Na tela fornecida pelo sistema através do caso de uso \nameref{uc014}, o gerente aciona a opção \textbf{Alterar}. 
+		\item O sistema apresenta a tela \textbf{Alterar Empresa} com os campos \ref{uc004_rn:1}. \label{uc004_a:1:2}
+		\item O gerente preenche os campos da tela. \label{uc004_a:1:3}
+		\item O gerente aciona a opção \textbf{Salvar}. \label{uc004_a:1:4}\ref{uc004_a:2}
+		\item O sistema valida os dados dos campos. \ref{uc004_e:1} \ref{uc004_e:2} \ref{uc004_e:3} \ref{uc004_e:4} \ref{uc004_e:5} \ref{uc004_e:6} \ref{uc004_e:7}
+		\item O sistema altera os dados com sucesso.
+		\item O sistema executa o caso de uso \nameref{uc014}.
+		\item Esse caso de uso é encerrado.
+	\end{enumerate}
+	
+	\item Alternativa ao passo \ref{uc004_p:4} ou \ref{uc004_a:1:4} - Cancelar inclusão ou alteração \label{uc004_a:2}
+	\begin{enumerate}[label*=.\arabic*]
+		\item O gerente aciona a opção \textbf{Cancelar}.
+		\item O sistema exibe a mensagem \textbf{Operação cancelada}.
+		\item O gerente aciona a opção \textbf{Ok}.
+		\item O sistema retorna à tela principal.
+		\item Esse caso de uso é encerrado.
+	\end{enumerate}	 	
+\end{enumerate}
+
+\subsection{Exceções}
+
+\begin{enumerate}[label=E\arabic*]	
+	\item O gerente não informou algum campo obrigatório \label{uc004_e:1}
+	\begin{enumerate}[label*=.\arabic*]
+		\item[] No passo \ref{uc004_p:3} ou \ref{uc004_a:1:3}, o gerente deixou em branco pelo menos um campo obrigatório.
+		\item O sistema exibe a mensagem \textbf{Favor preencher o campo obrigatório}.
+		\item O sistema destaca os campos não informados pelo gerente.
+		\item O sistema retorna ao passo anterior.
+	\end{enumerate}
+	
+	\item O gerente preencheu de forma errada o campo de CNPJ \label{uc004_e:2}
+	\begin{enumerate}[label*=.\arabic*]		
+		\item[] No passo \ref{uc004_p:3} ou \ref{uc004_a:1:3}, o gerente não preencheu de forma correta o campo de CNPJ.		
+		\item O sistema exibe a mensagem \textbf{CNPJ informado não é válido}.
+		\item O sistema destaca o campo \textbf{CNPJ}.
+		\item O sistema retorna ao passo anterior.
+	\end{enumerate}
+	
+	\item O gerente preencheu de forma errada o campo de e-mail \label{uc004_e:3}
+	\begin{enumerate}[label*=.\arabic*]		
+		\item[] No passo \ref{uc004_p:3} ou \ref{uc004_a:1:3}, o gerente não preencheu de forma correta o campo de e-mail, por exemplo, usou somente letras ou colocou números excessivos	
+		\item O sistema exibe a mensagem \textbf{E-mail informado não é válido}.
+		\item O sistema destaca o campo \textbf{E-mail}.
+		\item O sistema retorna ao passo anterior.
+	\end{enumerate}
+	
+	\item O gerente preencheu de forma errada o campo de telefone \label{uc004_e:4}
+	\begin{enumerate}[label*=.\arabic*]		
+		\item[] No passo \ref{uc004_p:3} ou \ref{uc004_a:1:3}, o gerente não preencheu de forma correta o campo de telefone, usando letras ou qualquer outro carácter diferente de número.		
+		\item O sistema exibe a mensagem \textbf{O número de telefone informado não é válido}.
+		\item O sistema destaca o campo \textbf{Telefone}.
+		\item O sistema retorna ao passo anterior.
+	\end{enumerate}
+	
+	\item O gerente preencheu de forma errada o campo de logradouro \label{uc004_e:5}
+	\begin{enumerate}[label*=.\arabic*]		
+		\item[] No passo \ref{uc004_p:3} ou \ref{uc004_a:1:3}, o gerente não preencheu de forma correta o campo de logradouro (rua, avenida, beco, ...), por exemplo, usou somente números.		
+		\item O sistema exibe a mensagem \textbf{O nome do logradouro informado não é válido}.
+		\item O sistema destaca o campo \textbf{Logradouro}.
+		\item O sistema retorna ao passo anterior.
+	\end{enumerate}
+	
+	\item O gerente preencheu de forma errada o campo de CEP \label{uc004_e:6}
+	\begin{enumerate}[label*=.\arabic*]		
+		\item[] No passo \ref{uc004_p:3} ou \ref{uc004_a:1:3}, o gerente não preencheu de forma correta o campo de CEP, usando letras ou menos de 8 dígitos.		
+		\item O sistema exibe a mensagem \textbf{O CEP informado não é válido}.
+		\item O sistema destaca o campo \textbf{CEP}.
+		\item O sistema retorna ao passo anterior.
+	\end{enumerate}
+	
+	\item O gerente preencheu de forma errada o campo de cidade \label{uc004_e:7}
+	\begin{enumerate}[label*=.\arabic*]		
+		\item[] No passo \ref{uc004_p:3} ou \ref{uc004_a:1:3}, o gerente não preencheu de forma correta o campo de cidade, por exemplo, usou somente números.		
+		\item O sistema exibe a mensagem \textbf{O nome da cidade informado não é válido}.
+		\item O sistema destaca o campo \textbf{Cidade}.
+		\item O sistema retorna ao passo anterior.
+	\end{enumerate}	
+	
+	\item Empresa cadastrada anteriormente \label{uc004_e:8}
+	\begin{enumerate}[label*=.\arabic*]
+		\item[] No passo \ref{uc004_p:3} do fluxo básico, o gerente preencheu os dados de uma empresa já cadastrado no sistema.
+		\item O sistema exibe a mensagem \textbf{A empresa informada já foi cadastrada anteriormente no sistema}.
+		\item O sistema retorna ao passo anterior.
+	\end{enumerate}
+\end{enumerate}
+
+\section{Pós-condições}
+
+\begin{enumerate}
+	\item O gerente terá cadastrado ou alterado os dados da empresa.
+	\item O sistema executará o caso de uso \nameref{uc014}.	
+\end{enumerate}
+
+\section{Regras de negócios especiais}
+
+\begin{enumerate}[label=RN\arabic*]
+	\item Exibe os campos de dados da empresa de acordo com a tabela \ref{uc004_tb_rn1}. \label{uc004_rn:1}
+	\begin{table}[htb]
+		\ABNTEXfontereduzida
+		\caption[Campos de dados da empresa]{Campos de dados da empresa.}
+		\label{uc004_tb_rn1}
+		\begin{tabular}{|p{3.0cm}|p{2.0cm}|p{1.5cm}|p{2.0cm}|p{5.75cm}|}
+			\hline
+			\textbf{Campo} & \textbf{Tipo} & \textbf{Tamanho} & \textbf{Obrigatório} & \textbf{Observação}                                                                  \\ \hline
+			Nome           & String        & 60               & SIM                  & N.A                                                                                  \\ \hline
+			CNPJ           & String        & 14               & SIM                  & O gerente terá que informar o CNPJ no formato \textbf{99.999.999/9999-99}.           \\ \hline
+			E-mail         & String        & 30               & SIM                  & N.A                                                                                  \\ \hline
+			Telefone       & String        & 10               & SIM                  & O gerente terá que informar o número de telefone no formato \textbf{(99) 9999-9999}. \\ \hline
+			Logradouro     & String        & 100              & SIM                  & N.A                                                                                  \\ \hline
+			CEP            & String        & 10               & SIM                  & O gerente terá que informar o CEP no formato \textbf{99.999-999}.                    \\ \hline
+			Bairro         & String        & 60               & SIM                  & N.A                                                                                  \\ \hline
+			Cidade         & String        & 60               & SIM                  & N.A                                                                                  \\ \hline
+			Número         & String        & 30               & SIM                  & N.A                                                                                  \\ \hline
+			Complemento    & String        & 30               & NÃO                  & N.A                                                                                  \\ \hline
+		\end{tabular}
+	\end{table}
+\end{enumerate}

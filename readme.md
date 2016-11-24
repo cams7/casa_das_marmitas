@@ -108,6 +108,10 @@ Para rodar o programa
 
 		git clone https://github.com/cams7/casa_das_marmitas.git
 		cd casa_das_marmitas
+
+		git remote add origin remote_repository_url
+		git remote -v
+		git push origin master
 	
 * Caso deseje rodar o **casa_das_marmitas** num [PAAS](https://pt.wikipedia.org/wiki/Plataforma_como_serviço), primeiro e necessário ter uma conta no **Heroku**. Após criar uma conta no Heroku, execute as linhas abaixo:				
 		
