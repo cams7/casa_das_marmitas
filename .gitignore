@@ -7,7 +7,6 @@ Homestead.json
 Homestead.yaml
 .env
 
-
 #git rm --cached .classpath
 #git rm -r --cached .settings
 
