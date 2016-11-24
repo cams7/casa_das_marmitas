@@ -36,6 +36,17 @@ Para rodar o programa
 
 		git clone https://github.com/cams7/casa_das_marmitas.git
 		cd casa_das_marmitas
+		
+		mysql -u root -p
+		CREATE DATABASE casa_da_marmita;
+		USE casa_da_marmita;
+		CREATE USER 'dono_da_marmita'@'localhost' IDENTIFIED BY 'marmita';
+		GRANT ALL PRIVILEGES ON casa_da_marmita.* TO 'dono_da_marmita'@'localhost';
+		FLUSH PRIVILEGES;		
+		exit		
+		mysql --host=127.0.0.1 --user=dono_da_marmita --password=marmita casa_da_marmita
+		exit
+		
 		wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
 		heroku --version
 		heroku login
@@ -54,6 +65,15 @@ Para rodar o programa
 		git commit -m "Initial commit"
 		
 		git push heroku -u master
+		
+		heroku addons:add heroku-postgresql:hobby-dev
+		
+		git commit -a -m "A configurações do banco de dados foram alteradas"
+		
+		git push heroku -u master
+		
+		heroku run "php artisan migrate"
+		heroku run "php artisan migrate:status"
 		
 		heroku apps:destroy --app casa-das-marmitas
 
