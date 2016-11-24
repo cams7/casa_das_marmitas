@@ -114,10 +114,7 @@ Para rodar o programa
 		git push origin master
 	
 * Caso deseje rodar o **casa_das_marmitas** num [PAAS](https://pt.wikipedia.org/wiki/Plataforma_como_serviço), primeiro e necessário ter uma conta no **Heroku**. Após criar uma conta no Heroku, execute as linhas abaixo:				
-		
-		rm -r .git
-		git init
-
+				
 		heroku login
 		heroku create nome_da_sua_aplicacao
 		heroku config:add \
