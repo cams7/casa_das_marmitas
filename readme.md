@@ -1,40 +1,61 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img width="150"src="https://laravel.com/laravel.png"></a></p>
+========================
+* Autor: César Magalhães
+* Tecnologias: MiKTeX 2.9.6069, TeXstudio 2.11.0, **Laravel Framework 5.3.24**
+* Banco de dados: **PostgreSQL**
+* Resumo: Portfólio do 4º semestre da faculdade UNOPAR
+* Linguagem: TeX, **PHP 7.1.0**
+* Fonte: <https://github.com/cams7/casa_das_marmitas>
+* Site: <https://enigmatic-river-52302.herokuapp.com/>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+O que é o sistema: Casa das Marmitas?
+-------------------
+Portfólio do 4º semestre da faculdade UNOPAR.
 
-## About Laravel
+Sistemas requeridos
+-------------------
+* [MiKTeX 2.9.6069](http://miktex.org/)
+* [TeXstudio 2.11.0](http://www.texstudio.org/)
+* [PHP 7.1.0](https://secure.php.net/)
+* [Composer](https://getcomposer.org/)
+* [Laravel Framework 5.3.24](https://laravel.com/)
+* [PostgreSQL](http://www.postgresql.org/download/)
+* [Git](https://git-scm.com/downloads)
+* [Heroku](https://www.heroku.com/)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+Para rodar o programa
+-------------------
+* Instale o MiKTeX 2.9.6069
+* Instale o TeXstudio 2.11.0
+* Instale os seguintes programas: **PHP 7**, **Git**, **PostgreSQL**, caso ainda não os tenha instalados.
+* No **Postgres**, crie um banco o qual o nome seja **casa_das_marmitas**.
+* Para baixar o projeto (**casa_das_marmitas**), execute a linha abaixo:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+		git clone https://github.com/cams7/casa_das_marmitas.git
+	
+* Caso deseje rodar o **casa_das_marmitas** num [PAAS](https://pt.wikipedia.org/wiki/Plataforma_como_serviço), primeiro e necessário ter uma conta no **Heroku**. Após criar uma conta no Heroku, execute as linhas abaixo:
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb combination of simplicity, elegance, and innovation give you tools you need to build any application with which you are tasked.
+		git clone https://github.com/cams7/casa_das_marmitas.git
+		cd casa_das_marmitas
+		wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+		heroku --version
+		heroku login
+		heroku create casa-das-marmitas
+		heroku config:add \
+		BUILDPACK_URL=https://github.com/heroku/heroku-buildpack-multi.git
 
-## Learning Laravel
+		vim .buildpacks
+		https://github.com/heroku/heroku-buildpack-nodejs
+		https://github.com/heroku/heroku-buildpack-php
+		
+		vim Procfile
+		web: vendor/bin/heroku-php-apache2 public/
+		
+		git add .
+		git commit -m "Initial commit"
+		
+		git push heroku -u master
+		
+		heroku apps:destroy --app casa-das-marmitas
 
-Laravel has the most extensive and thorough documentation and video tutorial library of any modern web application framework. The [Laravel documentation](https://laravel.com/docs) is thorough, complete, and makes it a breeze to get started learning the framework.
+		
 
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 900 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
