@@ -5,7 +5,7 @@
 * Resumo: Portfólio do 4º semestre da faculdade UNOPAR
 * Linguagem: TeX, **PHP 7.1.0**
 * Fonte: <https://github.com/cams7/casa_das_marmitas>
-* Site: <https://enigmatic-river-52302.herokuapp.com/>
+* Site: <https://casa-das-marmitas.herokuapp.com/>
 
 O que é o sistema: Casa das Marmitas?
 -------------------
