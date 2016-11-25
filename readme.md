@@ -42,10 +42,10 @@ vagrant init ubuntu/trusty64
 
 * Inclua as linhas abaixo no arquivo *Vagrantfile*
 	
-	config.vm.network "forwarded_port", guest: 80, host: 90
-	config.vm.network "forwarded_port", guest: 3306, host: 3306
-	config.vm.network "forwarded_port", guest: 5432, host: 5432
-	config.vm.network "forwarded_port", guest: 8000, host: 8000
+		config.vm.network "forwarded_port", guest: 80, host: 90
+		config.vm.network "forwarded_port", guest: 3306, host: 3306
+		config.vm.network "forwarded_port", guest: 5432, host: 5432
+		config.vm.network "forwarded_port", guest: 8000, host: 8000
 
 * No *Windows*, dentro do diretório *trusty64*, execute no *Prompt de Comando*, a linha abaixo:
 ```
@@ -144,7 +144,7 @@ vim postgresql.conf
 3. Remova o caráter *#* do inicio da linha, e altere *'localhost'* por _'*'_
 4. Apos alteração, a linha ficará como segue abaixo:
 	
-	listen_addresses = '*' ...
+		listen_addresses = '*' ...
 	
 5. Aperte a tecla *ESC*
 6. Digite *:wq* para salvar a alteração do arquivo *postgresql.conf*
@@ -157,7 +157,7 @@ vim pg_hba.conf
 3. Altere *127.0.0.1/32* por *0.0.0.0/0*
 4. Apos alteração, a linha ficará como segue abaixo:
 	
-	host all all 0.0.0.0/0 md5
+		host all all 0.0.0.0/0 md5
 	
 5. Aperte a tecla *ESC*
 6. Digite *:wq* para salvar a alteração do arquivo *pg_hba.conf*
@@ -213,7 +213,7 @@ heroku config:add \
 
 * Inclua linha abaixo após o comando:
 	
-	BUILDPACK_URL=https://github.com/heroku/heroku-buildpack-multi.git
+		BUILDPACK_URL=https://github.com/heroku/heroku-buildpack-multi.git
 	
 ```sh
 vim .buildpacks
@@ -221,8 +221,8 @@ vim .buildpacks
 
 * Inclua linhas abaixo no arquivo *.buildpacks*:
 	
-	https://github.com/heroku/heroku-buildpack-nodejs
-	https://github.com/heroku/heroku-buildpack-php
+		https://github.com/heroku/heroku-buildpack-nodejs
+		https://github.com/heroku/heroku-buildpack-php
 
 ```sh
 vim Procfile
@@ -230,7 +230,7 @@ vim Procfile
 
 * Inclua linhas abaixo no arquivo *Procfile*:
 	
-	web: vendor/bin/heroku-php-apache2 public/
+		web: vendor/bin/heroku-php-apache2 public/
 
 ```sh		
 heroku addons:add heroku-postgresql:hobby-dev
