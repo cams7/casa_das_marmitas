@@ -41,6 +41,7 @@ vagrant init ubuntu/trusty64
 ```
 
 * Inclua as linhas abaixo no arquivo *Vagrantfile*
+
 *config.vm.network "forwarded_port", guest: 80, host: 90*
 *config.vm.network "forwarded_port", guest: 3306, host: 3306*
 *config.vm.network "forwarded_port", guest: 5432, host: 5432*
@@ -57,8 +58,8 @@ vagrant up --provider virtualbox
 ```sh
 sudo apt-get update
 sudo apt-get install git-core
-git config --global user.name 'Nome do usuário'
-git config --global user.email 'E-mail do usuário'
+git config --global user.name <Nome do usuário>
+git config --global user.email <E-mail do usuário>
 git --version
 ```
 		
@@ -142,6 +143,7 @@ vim postgresql.conf
 2. Aperte a tecla *i* para editar o arquivo
 3. Remova o caráter *#* do inicio da linha, e altere *'localhost'* por _'*'_
 4. Apos alteração, a linha ficará como segue abaixo:
+
 *listen_addresses = '*' ...*
 5. Aperte a tecla *ESC*
 6. Digite *:wq* para salvar a alteração do arquivo *postgresql.conf*
@@ -153,6 +155,7 @@ vim pg_hba.conf
 2. Aperte a tecla *i* para editar o arquivo
 3. Altere *127.0.0.1/32* por *0.0.0.0/0*
 4. Apos alteração, a linha ficará como segue abaixo:
+
 *host all all 0.0.0.0/0 md5*
 5. Aperte a tecla *ESC*
 6. Digite *:wq* para salvar a alteração do arquivo *pg_hba.conf*
@@ -167,7 +170,7 @@ sudo /etc/init.d/postgresql restart
 				
 * Obs.: Para testar as alterações no **PostgreSQL**, execute o comando abaixo:
 ```sh
-psql -U postgres -h *IP da maquina*
+psql -U postgres -h <IP da maquina>
 \q
 ```				
 		
@@ -194,7 +197,7 @@ psql -d casa_da_marmita -U dono_da_marmita
 git clone https://github.com/cams7/casa_das_marmitas.git
 cd casa_das_marmitas
 
-git remote add origin "URL do repositório"
+git remote add origin <URL do repositório>
 git remote -v
 git push origin master
 ```		
@@ -202,11 +205,12 @@ git push origin master
 * Caso deseje rodar o *casa_das_marmitas* num [PAAS](https://pt.wikipedia.org/wiki/Plataforma_como_serviço), primeiro e necessário ter uma conta no **Heroku**. Após criar uma conta nesse site, execute as linhas abaixo:				
 ```sh		
 heroku login
-heroku create 'Nome da aplicação'
+heroku create <Nome da aplicação>
 heroku config:add \
 ```
 
 * Inclua linha abaixo após o comando:
+
 *BUILDPACK_URL=https://github.com/heroku/heroku-buildpack-multi.git*
 	
 ```sh
@@ -214,7 +218,9 @@ vim .buildpacks
 ```
 
 * Inclua linhas abaixo no arquivo *.buildpacks*:
+
 *https://github.com/heroku/heroku-buildpack-nodejs*
+
 *https://github.com/heroku/heroku-buildpack-php*
 
 ```sh
@@ -222,6 +228,7 @@ vim Procfile
 ```
 
 * Inclua linhas abaixo no arquivo *Procfile*:
+
 *web: vendor/bin/heroku-php-apache2 public/*
 
 ```sh		
@@ -238,5 +245,5 @@ heroku run "php artisan migrate:status"
 
 * Caso deseje remover a aplicação do seu *PAAS*, execute a linha abaixo:
 ```sh		
-heroku apps:destroy --app 'Nome da aplicação'
+heroku apps:destroy --app <Nome da aplicação>
 ```
