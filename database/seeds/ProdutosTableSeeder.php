@@ -1,9 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Faker\Factory as Faker;
-
-use App\Produto;
 
 class ProdutosTableSeeder extends Seeder
 {
@@ -16,14 +13,7 @@ class ProdutosTableSeeder extends Seeder
     {
 
         DB::table('produtos')->truncate();
-
-        $faker = Faker::create();
-
-        foreach (range(1, 30) as $i) {
-            Produto::create([
-                'nome'=>$faker->word(),
-                'ingredientes'=>$faker->sentence()
-            ]);
-        }        
+        
+        factory(App\Produto::class, 30)->create();     
     }
 }

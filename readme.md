@@ -88,7 +88,7 @@ sudo apt-get update
 sudo apt-get purge php5-fpm -y
 sudo apt-get install php7.0 php7.0-fpm
 sudo apt-get install libapache2-mod-php7.0
-sudo apt-get install php7.0-mysql -y
+sudo apt-get install php7.0-mysql php7.0-pgsql -y
 apt-get --purge autoremove -y
 php --version
 ```
