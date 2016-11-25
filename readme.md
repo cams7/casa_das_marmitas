@@ -109,14 +109,33 @@ composer global require "laravel/installer"
 wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
 heroku --version
 ```
+
+* Para disponibilizar acesso remoto ao banco **MySQL** , você terá que alterar o arquivo *my.cnf* no diretório */etc/mysql*; para isso, siga os passos abaixo:
+```sh
+sudo vim /etc/mysql/my.cnf
+```
+
+1. Digite */bind-address* para busca a linha *#bind-address ...*
+2. Aperte a tecla *i* para editar o arquivo
+3. Inclua o caráter *#* do inicio da linha para faze-la virar um comentário
+4. Apos alteração, a linha ficará como segue abaixo:
+	
+		#bind-address           = 127.0.0.1
+	
+5. Aperte a tecla *ESC*
+6. Digite *:wq* para salvar a alteração do arquivo *my.cnf*
+
+* Feito a alteração, basta reiniciar o **MySQL**
+```sh
+sudo /etc/init.d/mysql restart
+```
 	
 * No **MySQL**, crie o banco *casa_da_marmita* através dos comandos abaixo:
 ```sh
 mysql -u root -p
 CREATE DATABASE casa_da_marmita;
-USE casa_da_marmita;
-CREATE USER 'dono_da_marmita'@'localhost' IDENTIFIED BY 'marmita';
-GRANT ALL PRIVILEGES ON casa_da_marmita.* TO 'dono_da_marmita'@'localhost';
+CREATE USER 'dono_da_marmita'@'%' IDENTIFIED BY 'marmita';
+GRANT ALL PRIVILEGES ON casa_da_marmita.* TO 'dono_da_marmita'@'%';
 FLUSH PRIVILEGES;		
 exit		
 mysql --host=127.0.0.1 --user=dono_da_marmita --password=marmita casa_da_marmita
@@ -132,11 +151,10 @@ ALTER USER postgres WITH PASSWORD 'postgres';
 exit
 ```		
 		
-* Feito a instalação e a mudança de senha do usuário *postgres*, você estará apto a desenvolver um trabalho no seu computador conectando normalmente ao **PostgreSQL**, porém, se a ideia é disponibilizar acesso ao banco para receber conexões de outras máquinas, você terá que alterar os arquivos *postgresql.conf* e *pg_hba.conf* no diretório */etc/postgresql/9.3/main*; para isso, siga os passos abaixo:
+* Para disponibilizar acesso remoto ao banco **PostgreSQL**, você terá que alterar os arquivos *postgresql.conf* e *pg_hba.conf* no diretório */etc/postgresql/9.3/main*; para isso, siga os passos abaixo:
 ```sh
 sudo su - postgres
-cd /etc/postgresql/9.3/main
-vim postgresql.conf
+vim /etc/postgresql/9.3/main/postgresql.conf
 ```		
 		
 1. Digite */listen* para busca a linha *#listen_addresses ...*
@@ -149,7 +167,7 @@ vim postgresql.conf
 5. Aperte a tecla *ESC*
 6. Digite *:wq* para salvar a alteração do arquivo *postgresql.conf*
 ```sh
-vim pg_hba.conf
+vim /etc/postgresql/9.3/main/pg_hba.conf
 ```		
 		
 1. Digite */127.0.0.1* para busca a linha *host all all ...*
@@ -187,7 +205,6 @@ GRANT ALL PRIVILEGES ON DATABASE casa_da_marmita to dono_da_marmita;
 exit
 
 sudo adduser dono_da_marmita
-passwd marmita
 
 su - dono_da_marmita
 psql -d casa_da_marmita -U dono_da_marmita
