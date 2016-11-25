@@ -117,8 +117,8 @@ sudo vim /etc/mysql/my.cnf
 
 1. Digite */bind-address* para busca a linha *#bind-address ...*
 2. Aperte a tecla *i* para editar o arquivo
-3. Inclua o caráter *#* do inicio da linha para faze-la virar um comentário
-4. Apos alteração, a linha ficará como segue abaixo:
+3. Inclua o caráter *#* do inicio da linha para transforma-la em comentário
+4. Após alteração, a linha ficará como segue abaixo:
 	
 		#bind-address           = 127.0.0.1
 	
@@ -160,7 +160,7 @@ vim /etc/postgresql/9.3/main/postgresql.conf
 1. Digite */listen* para busca a linha *#listen_addresses ...*
 2. Aperte a tecla *i* para editar o arquivo
 3. Remova o caráter *#* do inicio da linha, e altere *'localhost'* por _'*'_
-4. Apos alteração, a linha ficará como segue abaixo:
+4. Após alteração, a linha ficará como segue abaixo:
 	
 		listen_addresses = '*' ...
 	
@@ -173,7 +173,7 @@ vim /etc/postgresql/9.3/main/pg_hba.conf
 1. Digite */127.0.0.1* para busca a linha *host all all ...*
 2. Aperte a tecla *i* para editar o arquivo
 3. Altere *127.0.0.1/32* por *0.0.0.0/0*
-4. Apos alteração, a linha ficará como segue abaixo:
+4. Após alteração, a linha ficará como segue abaixo:
 	
 		host all all 0.0.0.0/0 md5
 	
@@ -228,7 +228,7 @@ heroku create <Nome da aplicação>
 heroku config:add \
 ```
 
-* Inclua linha abaixo após o comando:
+Inclua linha abaixo após o comando:
 	
 		BUILDPACK_URL=https://github.com/heroku/heroku-buildpack-multi.git
 	
@@ -236,7 +236,7 @@ heroku config:add \
 vim .buildpacks
 ```
 
-* Inclua linhas abaixo no arquivo *.buildpacks*:
+Inclua linhas abaixo no arquivo *.buildpacks*:
 	
 		https://github.com/heroku/heroku-buildpack-nodejs
 		https://github.com/heroku/heroku-buildpack-php
@@ -245,7 +245,7 @@ vim .buildpacks
 vim Procfile
 ```
 
-* Inclua linhas abaixo no arquivo *Procfile*:
+Inclua linhas abaixo no arquivo *Procfile*:
 	
 		web: vendor/bin/heroku-php-apache2 public/
 
