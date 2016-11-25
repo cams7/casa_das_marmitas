@@ -33,10 +33,12 @@ Para rodar o programa
 * No *Windows*, instale o **MiKTeX 2.9.6069**
 * No *Windows*, instale o **TeXstudio 2.11.0**
 * No *Windows*, instale o **VirtualBox**
-* No *Windows*, instale o **Vagrant** 
+* No *Windows*, instale o **Vagrant**
+ 
 * No *Windows*, execute no *Prompt de Comando*, a linha abaixo:
-	
-		vagrant init ubuntu/trusty64
+```	
+vagrant init ubuntu/trusty64
+```
 
 * Inclua as linhas abaixo no arquivo *Vagrantfile*
 *config.vm.network "forwarded_port", guest: 80, host: 90*
@@ -45,10 +47,12 @@ Para rodar o programa
 *config.vm.network "forwarded_port", guest: 8000, host: 8000*
 
 * No *Windows*, dentro do diretório *trusty64*, execute no *Prompt de Comando*, a linha abaixo:
-
-		vagrant up --provider virtualbox
+```
+vagrant up --provider virtualbox
+```
 
 * Com o *Putty*, conecte via *SSH* na maquina virtual inicializada
+
 * No *Ubuntu*, instale o **Git** através dos comandos abaixo:
 ```sh
 sudo apt-get update
@@ -56,8 +60,8 @@ sudo apt-get install git-core
 git config --global user.name 'Nome do usuário'
 git config --global user.email 'E-mail do usuário'
 git --version
-```		
-
+```
+		
 * No *Ubuntu*, instale o **MySQL** através dos comandos abaixo:
 ```sh
 sudo apt-get install mysql-server
