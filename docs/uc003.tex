@@ -1,0 +1,140 @@
+\chapter{Manter Entregador - UC003} \label{uc003}
+
+\section{Breve descrição}
+
+O serviço de entrega é terceirizado, com isso, os motoboys são vinculados a uma empresa e recebem apenas pelas entregas realizadas. Caso o motoboy não esteja cadastrado, o gerente irá cadastra-lo, informando os seus dados.
+
+\section{Atores}
+
+\begin{enumerate}
+	\item Gerente da empresa, Casa das Marmitas.
+\end{enumerate}
+
+\section{Pré-condições}
+
+\begin{enumerate}
+	\item O gerente deverá possuir login e senha de acesso autenticados pelo sistema.
+	\item O gerente deverá ter permissão para realizar o cadastro e a alteração dos dados do entregador.
+\end{enumerate}
+
+\section{Fluxo de eventos}
+
+\subsection{Fluxo básico}
+
+\begin{enumerate}[label=P\arabic*]
+	\item O gerente aciona a opção \textbf{Entregador >> Incluir} no menu do sistema. \label{uc003_p:1}\ref{uc003_a:1}
+	\item O sistema apresenta a tela \textbf{Incluir Entregador} com os campos \ref{uc003_rn:1}.
+	\item No campo \textbf{Empresa}, o gerente informa o nome ou CNPJ da empresa. \label{uc003_p:3}
+	\item O sistema carrega o caso de uso \nameref{uc011} de acordo com o dado informado no passo anterior.
+	\item O gerente seleciona a empresa de entrega. \label{uc003_p:5}
+	\item O gerente preenche os outros campos da tela. \label{uc003_p:6}	
+	\item O gerente aciona a opção \textbf{Salvar}. \label{uc003_p:7}\ref{uc003_a:2}
+	\item O sistema valida os dados dos campos. \ref{uc003_e:1} \ref{uc003_e:2} \ref{uc003_e:3} \ref{uc003_e:4} \ref{uc003_e:5}
+	\item O sistema realiza a inclusão com sucesso.
+	\item O sistema executa o caso de uso \nameref{uc016}.
+	\item Esse caso de uso é encerrado.	
+\end{enumerate}
+
+\subsection{Fluxos alternativos}
+
+\begin{enumerate}[label=A\arabic*]
+	\item Alternativa ao passo \ref{uc003_p:1} - Alterar entregador \label{uc003_a:1}
+	\begin{enumerate}[label*=.\arabic*]
+		\item Na tela fornecida pelo sistema através do caso de uso \nameref{uc016}, o gerente aciona a opção \textbf{Alterar}. 
+		\item O sistema apresenta a tela \textbf{Alterar Entregador} com os campos \ref{uc003_rn:1}. \label{uc003_a:1:2}
+		\item O sistema desabilita o campo \textbf{Empresa}.
+		\item O gerente preenche os campos da tela. \label{uc003_a:1:4}
+		\item O gerente aciona a opção \textbf{Salvar}. \label{uc003_a:1:5}\ref{uc003_a:2}
+		\item O sistema valida os dados dos campos. \ref{uc003_e:2} \ref{uc003_e:3} \ref{uc003_e:4}
+		\item O sistema altera os dados com sucesso.
+		\item O sistema executa o caso de uso \nameref{uc016}.
+		\item Esse caso de uso é encerrado.
+	\end{enumerate}
+	
+	\item Alternativa ao passo \ref{uc003_p:7} ou \ref{uc003_a:1:5} - Cancelar inclusão ou alteração \label{uc003_a:2}
+	\begin{enumerate}[label*=.\arabic*]
+		\item O gerente aciona a opção \textbf{Cancelar}.
+		\item O sistema exibe a mensagem \textbf{Operação cancelada}.
+		\item O gerente aciona a opção \textbf{Ok}.
+		\item O sistema retorna à tela principal.
+		\item Esse caso de uso é encerrado.
+	\end{enumerate} 	
+\end{enumerate}
+
+\subsection{Exceções}
+
+\begin{enumerate}[label=E\arabic*]
+	\item O gerente não selecionou a empresa de entrega \label{uc003_e:1}
+	\begin{enumerate}[label*=.\arabic*]
+		\item[] No passo \ref{uc003_p:5}, o gerente não selecionou a empresa de entrega.
+		\item O sistema exibe a mensagem \textbf{Informe a empresa de entrega}.
+		\item O sistema destaca o campo \textbf{Empresa}.
+		\item O sistema retorna ao passo \ref{uc003_p:3}.
+	\end{enumerate}
+	
+	\item O gerente não informou algum campo obrigatório \label{uc003_e:2}
+	\begin{enumerate}[label*=.\arabic*]
+		\item[] No passo \ref{uc003_p:6} ou \ref{uc003_a:1:4}, o gerente deixou em branco pelo menos um campo obrigatório.
+		\item O sistema exibe a mensagem \textbf{Favor preencher o campo obrigatório}.
+		\item O sistema destaca os campos não informados pelo gerente.
+		\item O sistema retorna ao passo anterior.
+	\end{enumerate}
+
+	\item O gerente preencheu de forma errada o campo de CPF \label{uc003_e:3}
+	\begin{enumerate}[label*=.\arabic*]		
+		\item[] No passo \ref{uc003_p:6} ou \ref{uc003_a:1:4}, o gerente não preencheu de forma correta o campo de CPF.		
+		\item O sistema exibe a mensagem \textbf{CPF informado não é válido}.
+		\item O sistema destaca o campo \textbf{CPF}.
+		\item O sistema retorna ao passo anterior.
+	\end{enumerate}
+
+	\item O gerente preencheu de forma errada o campo de RG \label{uc003_e:4}
+	\begin{enumerate}[label*=.\arabic*]		
+		\item[] No passo \ref{uc003_p:6} ou \ref{uc003_a:1:4}, o gerente não preencheu de forma correta o campo de RG, por exemplo, usou letras ao invés de números, números excessivos ou menos números que o solicitado ou requerido.		
+		\item O sistema exibe a mensagem \textbf{RG informado não é válido}.
+		\item O sistema destaca o campo \textbf{RG}.
+		\item O sistema retorna ao passo anterior.
+	\end{enumerate}
+		
+	\item O gerente preencheu de forma errada o campo de celular \label{uc003_e:5}
+	\begin{enumerate}[label*=.\arabic*]		
+		\item[] No passo \ref{uc003_p:6} ou \ref{uc003_a:1:4}, o gerente não preencheu de forma correta o campo de celular, usando letras ou qualquer outro carácter diferente de número.		
+		\item O sistema exibe a mensagem \textbf{O número de celular informado não é válido}.
+		\item O sistema destaca o campo \textbf{Celular}.
+		\item O sistema retorna ao passo anterior.
+	\end{enumerate}	
+	
+	\item Entregador cadastrado anteriormente \label{uc003_e:6}
+	\begin{enumerate}[label*=.\arabic*]
+		\item[] No passo \ref{uc003_p:6} do fluxo básico, o gerente preencheu os dados de um entregador já cadastrado no sistema.
+		\item O sistema exibe a mensagem \textbf{O entregador informado já foi cadastrado anteriormente no sistema}.
+		\item O sistema retorna ao passo anterior.
+	\end{enumerate}
+\end{enumerate}
+
+\section{Pós-condições}
+
+\begin{enumerate}
+	\item O gerente terá cadastrado ou alterado os dados do entregador.
+	\item O sistema executará o caso de uso \nameref{uc016}.
+\end{enumerate}
+
+\section{Regras de negócios especiais}
+
+\begin{enumerate}[label=RN\arabic*]
+	\item Exibe os campos de dados do entregador de acordo com a tabela \ref{uc003_tb_rn1}. \label{uc003_rn:1}
+	\begin{table}[htb]
+		\ABNTEXfontereduzida
+		\caption[Campos de dados do entregador]{Campos de dados do entregador.}
+		\label{uc003_tb_rn1}
+		\begin{tabular}{|p{3.0cm}|p{2.0cm}|p{1.5cm}|p{2.0cm}|p{5.75cm}|}
+			\hline
+			\textbf{Campo} & \textbf{Tipo} & \textbf{Tamanho} & \textbf{Obrigatório} & \textbf{Observação}                                                                  \\ \hline
+			Empresa        & String        & 60               & SIM                  & N.A                                                                                  \\ \hline
+			Nome           & String        & 60               & SIM                  & N.A                                                                                  \\ \hline
+			CPF            & String        & 11               & SIM                  & O gerente terá que informar o CPF no formato \textbf{999.999.999-99}.                \\ \hline
+			RG             & String        & 10               & SIM                  & O gerente terá que informar o RG no formato numérico.                                \\ \hline
+			Celular        & String        & 11               & SIM                  & O gerente terá que informar o número de celular no formato \textbf{(99) 99999-9999}. \\ \hline
+		\end{tabular}
+	\end{table}
+\end{enumerate}

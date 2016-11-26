@@ -1,0 +1,94 @@
+\chapter{Alterar Taxa de Entrega - UC006} \label{uc006}
+
+\section{Breve descrição}
+
+O gerente altera o valor da taxa de entrega, por exemplo:
+
+\begin{itemize}
+	\item Taxa de entrega: R\$ 4,50
+\end{itemize}
+
+\section{Atores}
+
+\begin{enumerate}
+	\item Gerente da empresa, Casa das Marmitas.
+\end{enumerate}
+
+\section{Pré-condições}
+
+\begin{enumerate}
+	\item O gerente deverá possuir login e senha de acesso autenticados pelo sistema.
+	\item O gerente deverá ter permissão para realizar a alteração da taxa de entrega.
+\end{enumerate}
+
+\section{Fluxo de eventos}
+
+\subsection{Fluxo básico}
+
+\begin{enumerate}[label=P\arabic*]
+	\item O gerente aciona a opção \textbf{Taxa de Entrega >> Alterar} no menu do sistema.
+	\item O sistema apresenta a tela \textbf{Alterar Taxa de Entrega} com os campos \ref{uc006_rn:1}. \label{uc006_p:2}
+	\item O gerente preenche os campos da tela. \label{uc006_p:3}
+	\item O gerente aciona a opção \textbf{Salvar}. \label{uc006_p:4}\ref{uc006_a:2}
+	\item O sistema valida os dados dos campos. \ref{uc006_e:1} \ref{uc006_e:2}
+	\item O sistema altera os dados com sucesso.
+	\item O sistema carrega a tela principal.
+	\item Esse caso de uso é encerrado.	
+\end{enumerate}
+
+\subsection{Fluxos alternativos}
+
+\begin{enumerate}[label=A\arabic*]
+	\item Alternativa ao passo \ref{uc006_p:4} - Cancelar alteração \label{uc006_a:2}
+	\begin{enumerate}[label*=.\arabic*]
+		\item O gerente aciona a opção \textbf{Cancelar}.
+		\item O sistema exibe a mensagem \textbf{Operação cancelada}.
+		\item O gerente aciona a opção \textbf{Ok}.
+		\item O sistema retorna à tela principal.
+		\item Esse caso de uso é encerrado.
+	\end{enumerate}	
+\end{enumerate}
+
+\subsection{Exceções}
+
+\begin{enumerate}[label=E\arabic*]	
+	\item O gerente não informou algum campo obrigatório \label{uc006_e:1}
+	\begin{enumerate}[label*=.\arabic*]
+		\item[] No passo \ref{uc006_p:3}, o gerente deixou em branco pelo menos um campo obrigatório.
+		\item O sistema exibe a mensagem \textbf{Favor preencher o campo obrigatório}.
+		\item O sistema destaca os campos não informados pelo gerente.
+		\item O sistema retorna ao passo anterior.
+	\end{enumerate}
+	
+	\item O gerente preencheu de forma errada o campo de taxa de entrega \label{uc006_e:2}
+	\begin{enumerate}[label*=.\arabic*]		
+		\item[] No passo \ref{uc006_p:3}, o gerente não preencheu de forma correta o campo de taxa de entrega.		
+		\item O sistema exibe a mensagem \textbf{Taxa de entrega informada não é válida}.
+		\item O sistema destaca o campo \textbf{Taxa de entrega}.
+		\item O sistema retorna ao passo anterior.
+	\end{enumerate}
+\end{enumerate}
+
+\section{Pós-condições}
+
+\begin{enumerate}
+	\item O gerente terá alterado a taxa de entrega.
+	\item O sistema carregará a tela principal.	
+\end{enumerate}
+
+\section{Regras de negócios especiais}
+
+\begin{enumerate}[label=RN\arabic*]
+	\item Exibe os campos de dados da taxa de entrega de acordo com a tabela \ref{uc006_tb_rn1}. \label{uc006_rn:1}
+	\begin{table}[htb]
+		\ABNTEXfontereduzida
+		\caption[Campos de dados da taxa de entrega]{Campos de dados da taxa de entrega.}
+		\label{uc006_tb_rn1}
+		\begin{tabular}{|p{3.0cm}|p{2.0cm}|p{1.5cm}|p{2.0cm}|p{5.75cm}|}
+			\hline
+			\textbf{Campo}  & \textbf{Tipo} & \textbf{Tamanho} & \textbf{Obrigatório} & \textbf{Observação}                                             \\ \hline
+			Taxa de entrega & Float         & N.A              & SIM                  & O gerente terá que informar a taxa de entrega no formato moeda. \\ \hline
+			Tipo            & Enum          & N.A              & SIM                  & O sistema exibirá a opção \textbf{ENTREGA}.                     \\ \hline
+		\end{tabular}
+	\end{table}
+\end{enumerate}

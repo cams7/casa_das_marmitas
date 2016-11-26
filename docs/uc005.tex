@@ -1,0 +1,131 @@
+\chapter{Manter Produto - UC005} \label{uc005}
+
+\section{Breve descrição}
+
+O gerente cadastra as marmitas que serão vendidas, informando os seus dados.
+
+\begin{table}[htb]
+	\ABNTEXfontereduzida
+	\caption[Dados referentes às marmitas]{Dados referentes às marmitas.}
+	\centering
+	\label{tab-marmitas}
+	\begin{tabular}{|p{4cm}|p{8cm}|p{2cm}|}
+		\hline
+		\textbf{Nome do produto} & \textbf{Descrição}                               & \textbf{Custo} \\ \hline
+		Marmita1                 & Arroz, feijão, bife e salada de tomate           & R\$ 15,00      \\ \hline
+		Marmita2                 & Arroz, feijão, bife e ovo frito                  & R\$ 18,00      \\ \hline
+		Marmita3                 & Arroz, feijão, file de frango, creme de milho    & R\$ 14,00      \\ \hline
+		Marmita4                 & Arroz, feijão, file de frango e salada de tomate & R\$ 10,00      \\ \hline
+	\end{tabular}
+\end{table}
+
+\section{Atores}
+
+\begin{enumerate}
+	\item Gerente da empresa, Casa das Marmitas.
+\end{enumerate}
+
+\section{Pré-condições}
+
+\begin{enumerate}
+	\item O gerente deverá possuir login e senha de acesso autenticados pelo sistema.
+	\item O gerente deverá ter permissão para realizar o cadastro e a alteração dos dados da marmita.
+\end{enumerate}
+
+\section{Fluxo de eventos}
+
+\subsection{Fluxo básico}
+
+\begin{enumerate}[label=P\arabic*]
+	\item O gerente aciona a opção \textbf{Marmita >> Incluir} no menu do sistema. \label{uc005_p:1}\ref{uc005_a:1}
+	\item O sistema apresenta a tela \textbf{Incluir Marmita} com os campos \ref{uc005_rn:1}. \label{uc005_p:2}
+	\item O gerente preenche os campos da tela. \label{uc005_p:3}
+	\item O gerente aciona a opção \textbf{Salvar}. \label{uc005_p:4}\ref{uc005_a:2}
+	\item O sistema valida os dados dos campos. \ref{uc005_e:1} \ref{uc005_e:2} \ref{uc005_e:3}
+	\item O sistema realiza a inclusão com sucesso.
+	\item O sistema executa o caso de uso \nameref{uc017}.
+	\item Esse caso de uso é encerrado.	
+\end{enumerate}
+
+\subsection{Fluxos alternativos}
+
+\begin{enumerate}[label=A\arabic*]
+	\item Alternativa ao passo \ref{uc005_p:1} - Alterar marmita \label{uc005_a:1}
+	\begin{enumerate}[label*=.\arabic*]
+		\item Na tela fornecida pelo sistema através do caso de uso \nameref{uc017}, o gerente aciona a opção \textbf{Alterar}. 
+		\item O sistema apresenta a tela \textbf{Alterar Marmita} com os campos \ref{uc005_rn:1}. \label{uc005_a:1:2}
+		\item O gerente preenche os campos da tela. \label{uc005_a:1:3}
+		\item O gerente aciona a opção \textbf{Salvar}. \label{uc005_a:1:4}\ref{uc005_a:2}
+		\item O sistema valida os dados dos campos. \ref{uc005_e:1} \ref{uc005_e:2}
+		\item O sistema altera os dados com sucesso.
+		\item O sistema executa o caso de uso \nameref{uc017}.
+		\item Esse caso de uso é encerrado.
+	\end{enumerate}
+	
+	\item Alternativa ao passo \ref{uc005_p:4} ou \ref{uc005_a:1:4} - Cancelar inclusão ou alteração \label{uc005_a:2}
+	\begin{enumerate}[label*=.\arabic*]
+		\item O gerente aciona a opção \textbf{Cancelar}.
+		\item O sistema exibe a mensagem \textbf{Operação cancelada}.
+		\item O gerente aciona a opção \textbf{Ok}.
+		\item O sistema retorna à tela principal.
+		\item Esse caso de uso é encerrado.
+	\end{enumerate}	 	
+\end{enumerate}
+
+\subsection{Exceções}
+
+\begin{enumerate}[label=E\arabic*]	
+	\item O gerente não informou algum campo obrigatório \label{uc005_e:1}
+	\begin{enumerate}[label*=.\arabic*]
+		\item[] No passo \ref{uc005_p:3} ou \ref{uc005_a:1:3}, o gerente deixou em branco pelo menos um campo obrigatório.
+		\item O sistema exibe a mensagem \textbf{Favor preencher o campo obrigatório}.
+		\item O sistema destaca os campos não informados pelo gerente.
+		\item O sistema retorna ao passo anterior.
+	\end{enumerate}
+	
+	\item O gerente preencheu de forma errada o campo de custo \label{uc005_e:2}
+	\begin{enumerate}[label*=.\arabic*]		
+		\item[] No passo \ref{uc005_p:3} ou \ref{uc005_a:1:3}, o gerente não preencheu de forma correta o campo de custo.		
+		\item O sistema exibe a mensagem \textbf{Custo informado não é válido}.
+		\item O sistema destaca o campo \textbf{Custo}.
+		\item O sistema retorna ao passo anterior.
+	\end{enumerate}
+		
+	\item Marmita cadastrada anteriormente \label{uc005_e:3}
+	\begin{enumerate}[label*=.\arabic*]
+		\item[] No passo \ref{uc005_p:3} do fluxo básico, o gerente preencheu os dados de uma marmita já cadastrado no sistema.
+		\item O sistema exibe a mensagem \textbf{A marmita informada já foi cadastrada anteriormente no sistema}.
+		\item O sistema retorna ao passo anterior.
+	\end{enumerate}
+\end{enumerate}
+
+\section{Pós-condições}
+
+\begin{enumerate}
+	\item O gerente terá cadastrado ou alterado os dados da marmita.
+	\item O sistema executará o caso de uso \nameref{uc017}.	
+\end{enumerate}
+
+\section{Regras de negócios especiais}
+
+\begin{enumerate}[label=RN\arabic*]
+	\item Exibe os campos de dados da marmita de acordo com a tabela \ref{uc005_tb_rn1}. \label{uc005_rn:1}
+	\begin{table}[htb]
+		\ABNTEXfontereduzida
+		\caption[Campos de dados da marmita]{Campos de dados da marmita.}
+		\label{uc005_tb_rn1}
+		\begin{tabular}{|p{3.0cm}|p{2.0cm}|p{1.5cm}|p{2.0cm}|p{5.75cm}|}
+			\hline
+			\textbf{Campo} & \textbf{Tipo} & \textbf{Tamanho} & \textbf{Obrigatório} & \textbf{Observação}                                              \\ \hline
+			Nome           & String        & 60               & SIM                  & N.A                                                              \\ \hline
+			Ingredientes   & String        & 250              & SIM                  & N.A                                                              \\ \hline
+			Custo          & Float         & N.A              & SIM                  & O gerente terá que informar o custo da marmita no formato moeda. \\ \hline
+			Tamanho        & Enum          & N.A              & SIM                  & O gerente terá que informar uma das seguintes opções: 	
+			\begin{enumerate}
+				\item GRANDE (tamanho grande);
+				\item MEDIO (tamanho médio);
+				\item PEQUENO (tamanho pequeno).
+			\end{enumerate}\\ \hline
+		\end{tabular}
+	\end{table}
+\end{enumerate}

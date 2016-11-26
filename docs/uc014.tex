@@ -1,0 +1,104 @@
+\chapter{Exibir Empresa - UC014} \label{uc014}
+
+\section{Breve descrição}
+
+Após a pesquisa ou o cadastro de uma empresa, o sistema carregará um formulário com os dados da mesma.
+
+\section{Atores}
+
+\begin{enumerate}
+	\item Funcionário da empresa, Casa das Marmitas.
+\end{enumerate}
+
+\section{Pré-condições}
+
+\begin{enumerate}
+	\item O funcionário deverá possuir login e senha de acesso autenticados pelo sistema.
+	\item O funcionário deverá ter executado, anteriormente, o caso de uso \nameref{uc004} ou \nameref{uc011}.
+\end{enumerate}
+
+\section{Fluxo de eventos}
+
+\subsection{Fluxo básico}
+
+\begin{enumerate}[label=P\arabic*]
+	\item O sistema apresenta a tela \textbf{Exibir Empresa} com os campos \ref{uc014_rn:1}. \label{uc014_p:1}
+	\item O sistema habilita a opção \textbf{Alterar}. \label{uc014_p:2}\ref{uc014_a:1} 
+	\item O sistema habilita a opção \textbf{Excluir}. \label{uc014_p:3}\ref{uc014_a:2}
+	\item Esse caso de uso é encerrado. \label{uc014_p:4}\ref{uc014_a:3} \ref{uc014_a:4}
+\end{enumerate}
+
+\subsection{Fluxos alternativos}
+
+\begin{enumerate}[label=A\arabic*]
+	\item Alternativa ao passo \ref{uc014_p:2} - O funcionário não tem permissão de alterar os dados da empresa \label{uc014_a:1}
+	\begin{enumerate}[label*=.\arabic*]
+		\item O sistema desabilita a opção \textbf{Alterar}.
+		\item O sistema vai para o próximo passo.
+	\end{enumerate}
+	
+	\item Alternativa ao passo \ref{uc014_p:3} - O funcionário não tem permissão de excluir a empresa \label{uc014_a:2}
+	\begin{enumerate}[label*=.\arabic*]
+		\item O sistema desabilita a opção \textbf{Excluir}.
+		\item O sistema vai para o próximo passo.
+	\end{enumerate}
+	
+	\item Alternativa ao passo \ref{uc014_p:4} - Alterar empresa \label{uc014_a:3}
+	\begin{enumerate}[label*=.\arabic*]
+		\item O funcionário aciona a opção \textbf{Alterar}, caso essa funcionalidade esteja habilitada.
+		\item O sistema executa o caso de uso \nameref{uc004}.
+		\item Esse caso de uso é encerrado.
+	\end{enumerate}
+	
+	\item Alternativa ao passo \ref{uc014_p:4} - Excluir empresa \label{uc014_a:4}
+	\begin{enumerate}[label*=.\arabic*]
+		\item O funcionário aciona a opção \textbf{Excluir}, caso essa funcionalidade esteja habilitada.
+		\item O sistema remove os dados da empresa. \label{uc014_a:4:2}\ref{uc014_e:1}
+		\item O sistema volta à tela anterior.
+		\item Esse caso de uso é encerrado.
+	\end{enumerate}
+\end{enumerate}
+
+\subsection{Exceções}
+
+\begin{enumerate}[label=E\arabic*]
+	\item Empresa tem entregador vinculado \label{uc014_e:1}
+	\begin{enumerate}[label*=.\arabic*]
+		\item[] No passo \ref{uc014_a:4:2}, o funcionário tentou remover a empresa, mas isso não foi possível, por que essa tinha pelo menos um entregador vinculado a mesma.
+		\item O sistema exibe a mensagem \textbf{A empresa tem entregador vinculado}.
+		\item O sistema retorna ao passo \ref{uc014_p:1}.
+	\end{enumerate}
+\end{enumerate}
+
+\section{Pós-condições}
+
+\begin{enumerate}
+	\item O sistema exibirá os dados da empresa.
+\end{enumerate}
+
+\section{Regras de negócios especiais}
+
+\begin{enumerate}[label=ED\arabic*]
+	\item Exibe os campos de dados da empresa de acordo com a tabela \ref{uc014_tb_rn1}. \label{uc014_rn:1}
+	\begin{table}[htb]
+		\ABNTEXfontereduzida
+		\caption[Campos de dados da empresa]{Campos de dados da empresa.}
+		\label{uc014_tb_rn1}
+		\begin{tabular}{|p{4.0cm}|p{3.0cm}|p{7.25cm}|}
+			\hline
+			\textbf{Campo}  & \textbf{Tipo} & \textbf{Observação}                                                        \\ \hline
+			Cód. da empresa & Integer       & N.A                                                                        \\ \hline
+			Data cadastro   & Date          & O sistema exibirá a data de cadastro no formato \textbf{dia/mês/ano}.      \\ \hline
+			Nome            & String        & N.A                                                                        \\ \hline
+			CNPJ            & String        & O sistema exibirá o CNPJ no formato \textbf{99.999.999/9999-99}.           \\ \hline
+			E-mail          & String        & N.A                                                                        \\ \hline
+			Telefone        & String        & O sistema exibirá o número de telefone no formato \textbf{(99) 9999-9999}. \\ \hline
+			Logradouro      & String        & N.A                                                                        \\ \hline
+			CEP             & String        & O sistema exibirá o CEP no formato \textbf{99.999-999}.                    \\ \hline
+			Bairro          & String        & N.A                                                                        \\ \hline
+			Cidade          & String        & N.A                                                                        \\ \hline
+			Número          & String        & N.A                                                                        \\ \hline
+			Complemento     & String        & N.A                                                                        \\ \hline
+		\end{tabular}
+	\end{table}
+\end{enumerate}
