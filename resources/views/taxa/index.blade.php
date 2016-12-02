@@ -1,9 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Taxas</title>
-</head>
-<body>
+@extends('layouts.master')
+@section('title', 'Taxas')
+
+@section('sidebar')
+	@parent
+	<!--<p>This is appended to the master sidebar.</p>-->
+@endsection
+
+@section('content')
 	<h1>Lista de taxa</h1>
 	<table>
 		<tr><th>Tipo</th><th>Valor</th></tr>
@@ -13,6 +16,5 @@
 			<td>{{$t->taxa}}</td>
 		</tr>
 	@endforeach	
-	</table>	
-</body>
-</html>
+	</table>
+@endsection

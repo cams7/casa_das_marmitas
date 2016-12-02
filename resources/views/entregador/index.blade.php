@@ -1,9 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Entregadores</title>
-</head>
-<body>
+@extends('layouts.master')
+@section('title', 'Entregadores')
+
+@section('sidebar')
+	@parent
+	<!--<p>This is appended to the master sidebar.</p>-->
+@endsection
+
+@section('content')
 	<h1>Lista de entregadores</h1>
 	<table>
 		<tr><th>Nome</th><th>Empresa</th><th>CPF</th><th>Celular</th></tr>
@@ -15,6 +18,5 @@
 			<td>{{$e->celular}}</td>
 		</tr>
 	@endforeach	
-	</table>	
-</body>
-</html>
+	</table>
+@endsection

@@ -1,9 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Pedidos</title>
-</head>
-<body>
+@extends('layouts.master')
+@section('title', 'Pedidos')
+
+@section('sidebar')
+	@parent
+	<!--<p>This is appended to the master sidebar.</p>-->
+@endsection
+
+@section('content')
 	<h1>Lista de pedidos</h1>
 	<table>
 		<tr><th>Cliente</th><th>Qtd total</th><th>Custo total + Taxa</th></tr>
@@ -28,6 +31,5 @@
 			</td>
 		</tr>
 	@endforeach	
-	</table>	
-</body>
-</html>
+	</table>
+@endsection
