@@ -4,18 +4,20 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\User;
-use App\PedidoItem;
+use App\Empresa;
 
-class Produto extends Model
+
+class Entregador extends Model
 {
-	protected $table = 'produtos';
+	protected $table = 'entregadores';
 
     protected $fillable = [
     	'user_id',
+    	'empresa_id',
     	'nome',
-    	'ingredientes',
-    	'custo',
-    	'tamanho'
+    	'cpf',
+    	'rg',
+    	'celular'
     ];
 
     public function user()
@@ -23,8 +25,8 @@ class Produto extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function itensPedido()
+    public function empresa()
     {
-        return $this->hasMany(PedidoItem::class);
+        return $this->belongsTo(Empresa::class);
     }
 }

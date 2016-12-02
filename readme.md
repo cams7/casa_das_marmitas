@@ -16,6 +16,7 @@ Sistemas requeridos
 * [Microsoft Windows 10](https://www.microsoft.com/pt-br/software-download/windows10)
 * [MiKTeX 2.9.6069](http://miktex.org/)
 * [TeXstudio 2.11.0](http://www.texstudio.org/)
+* [SQL Power Architect Data Modeling & Profiling Tool](http://www.sqlpower.ca/page/resources)
 * [VirtualBox](https://www.virtualbox.org/)
 * [Vagrant](https://www.vagrantup.com/)
 * [Ubuntu 14.04.5 LTS](http://releases.ubuntu.com/14.04/)
@@ -34,6 +35,7 @@ Para rodar o programa
 * No *Windows*, instale o **TeXstudio 2.11.0**
 * No *Windows*, instale o **VirtualBox**
 * No *Windows*, instale o **Vagrant**
+* No *Windows*, instale o **SQL Power Architect**
  
 * No *Windows*, execute no *Prompt de Comando*, a linha abaixo:
 ```	

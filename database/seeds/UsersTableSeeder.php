@@ -11,9 +11,13 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+        $totalUsuarios = rand(3, 10);
 
-        DB::table('users')->truncate();
-
-        factory(App\User::class, 10)->create();       
-    }
+        factory(App\User::class, $totalUsuarios)->create()->each(function($user) 
+        {
+            factory(App\Funcionario::class)->create([
+                'id' => $user['id']
+            ]);                 
+        });       
+    }    
 }

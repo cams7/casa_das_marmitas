@@ -10,10 +10,9 @@ class ProdutosTableSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
+    {        
+        $TOTAL_MARMITAS = 12;
 
-        DB::table('produtos')->truncate();
-        
-        factory(App\Produto::class, 30)->create();     
-    }
+        factory(App\Produto::class, $TOTAL_MARMITAS)->create();            
+    }    
 }
