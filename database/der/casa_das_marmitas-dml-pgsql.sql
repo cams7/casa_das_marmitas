@@ -17,5 +17,3 @@ select
 	END as custo_total
 from clientes c inner join pedidos p on c.id = p.cliente_id inner join taxas t on t.id = p.taxa_id inner join pedido_itens i on p.id = i.pedido_id inner join produtos m on m.id = i.produto_id 
 group by c.id, t.id, p.id order by nome_cliente, qtd_itens desc, qtd_marmitas desc, custo_total desc;
-
-

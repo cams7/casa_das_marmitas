@@ -24,7 +24,7 @@ class PedidosTableSeeder extends Seeder
             //Log::info("--------------------//--------------------//--------------------");
             //Log::info("Cliente: Nome = ".$cliente['nome']);
 
-            $totalPedidosPorCliente = rand(0, 5);
+            $totalPedidosPorCliente = rand(0, 3);
 
             for ($i=0; $i < $totalPedidosPorCliente; $i++) 
             {  
