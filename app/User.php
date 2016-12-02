@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+use App\Funcionario;
 use App\Cliente;
 use App\Empresa;
 use App\Entregador;
@@ -33,6 +34,11 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function funcionario()
+    {
+        return $this->hasOne(Funcionario::class, 'id');
+    }
     
     public function clientes()
     {
