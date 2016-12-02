@@ -1,5 +1,5 @@
 ========================
-* Autor: César Magalhães
+* Autor: César A. Magalhães
 * Tecnologias: MiKTeX 2.9.6069, TeXstudio 2.11.0, Laravel Framework 5.3.24
 * Banco de dados: MySQL, PostgreSQL
 * Resumo: Portfólio do 4º semestre da faculdade UNOPAR
