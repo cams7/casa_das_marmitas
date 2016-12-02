@@ -3,17 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use DB;
 
 use App\Cliente;
 
 class ClienteController extends Controller
 {
-    private $cliente;
+    //private $cliente;
 
-    public function __construct(Cliente $cliente)  
+    /*public function __construct(Cliente $cliente)  
     {
         $this->cliente = $cliente;
-    }
+    }*/
     
     /**
      * Display a listing of the resource.
@@ -22,8 +24,8 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        $clientes = $this->cliente->all();
-        return view('cliente.index')->with('clientes',$clientes);
+        $clientes = Cliente::all();
+        return view('cliente.index')->with('clientes', $clientes);
     }
 
     /**
@@ -44,7 +46,22 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // validate
+        // read more on validation at http://laravel.com/docs/validation
+        
+        $this->validate($request, $this->getRoles());
+
+        $userId = DB::table('users')->max('id');
+        
+        // store
+        $cliente = new Cliente;
+        $cliente->user_id = $userId;
+
+        $this->setCliente($request, $cliente);        
+
+        $cliente->save();
+
+        return redirect('cliente')->with('message', 'O cliente foi cadastrado com sucesso!');
     }
 
     /**
@@ -55,7 +72,10 @@ class ClienteController extends Controller
      */
     public function show($id)
     {
-        //
+        // get the cliente
+        $cliente = Cliente::find($id);
+
+        return view('cliente.show')->with('cliente', $cliente);
     }
 
     /**
@@ -66,7 +86,10 @@ class ClienteController extends Controller
      */
     public function edit($id)
     {
-        //
+        // get the cliente
+        $cliente = Cliente::find($id);
+
+        return view('cliente.edit')->with('cliente', $cliente);
     }
 
     /**
@@ -78,7 +101,18 @@ class ClienteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // validate
+        // read more on validation at http://laravel.com/docs/validation
+        
+        $this->validate($request, $this->getRoles());
+
+        $cliente = Cliente::find($id);
+
+       $this->setCliente($request, $cliente);        
+
+        $cliente->save();
+
+        return redirect('cliente')->with('message', 'O cliente foi atualizado com sucesso!');
     }
 
     /**
@@ -89,6 +123,38 @@ class ClienteController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // delete
+        $cliente = Cliente::find($id);
+        $cliente->delete();
+
+        // redirect
+        return redirect('cliente')->with('message', 'O cliente foi excluído com sucesso!');
+    }
+
+    private function getRoles()
+    {
+        return array(
+            'nome' => 'required',
+            'telefone' => 'required|numeric',
+            'cep' => 'required|numeric',
+            'cidade' => 'required',
+            'bairro' => 'required',
+            'logradouro' => 'required',
+            'numero_residencial' => 'required'
+        );
+    }
+
+    private function setCliente(Request $request, Cliente &$cliente)
+    {     
+        $cliente->nome  = $request->input('nome');
+        //$cliente->nascimento = Input::get('nascimento');
+        $cliente->telefone = $request->input('telefone');
+        $cliente->cep = $request->input('cep');
+        $cliente->cidade = $request->input('cidade');
+        $cliente->bairro = $request->input('bairro');
+        $cliente->logradouro = $request->input('logradouro');
+        $cliente->numero_residencial = $request->input('numero_residencial');
+        $cliente->complemento_endereco = $request->input('complemento_endereco');
+        $cliente->ponto_referencia = $request->input('ponto_referencia');
     }
 }
