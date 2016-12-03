@@ -29,4 +29,32 @@ class Entregador extends Model
     {
         return $this->belongsTo(Empresa::class);
     }
+
+    public function setCpf($cpf)
+    {
+        $this->attributes['cpf'] = preg_replace('~.*(\d{3})\.(\d{3})\.(\d{3})\-(\d{2}).*~', '$1$2$3$4', $cpf);
+    }
+
+    public function getCpf()
+    {
+        $cpf = $this->attributes['cpf'];
+        if($cpf == null)
+            return null;
+
+        return preg_replace('~.*(\d{3})(\d{3})(\d{3})(\d{2}).*~', '$1.$2.$3-$4', $cpf);
+    }     
+
+    public function setCelular($celular)
+    {
+        $this->attributes['celular'] = preg_replace('~.*\((\d{2})\) (\d{5})\-(\d{4}).*~', '$1$2$3', $celular);
+    }
+
+    public function getCelular()
+    {
+        $celular = $this->attributes['celular'];
+        if($celular == null)
+            return null;
+
+        return preg_replace('~.*(\d{2})(\d{5})(\d{4}).*~', '($1) $2-$3', $celular);
+    }
 }

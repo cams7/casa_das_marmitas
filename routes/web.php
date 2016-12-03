@@ -18,12 +18,13 @@ Route::get('/', function () {
 Route::get('funcionarios', 'FuncionarioController@index');
 //Route::get('clientes', 'ClienteController@index');
 //Route::get('empresas', 'EmpresaController@index');
-Route::get('entregadores', 'EntregadorController@index');
+//Route::get('entregadores', 'EntregadorController@index');
 //Route::get('produtos', 'ProdutoController@index');
 //Route::get('taxas', 'TaxaController@index');
 Route::get('pedidos', 'PedidoController@index');
 
 Route::resource('cliente', 'ClienteController');
 Route::resource('empresa', 'EmpresaController');
+Route::resource('entregador', 'EntregadorController');
 Route::resource('produto', 'ProdutoController');
 Route::resource('taxa', 'TaxaController');
