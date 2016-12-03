@@ -31,8 +31,9 @@ class Produto extends Model
 
     public function setCusto($custo)
     {
+        $custo = str_replace(',', '.', $custo);
         $custo = preg_replace('/[^\d,\.]/', '', $custo);
-        $custo = preg_replace('/,(\d{2})$/', '.$1', $custo);
+        $custo = round($custo, 2);
         $this->attributes['custo'] = $custo;
     }
 

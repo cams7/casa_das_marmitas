@@ -25,4 +25,42 @@ class Taxa extends Model
     {
         return $this->hasMany(Pedido::class);
     }
+
+    public function setTaxa($taxa)
+    {
+        $taxa = str_replace(',', '.', $taxa);
+        $taxa = preg_replace('/[^\d,\.]/', '', $taxa);
+        $taxa = round($taxa, 2);
+        $this->attributes['taxa'] = $taxa;
+    }
+
+    public function getTaxa()
+    {
+        $taxa = $this->attributes['taxa'];
+        if($taxa == null)
+            return null;
+
+        return "R$".number_format($taxa, 2, ',', '.');
+    }
+
+    public function getTipo()
+    {
+        $tipo = null;
+
+        switch ($this->attributes['tipo_taxa']) {
+            case 1:
+                $tipo = "Atraso";
+                break;
+            case 2:
+                $tipo = "Entrega";
+                break;
+            case 3:
+                $tipo = "Extra";
+                break;
+            default:
+                break;
+        }
+
+        return $tipo;
+    }
 }

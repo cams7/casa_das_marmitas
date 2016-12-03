@@ -14,7 +14,7 @@
     <li><a href="{{ URL::to('entregadores') }}">Entregadores</a></li>
     <li><a href="{{ URL::to('produto') }}">Produtos</a></li>
     <li><a href="{{ URL::to('cliente') }}">Clientes</a></li>
-    <li><a href="{{ URL::to('taxas') }}">Taxas</a></li>
+    <li><a href="{{ URL::to('taxa') }}">Taxas</a></li>
     <li><a href="{{ URL::to('pedidos') }}">Pedidos</a></li>
   </ul>
   <ul class="nav navbar-nav navbar-right">

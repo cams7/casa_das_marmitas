@@ -3,17 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 
 use App\Taxa;
 
 class TaxaController extends Controller
 {
-    private $taxa;
+    //private $taxa;
 
-    public function __construct(Taxa $taxa)  
+    /*public function __construct(Taxa $taxa)  
     {
         $this->taxa = $taxa;
-    }
+    }*/
 
     /**
      * Display a listing of the resource.
@@ -22,8 +23,8 @@ class TaxaController extends Controller
      */
     public function index()
     {
-        $taxas = $this->taxa->all();
-        return view('taxa.index')->with('taxas',$taxas);
+        $taxas = Taxa::all();
+        return view('taxa.index')->with('taxas', $taxas);
     }
 
     /**
@@ -33,7 +34,7 @@ class TaxaController extends Controller
      */
     public function create()
     {
-        //
+        return view('taxa.create')->with('taxa', null);
     }
 
     /**
@@ -44,7 +45,22 @@ class TaxaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // validate
+        // read more on validation at http://laravel.com/docs/validation
+        
+        $this->validate($request, $this->getRoles());
+
+        $userId = DB::table('users')->max('id');
+        
+        // store
+        $taxa = new Taxa;
+        $taxa->user_id = $userId;
+
+        $this->setTaxa($request, $taxa);        
+
+        $taxa->save();
+
+        return redirect('taxa')->with('message', 'A taxa foi cadastrada com sucesso!');
     }
 
     /**
@@ -55,7 +71,10 @@ class TaxaController extends Controller
      */
     public function show($id)
     {
-        //
+        // get the taxa
+        $taxa = Taxa::find($id);
+
+        return view('taxa.show')->with('taxa', $taxa);
     }
 
     /**
@@ -66,7 +85,10 @@ class TaxaController extends Controller
      */
     public function edit($id)
     {
-        //
+        // get the taxa
+        $taxa = Taxa::find($id);
+
+        return view('taxa.edit')->with('taxa', $taxa);
     }
 
     /**
@@ -78,7 +100,18 @@ class TaxaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // validate
+        // read more on validation at http://laravel.com/docs/validation
+        
+        $this->validate($request, $this->getRoles());
+
+        $taxa = Taxa::find($id);
+
+        $this->setTaxa($request, $taxa);        
+
+        $taxa->save();
+
+        return redirect('taxa')->with('message', 'A taxa foi atualizada com sucesso!');
     }
 
     /**
@@ -89,6 +122,25 @@ class TaxaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // delete
+        $taxa = Taxa::find($id);
+        $taxa->delete();
+
+        // redirect
+        return redirect('taxa')->with('message', 'A taxa foi excluída com sucesso!');
+    }
+
+    private function getRoles()
+    {
+        return array(
+            'taxa' => 'required',
+            'tipo_taxa' => 'required|integer|between:1,3'
+        );
+    }
+
+    private function setTaxa(Request $request, Taxa &$taxa)
+    {   
+        $taxa->setTaxa($request->input('taxa'));
+        $taxa->tipo_taxa = $request->input('tipo_taxa');       
     }
 }
