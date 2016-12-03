@@ -1,21 +1,14 @@
 @extends('layouts.master')
 @section('title', 'Visualiza cliente')
 
+@section('jquery_content')
+@endsection
+
 @section('sidebar')
-	@parent
-	<!--<p>This is appended to the master sidebar.</p>-->
-	<ul class="nav navbar-nav">
-        <li><a href="{{ URL::to('cliente') }}">Lista</a></li>
-        <li><a href="{{ URL::to('cliente/create') }}">Novo</a>
-    </ul>
-@stop
+	@include('cliente.menu')
+@endsection
 
-@section('head')
-@stop
-
-@section('content')
-	<h1>Visualiza cliente</h1>
-	
+@section('content')	
 	<div class="jumbotron text-center">
         <h2>{{ $cliente->nome }}</h2>
         <p>
@@ -30,4 +23,4 @@
             <strong>Ponto de referência:</strong> {{ $cliente->ponto_referencia }}
         </p>
     </div>
-@stop
+@endsection

@@ -1,25 +1,14 @@
 @extends('layouts.master')
 @section('title', 'Lista de clientes')
 
-@section('sidebar')
-	@parent
-	<ul class="nav navbar-nav">
-        <li><a href="{{ URL::to('cliente') }}">Lista</a></li>
-        <li><a href="{{ URL::to('cliente/create') }}">Novo</a>
-    </ul>
-@stop
+@section('jquery_content')
+@endsection
 
-@section('head')
-@stop
+@section('sidebar')	
+    @include('cliente.menu')
+@endsection
 
 @section('content')
-	<h1>Lista de clientes</h1>
-
-	<!-- will be used to show any messages -->
-	@if (Session::has('message'))
-	    <div class="alert alert-info">{{ Session::get('message') }}</div>
-	@endif
-
 	<table class="table table-striped table-bordered">
 	    <thead>
 	        <tr>
@@ -59,4 +48,4 @@
 	    @endforeach
 	    </tbody>
 	</table>
-@stop
+@endsection
