@@ -143,6 +143,7 @@ class ClienteController extends Controller
             'bairro' => 'required|max:60',
             'logradouro' => 'required|max:100',
             'numero_residencial' => 'required|max:30',
+            'complemento_endereco' => 'max:30',
             'ponto_referencia' => 'max:30'
         );
     }

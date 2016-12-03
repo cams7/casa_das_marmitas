@@ -10,7 +10,7 @@
   <ul class="nav navbar-nav">
     <li class="active"><a href="/">Home</a></li>
     <li><a href="{{ URL::to('funcionarios') }}">Funcionários</a></li>
-    <li><a href="{{ URL::to('empresas') }}">Empresa</a></li>
+    <li><a href="{{ URL::to('empresa') }}">Empresa</a></li>
     <li><a href="{{ URL::to('entregadores') }}">Entregadores</a></li>
     <li><a href="{{ URL::to('produto') }}">Produtos</a></li>
     <li><a href="{{ URL::to('cliente') }}">Clientes</a></li>
