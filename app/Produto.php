@@ -27,4 +27,43 @@ class Produto extends Model
     {
         return $this->hasMany(PedidoItem::class);
     }
+
+
+    public function setCusto($custo)
+    {
+        $custo = preg_replace('/[^\d,\.]/', '', $custo);
+        $custo = preg_replace('/,(\d{2})$/', '.$1', $custo);
+        $this->attributes['custo'] = $custo;
+    }
+
+    public function getCusto()
+    {
+        $custo = $this->attributes['custo'];
+        if($custo == null)
+            return null;
+
+        return "R$".number_format($custo, 2, ',', '.');
+    }
+
+    public function getTamanho()
+    {
+        $tamanho = null;
+
+        switch ($this->attributes['tamanho']) {
+            case 1:
+                $tamanho = "Grande";
+                break;
+            case 2:
+                $tamanho = "Média";
+                break;
+            case 3:
+                $tamanho = "Pequena";
+                break;
+            default:
+                # code...
+                break;
+        }
+
+        return $tamanho;
+    }
 }

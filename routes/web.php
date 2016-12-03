@@ -24,4 +24,4 @@ Route::get('taxas', 'TaxaController@index');
 Route::get('pedidos', 'PedidoController@index');
 
 Route::resource('cliente', 'ClienteController');
-//Route::resource('produto', 'ProdutoController');
+Route::resource('produto', 'ProdutoController');
