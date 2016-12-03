@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('funcionarios', 'FuncionarioController@index');
+//Route::get('funcionarios', 'FuncionarioController@index');
 //Route::get('clientes', 'ClienteController@index');
 //Route::get('empresas', 'EmpresaController@index');
 //Route::get('entregadores', 'EntregadorController@index');
@@ -24,7 +24,9 @@ Route::get('funcionarios', 'FuncionarioController@index');
 Route::get('pedidos', 'PedidoController@index');
 
 Route::resource('cliente', 'ClienteController');
+
+Route::resource('produto', 'ProdutoController');
 Route::resource('empresa', 'EmpresaController');
 Route::resource('entregador', 'EntregadorController');
-Route::resource('produto', 'ProdutoController');
 Route::resource('taxa', 'TaxaController');
+Route::resource('funcionario', 'FuncionarioController');
