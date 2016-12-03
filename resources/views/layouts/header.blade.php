@@ -4,7 +4,7 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>                        
   </button-->
-  <img src="{{ URL::asset('img/casa_das_marmitas.png') }}" alt="Casa das marmitas" title="Casa das marmitas" class="navbar-brand">
+  <img src="{{ URL::asset('img/casa_das_marmitas-logo.png') }}" alt="Casa das marmitas" title="Casa das marmitas" class="navbar-brand">
 </div>
 <div class="collapse navbar-collapse" id="myNavbar">
   <ul class="nav navbar-nav">

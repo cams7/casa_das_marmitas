@@ -23,7 +23,7 @@
 	    @foreach($clientes as $i => $cliente)
 	        <tr>
 	            <td>{{ $cliente->nome }}</td>
-	            <td>{{ $cliente->telefone }}</td>
+	            <td>{{ $cliente->getTelefone() }}</td>
 	            <td>{{ $cliente->cidade }}</td>
 	            <td>{{ $cliente->bairro }}</td>
 

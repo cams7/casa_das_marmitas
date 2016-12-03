@@ -7,19 +7,19 @@
 <div class="form-group">
     {{ Form::label('nascimento', 'Nascimento:', array('class' => 'control-label col-sm-2')) }}
     <div class="col-sm-2">
-    	{{ Form::date('nascimento', null, array('id' => 'nascimento','class' => 'form-control', 'placeholder' => '99/99/9999', 'maxlength' => '10')) }}
+    	{{ Form::date('nascimento', $cliente != null ? $cliente->getNascimento() : null, array('id' => 'nascimento','class' => 'form-control', 'placeholder' => '99/99/9999', 'maxlength' => '10')) }}
     </div>
 </div>
 <div class="form-group">
     {{ Form::label('telefone', 'Telefone:', array('class' => 'control-label col-sm-2')) }}
     <div class="col-sm-2">
-    	{{ Form::text('telefone',null, array('id' => 'telefone', 'class' => 'form-control', 'placeholder' => '(99) 9999-9999', 'maxlength' => '14')) }}
+    	{{ Form::text('telefone', $cliente != null ? $cliente->getTelefone() : null, array('id' => 'telefone', 'class' => 'form-control', 'placeholder' => '(99) 9999-9999', 'maxlength' => '14')) }}
     </div>
 </div>
 <div class="form-group">
     {{ Form::label('cep', 'CEP:', array('class' => 'control-label col-sm-2')) }}
     <div class="col-sm-2">
-    	{{ Form::text('cep',null, array('id' => 'cep', 'class' => 'form-control', 'placeholder' => '99.999.999', 'maxlength' => '10')) }}
+    	{{ Form::text('cep', $cliente != null ? $cliente->getCep() : null, array('id' => 'cep', 'class' => 'form-control', 'placeholder' => '99.999.999', 'maxlength' => '10')) }}
     </div>
 </div>
 <div class="form-group">

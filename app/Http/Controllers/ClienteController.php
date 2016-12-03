@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+//use Illuminate\Support\Facades\Log;
 use DB;
 
 use App\Cliente;
@@ -35,7 +36,7 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        return view('cliente.create');
+        return view('cliente.create')->with('cliente', null);
     }
 
     /**
@@ -108,7 +109,7 @@ class ClienteController extends Controller
 
         $cliente = Cliente::find($id);
 
-       $this->setCliente($request, $cliente);        
+        $this->setCliente($request, $cliente);        
 
         $cliente->save();
 
@@ -134,27 +135,29 @@ class ClienteController extends Controller
     private function getRoles()
     {
         return array(
-            'nome' => 'required',
-            'telefone' => 'required|numeric',
-            'cep' => 'required|numeric',
-            'cidade' => 'required',
-            'bairro' => 'required',
-            'logradouro' => 'required',
-            'numero_residencial' => 'required'
+            'nome' => 'required|max:60',
+            'nascimento' => 'date_format:"d/m/Y"',
+            'telefone' => 'required|regex:~.*\((\d{2})\) (\d{4})\-(\d{4}).*~',
+            'cep' => 'required|regex:~.*(\d{2})\.(\d{3})\.(\d{3}).*~',
+            'cidade' => 'required|max:60',
+            'bairro' => 'required|max:60',
+            'logradouro' => 'required|max:100',
+            'numero_residencial' => 'required|max:30',
+            'ponto_referencia' => 'max:30'
         );
     }
 
     private function setCliente(Request $request, Cliente &$cliente)
-    {     
+    {   
         $cliente->nome  = $request->input('nome');
-        //$cliente->nascimento = Input::get('nascimento');
-        $cliente->telefone = $request->input('telefone');
-        $cliente->cep = $request->input('cep');
+        $cliente->setNascimento($request->input('nascimento'));
+        $cliente->setTelefone($request->input('telefone'));
+        $cliente->setCep($request->input('cep'));
         $cliente->cidade = $request->input('cidade');
         $cliente->bairro = $request->input('bairro');
         $cliente->logradouro = $request->input('logradouro');
         $cliente->numero_residencial = $request->input('numero_residencial');
         $cliente->complemento_endereco = $request->input('complemento_endereco');
-        $cliente->ponto_referencia = $request->input('ponto_referencia');
+        $cliente->ponto_referencia = $request->input('ponto_referencia');        
     }
 }

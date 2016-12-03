@@ -12,9 +12,9 @@
 	<div class="jumbotron text-center">
         <h2>{{ $cliente->nome }}</h2>
         <p>
-            <strong>Nascimento:</strong> {{ $cliente->nascimento }}<br/>
-            <strong>Telefone:</strong> {{ $cliente->telefone }}<br/>
-            <strong>CEP:</strong> {{ $cliente->cep }}<br/>
+            <strong>Nascimento:</strong> {{ $cliente->getNascimento() }}<br/>
+            <strong>Telefone:</strong> {{ $cliente->getTelefone() }}<br/>
+            <strong>CEP:</strong> {{ $cliente->getCep() }}<br/>
             <strong>Cidade:</strong> {{ $cliente->cidade }}<br/>
             <strong>Bairro:</strong> {{ $cliente->bairro }}<br/>
             <strong>Logradouro:</strong> {{ $cliente->logradouro }}<br/>
