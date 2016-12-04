@@ -1,50 +1,29 @@
 @extends('layouts.master')
-@section('title', 'Cadastra cliente')
+@section('title', 'Adicionar Cliente')
 
 @section('jquery_content')
-	<script src="{{ URL::asset('js/ui.datepicker-pt-BR.js') }}"></script>
+  <script src="{{ URL::asset('js/ui.datepicker-pt-BR.js') }}"></script>
 	<script>
-  	jQuery(function($){
-    	$("#nascimento").datepicker();
+    jQuery(function($){
+      $("#nascimento").datepicker();
   	});  
-  	</script>
-@endsection
-
-@section('sidebar')
-	@include('cliente.menu')
+  </script>
 @endsection
 
 @section('content')	
+  <h3 class="page-header">Adicionar Cliente</h3>
+
 	@include('layouts.errors')
 
-	{{ Form::open(array('url' => 'cliente', 'class' => 'form-horizontal')) }}
+	{{ Form::open(array('url' => 'cliente')) }}
 	    @include('cliente.form_fields')
 
-	    <div class="form-group">
-    		<div class="col-sm-offset-2 col-sm-10">
-	    		{{ Form::submit('Cadastra', array('class' => 'btn btn-primary')) }}
+	    <hr />
+      <div id="actions" class="row">
+        <div class="col-md-12">
+	    		{{ Form::submit('Salvar', array('class' => 'btn btn-primary')) }}
+          <a href="javascript:history.back()" class="btn btn-default">Cancelar</a>
 	    	</div>
   		</div>
 	{{ Form::close() }}
-
-
-	<?php
-  	/*echo Form::open(['url' => 'foo/bar']);
-    echo Form::text('username','username');
-    echo '<br/>';
-    echo Form::text('email','yourmail@here.com');
-    echo '<br/>';
-    echo Form::password('password');
-    echo '<br/>';
-    echo Form::checkbox('name','value');
-    echo '<br/>';
-    echo Form::radio('name','value');
-    echo '<br/>';
-    echo Form::file('image');
-    echo '<br/>';
-    echo Form::select('Gender',['P'=>'perempuan','L'=> 'Laki-laki']);
-    echo '<br/>';
-    echo Form::submit('Register Now');
-  	echo Form::close();*/ 
-  	?>
 @endsection

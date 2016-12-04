@@ -82,4 +82,13 @@ class Pedido extends Model
 
         return $situacao;
     }
+
+    public function getCadastro()
+    {
+        $cadastro = $this->attributes['created_at'];
+        if($cadastro == null)
+            return null;
+        
+        return preg_replace('~.*(\d{4})\-(\d{2})\-(\d{2}).*~', '$3/$2/$1', $cadastro);
+    }
 }

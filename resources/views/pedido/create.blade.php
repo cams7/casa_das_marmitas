@@ -1,22 +1,22 @@
 @extends('layouts.master')
-@section('title', 'Cadastra pedido')
+@section('title', 'Adicionar Pedido')
 
 @section('jquery_content')	
 @endsection
 
-@section('sidebar')
-	@include('pedido.menu')
-@endsection
+@section('content')
+	<h3 class="page-header">Adicionar Pedido</h3>
 
-@section('content')	
-  @include('layouts.errors')
+  	@include('layouts.errors')
 
-	{{ Form::open(array('url' => 'pedido', 'class' => 'form-horizontal')) }}
+	{{ Form::open(array('url' => 'pedido')) }}
 	    @include('pedido.form_fields')
 
-	    <div class="form-group">
-    		<div class="col-sm-offset-2 col-sm-10">
-	    		{{ Form::submit('Cadastra', array('class' => 'btn btn-primary')) }}
+	    <hr />
+	    <div id="actions" class="row">
+	  		<div class="col-md-12">
+	    		{{ Form::submit('Salvar', array('class' => 'btn btn-primary')) }}
+	    		<a href="javascript:history.back()" class="btn btn-default">Cancelar</a>
 	    	</div>
   		</div>
 	{{ Form::close() }}	

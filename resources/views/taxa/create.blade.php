@@ -1,22 +1,23 @@
 @extends('layouts.master')
-@section('title', 'Cadastra taxa')
+@section('title', 'Adicionar Taxa')
 
 @section('jquery_content')	
 @endsection
 
-@section('sidebar')
-	@include('taxa.menu')
-@endsection
 
-@section('content')	
-  @include('layouts.errors')
+@section('content')
+	<h3 class="page-header">Adicionar Taxa</h3>
 
-	{{ Form::open(array('url' => 'taxa', 'class' => 'form-horizontal')) }}
+ 	@include('layouts.errors')
+
+	{{ Form::open(array('url' => 'taxa')) }}
 	    @include('taxa.form_fields')
 
-	    <div class="form-group">
-    		<div class="col-sm-offset-2 col-sm-10">
-	    		{{ Form::submit('Cadastra', array('class' => 'btn btn-primary')) }}
+	    <hr />
+	    <div id="actions" class="row">
+	  		<div class="col-md-12">
+	    		{{ Form::submit('Salvar', array('class' => 'btn btn-primary')) }}
+	    		<a href="javascript:history.back()" class="btn btn-default">Cancelar</a>
 	    	</div>
   		</div>
 	{{ Form::close() }}	

@@ -1,28 +1,28 @@
 @extends('layouts.master')
-@section('title', 'Altera cliente')
+@section('title', 'Editar Cliente')
 
 @section('jquery_content')
 	<script src="{{ URL::asset('js/ui.datepicker-pt-BR.js') }}"></script>
 	<script>
-  	jQuery(function($){
-    	$("#nascimento").datepicker();
-  	});  
+  		jQuery(function($){
+    		$("#nascimento").datepicker();
+  		});  
   	</script>
 @endsection
 
-@section('sidebar')
-	@include('cliente.menu')
-@endsection
+@section('content')
+	<h3 class="page-header">{{'Editar Cliente #'.$cliente->id}}</h3>
 
-@section('content')	
 	@include('layouts.errors')
 
-	{{ Form::model($cliente, array('route' => array('cliente.update', $cliente->id), 'method' => 'PUT', 'class' => 'form-horizontal')) }}
+	{{ Form::model($cliente, array('route' => array('cliente.update', $cliente->id), 'method' => 'PUT')) }}
 	    @include('cliente.form_fields')
 
-	    <div class="form-group">
-    		<div class="col-sm-offset-2 col-sm-10">
-	    		{{ Form::submit('Altera', array('class' => 'btn btn-primary')) }}
+	    <hr />
+	    <div id="actions" class="row">
+	  		<div class="col-md-12">
+	    		{{ Form::submit('Alterar', array('class' => 'btn btn-primary')) }}
+	    		<a href="javascript:history.back()" class="btn btn-default">Cancelar</a>
 	    	</div>
   		</div>
 	{{ Form::close() }}

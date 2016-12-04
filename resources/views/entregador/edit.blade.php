@@ -1,22 +1,22 @@
 @extends('layouts.master')
-@section('title', 'Altera entregador')
+@section('title', 'Editar Entregador')
 
 @section('jquery_content')	
 @endsection
 
-@section('sidebar')
-	@include('entregador.menu')
-@endsection
+@section('content')
+	<h3 class="page-header">{{'Editar Entregador #'.$entregador->id}}</h3>
 
-@section('content')	
 	@include('layouts.errors')
 
-	{{ Form::model($entregador, array('route' => array('entregador.update', $entregador->id), 'method' => 'PUT', 'class' => 'form-horizontal')) }}
+	{{ Form::model($entregador, array('route' => array('entregador.update', $entregador->id), 'method' => 'PUT')) }}
 	    @include('entregador.form_fields')
 
-	    <div class="form-group">
-    		<div class="col-sm-offset-2 col-sm-10">
-	    		{{ Form::submit('Altera', array('class' => 'btn btn-primary')) }}
+	    <hr />
+	    <div id="actions" class="row">
+	  		<div class="col-md-12">
+	    		{{ Form::submit('Alterar', array('class' => 'btn btn-primary')) }}
+	    		<a href="javascript:history.back()" class="btn btn-default">Cancelar</a>
 	    	</div>
   		</div>
 	{{ Form::close() }}

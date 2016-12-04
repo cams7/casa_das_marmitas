@@ -1,22 +1,22 @@
 @extends('layouts.master')
-@section('title', 'Altera pedido')
+@section('title', 'Editar Pedido')
 
 @section('jquery_content')	
 @endsection
 
-@section('sidebar')
-	@include('pedido.menu')
-@endsection
+@section('content')
+	<h3 class="page-header">{{'Editar Predido #'.$pedido->id}}</h3>
 
-@section('content')	
 	@include('layouts.errors')
 
-	{{ Form::model($pedido, array('route' => array('pedido.update', $pedido->id), 'method' => 'PUT', 'class' => 'form-horizontal')) }}
+	{{ Form::model($pedido, array('route' => array('pedido.update', $pedido->id), 'method' => 'PUT')) }}
 	    @include('pedido.form_fields')
 
-	    <div class="form-group">
-    		<div class="col-sm-offset-2 col-sm-10">
-	    		{{ Form::submit('Altera', array('class' => 'btn btn-primary')) }}
+	    <hr />
+	    <div id="actions" class="row">
+	  		<div class="col-md-12">
+	    		{{ Form::submit('Alterar', array('class' => 'btn btn-primary')) }}
+	    		<a href="javascript:history.back()" class="btn btn-default">Cancelar</a>
 	    	</div>
   		</div>
 	{{ Form::close() }}

@@ -1,26 +1,70 @@
 @extends('layouts.master')
-@section('title', 'Visualiza cliente')
+@section('title', 'Visualizar Cliente')
 
 @section('jquery_content')
 @endsection
 
-@section('sidebar')
-	@include('cliente.menu')
-@endsection
-
 @section('content')	
-	<div class="jumbotron text-center">
-        <h2>{{ $cliente->nome }}</h2>
-        <p>
-            <strong>Nascimento:</strong> {{ $cliente->getNascimento() }}<br/>
-            <strong>Telefone:</strong> {{ $cliente->getTelefone() }}<br/>
-            <strong>CEP:</strong> {{ $cliente->getCep() }}<br/>
-            <strong>Cidade:</strong> {{ $cliente->cidade }}<br/>
-            <strong>Bairro:</strong> {{ $cliente->bairro }}<br/>
-            <strong>Logradouro:</strong> {{ $cliente->logradouro }}<br/>
-            <strong>Número:</strong> {{ $cliente->numero_residencial }}<br/>
-            <strong>Complemento:</strong> {{ $cliente->complemento_endereco }}<br/>
-            <strong>Ponto de referência:</strong> {{ $cliente->ponto_referencia }}
-        </p>
+    <h3 class="page-header">{{'Visualizar Cliente #'.$cliente->id}}</h3>
+
+    <div class="row">
+        <div class="col-md-6">
+            <p><strong>Nome:</strong></p>
+            <p>{{ $cliente->nome }}</p>
+        </div>
+        <div class="col-md-2">
+            <p><strong>Nascimento:</strong></p>
+            <p>{{ $cliente->getNascimento() }}</p>
+        </div>
+        <div class="col-md-4">
+            <p><strong>Telefone:</strong></p>
+            <p>{{ $cliente->getTelefone() }}</p>
+        </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-2">
+            <p><strong>CEP:</strong></p>
+            <p>{{ $cliente->getCep() }}</p>
+        </div>
+        <div class="col-md-4">
+            <p><strong>Cidade:</strong></p>
+            <p>{{ $cliente->cidade }}</p>
+        </div>
+        <div class="col-md-6">
+            <p><strong>Bairro:</strong></p>
+            <p>{{ $cliente->bairro }}</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <p><strong>Logradouro:</strong></p>
+            <p>{{ $cliente->logradouro }}</p>
+        </div>
+        <div class="col-md-4">
+            <p><strong>Número:</strong></p>
+            <p>{{ $cliente->numero_residencial }}</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <p><strong>Complemento:</strong></p>
+            <p>{{ $cliente->complemento_endereco }}</p>
+        </div>
+        <div class="col-md-6">
+            <p><strong>Ponto de referência:</strong></p>
+            <p>{{ $cliente->ponto_referencia }}</p>
+        </div>
+    </div>
+
+    <hr />
+    <div id="actions" class="row">
+        <div class="col-md-12">             
+            <a href="{{ URL::to('cliente/' . $cliente->id . '/edit') }}" class="btn btn-warning">Alterar</a>
+            <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#delete-modal">Excluir</a>
+            <a href="javascript:history.back()" class="btn btn-default">Cancelar</a>
+        </div>
+    </div>	
 @endsection

@@ -1,49 +1,74 @@
 @extends('layouts.master')
-@section('title', 'Lista de produtos')
+@section('title', 'Lista de Produtos')
 
 @section('jquery_content')
 @endsection
 
-@section('sidebar')	
-    @include('produto.menu')
-@endsection
-
 @section('content')
-	<table class="table table-striped table-bordered">
-	    <thead>
-	        <tr>
-	            <th>Nome</th>
-	            <th>Custo</th>
-	            <th>Tamanho</th>
-	            <th></th>
-	        </tr>
-	    </thead>
-	    <tbody>
-	    @foreach($produtos as $i => $produto)
-	        <tr>
-	            <td>{{ $produto->nome }}</td>
-	            <td>{{ $produto->getCusto() }}</td>
-	            <td>{{ $produto->getTamanho() }}</td>
+	<div id="top" class="row">
+		<div class="col-sm-3">
+			<h2>Produtos</h2>
+		</div>
+		<div class="col-sm-6">			
+			<div class="input-group h2">
+				<input name="data[search]" class="form-control" id="search" type="text" placeholder="Pesquisar Produtos">
+				<span class="input-group-btn">
+					<button class="btn btn-primary" type="submit">
+						<span class="glyphicon glyphicon-search"></span>
+					</button>
+				</span>
+			</div>
+			
+		</div>
+		<div class="col-sm-3">
+			<a href="{{ URL::to('produto/create') }}" class="btn btn-primary pull-right h2">Novo Produto</a>
+		</div>
+	</div> <!-- /#top --> 
+ 
+ 	<hr />
+ 	
+@if (Session::has('message'))
+	<div class="alert alert-info">{{ Session::get('message') }}</div>
+@endif	
 
-	            <!-- we will also add show, edit, and delete buttons -->
-	            <td>
+ 	<div id="list" class="row"> 		
+		<div class="table-responsive col-md-12">
+			<table class="table table-striped" cellspacing="0" cellpadding="0">
+				<thead>
+					<tr>
+						<th>Nome</th>
+		            	<th>Custo</th>
+		            	<th>Tamanho</th>
+						<th class="actions">Ações</th>
+					</tr>
+				</thead>
+				<tbody>
+	    		@foreach($produtos as $i => $produto)
+	    			<tr>
+	            		<td>{{ $produto->nome }}</td>
+	            		<td>{{ $produto->getCusto() }}</td>
+	            		<td>{{ $produto->getTamanho() }}</td>
+	            		<td class="actions">
+							<a class="btn btn-success btn-xs" href="{{ URL::to('produto/' . $produto->id) }}">Visualizar</a>
+							<a class="btn btn-warning btn-xs" href="{{ URL::to('produto/' . $produto->id . '/edit') }}">Alterar</a>
+							<a class="btn btn-danger btn-xs"  href="#" data-toggle="modal" data-target="#delete-modal">Excluir</a>
+						</td>
+	            	</tr>	
+	    		@endforeach
+	    		</tbody>
+			</table>
+		</div>
+	</div><!-- /#list -->
 
-	                <!-- delete the nerd (uses the destroy method DESTROY /nerds/{id} -->
-	                <!-- we will add this later since its a little more complicated than the other two buttons -->
-	                {{ Form::open(array('url' => 'produto/' . $produto->id, 'class' => 'pull-right')) }}
-	                    {{ Form::hidden('_method', 'DELETE') }}
-	                    {{ Form::submit('Exclui', array('class' => 'btn btn-warning')) }}
-	                {{ Form::close() }}
-
-
-	                <!-- show the nerd (uses the show method found at GET /produto/{id} -->
-	                <a class="btn btn-small btn-success" href="{{ URL::to('produto/' . $produto->id) }}">Visualiza</a>
-
-	                <!-- edit this nerd (uses the edit method found at GET /produto/{id}/edit -->
-	                <a class="btn btn-small btn-info" href="{{ URL::to('produto/' . $produto->id . '/edit') }}">Altera</a>
-	            </td>
-	        </tr>
-	    @endforeach
-	    </tbody>
-	</table>
+	<div id="bottom" class="row">
+		<div class="col-md-12">
+			<ul class="pagination">
+				<li class="disabled"><a>&lt; Anterior</a></li>
+				<li class="disabled"><a>1</a></li>
+				<li><a href="#">2</a></li>
+				<li><a href="#">3</a></li>
+				<li class="next"><a href="#" rel="next">Próximo &gt;</a></li>
+			</ul><!-- /.pagination -->
+		</div>
+	</div> <!-- /#bottom -->	
 @endsection

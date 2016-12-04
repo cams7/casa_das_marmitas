@@ -1,22 +1,22 @@
 @extends('layouts.master')
-@section('title', 'Cadastra funcionário')
+@section('title', 'Adicionar Funcionário')
 
 @section('jquery_content')	
 @endsection
 
-@section('sidebar')
-	@include('funcionario.menu')
-@endsection
+@section('content')
+	<h3 class="page-header">Adicionar Funcionário</h3>
 
-@section('content')	
-  @include('layouts.errors')
+  	@include('layouts.errors')
 
-	{{ Form::open(array('url' => 'funcionario', 'class' => 'form-horizontal')) }}
+	{{ Form::open(array('url' => 'funcionario')) }}
 	    @include('funcionario.form_fields')
 
-	    <div class="form-group">
-    		<div class="col-sm-offset-2 col-sm-10">
-	    		{{ Form::submit('Cadastra', array('class' => 'btn btn-primary')) }}
+	    <hr />
+	    <div id="actions" class="row">
+	  		<div class="col-md-12">
+	    		{{ Form::submit('Salvar', array('class' => 'btn btn-primary')) }}
+	    		<a href="javascript:history.back()" class="btn btn-default">Cancelar</a>
 	    	</div>
   		</div>
 	{{ Form::close() }}	

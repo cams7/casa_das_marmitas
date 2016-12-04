@@ -1,22 +1,22 @@
 @extends('layouts.master')
-@section('title', 'Altera produto')
+@section('title', 'Editar Produto')
 
 @section('jquery_content')	
 @endsection
 
-@section('sidebar')
-	@include('produto.menu')
-@endsection
-
 @section('content')	
+	<h3 class="page-header">{{'Editar Produto #'.$produto->id}}</h3>
+
 	@include('layouts.errors')
 
-	{{ Form::model($produto, array('route' => array('produto.update', $produto->id), 'method' => 'PUT', 'class' => 'form-horizontal')) }}
+	{{ Form::model($produto, array('route' => array('produto.update', $produto->id), 'method' => 'PUT')) }}
 	    @include('produto.form_fields')
 
-	    <div class="form-group">
-    		<div class="col-sm-offset-2 col-sm-10">
-	    		{{ Form::submit('Altera', array('class' => 'btn btn-primary')) }}
+	    <hr />
+	    <div id="actions" class="row">
+	  		<div class="col-md-12">
+	    		{{ Form::submit('Alterar', array('class' => 'btn btn-primary')) }}
+	    		<a href="javascript:history.back()" class="btn btn-default">Cancelar</a>
 	    	</div>
   		</div>
 	{{ Form::close() }}
