@@ -46,7 +46,7 @@
 				<tbody>
 	    		@foreach($pedidos as $i => $pedido)
 	    			<tr>
-	            		<td>{{ $pedido->cliente->nome }}</td>
+	            		<td><a href="{{ URL::to('cliente/' . $pedido->cliente->id) }}">{{ $pedido->cliente->nome }}</a></td>
 	            		<td>{{ $pedido->quantidade_total }}</td>
 	            		<td>{{ $pedido->getCustoTotal() }}</td>
 	            		<td>{{ $pedido->getSituacao() }}</td>

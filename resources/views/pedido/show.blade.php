@@ -10,11 +10,11 @@
 	<div class="row">
 		<div class="col-md-6">
       		<p><strong>Cliente:</strong></p>
-  	  		<p>{{ $pedido->cliente->nome }}</p>
+  	  		<p><a href="{{ URL::to('cliente/' . $pedido->cliente->id) }}">{{ $pedido->cliente->nome }}</a></p>
     	</div>
     	<div class="col-md-2">
       		<p><strong>Taxa:</strong></p>
-  	  		<p>{{ $pedido->taxa->getTaxa() }}</p>
+  	  		<p><a href="{{ URL::to('taxa/' . $pedido->taxa->id) }}">{{ $pedido->taxa->getTaxa() }}</a></p>
     	</div>
     	<div class="col-md-4">
       		<p><strong>Situação:</strong></p>
@@ -46,7 +46,9 @@
    		</div>
  	</div>
 
-	<hr />
+@if ($pedido->itens->count() > 0)
+    <h3 class="page-header">Itens do Pedido</h3>
+
 	<div id="list" class="row"> 		
 		<div class="table-responsive col-md-12">
 			<table class="table table-striped" cellspacing="0" cellpadding="0">
@@ -63,7 +65,7 @@
 	    			<tr>
 	            		<td>{{ $item->quantidade }}</td>
 	            		<td>{{ $item->produto->getCusto() }}</td>
-	            		<td>{{ $item->produto->nome }}</td>
+	            		<td><a href="{{ URL::to('produto/' . $item->produto->id) }}">{{ $item->produto->nome }}</a></td>
 	            		<td class="actions">
 							<a class="btn btn-success btn-xs" href="{{ URL::to('pedido_item/' . $item->id) }}">Visualizar</a>
 							<a class="btn btn-warning btn-xs" href="{{ URL::to('pedido_item/' . $item->id . '/edit') }}">Alterar</a>
@@ -74,5 +76,18 @@
 	    		</tbody>
 			</table>
 		</div>
-	</div><!-- /#list -->    
+	</div><!-- /#list -->
+
+	<div id="bottom" class="row">
+		<div class="col-md-12">
+			<ul class="pagination">
+				<li class="disabled"><a>&lt; Anterior</a></li>
+				<li class="disabled"><a>1</a></li>
+				<li><a href="#">2</a></li>
+				<li><a href="#">3</a></li>
+				<li class="next"><a href="#" rel="next">Próximo &gt;</a></li>
+			</ul><!-- /.pagination -->
+		</div>
+	</div> <!-- /#bottom -->
+@endif
 @endsection

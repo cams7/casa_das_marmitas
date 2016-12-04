@@ -14,7 +14,7 @@
         </div>
         <div class="col-md-6">
             <p><strong>Empresa:</strong></p>
-            <p>{{ $entregador->empresa->nome }}</p>
+            <p><a href="{{ URL::to('empresa/' . $entregador->empresa->id) }}">{{ $entregador->empresa->nome }}</a></p>
         </div>        
     </div>
     <div class="row">        

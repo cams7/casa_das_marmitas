@@ -56,18 +56,32 @@ class FuncionarioController extends Controller
 
         $this->setUser($request, $user);
 
+        DB::beginTransaction();
+
         $user->save(); 
 
         $userId = DB::table('users')->max('id');
 
         $funcionario = new Funcionario;
-        $funcionario->id = $userId;       
+        $funcionario->id = $userId;
 
         $this->setFuncionario($request, $funcionario);             
 
         $funcionario->save();
 
-        return redirect('funcionario')->with('message', 'O funcionario foi cadastrado com sucesso!');
+        $message = "";
+
+        if($user->email !== "roolback@teste.com")
+        {
+            DB::commit();
+            $message = "O funcionario foi cadastrado com sucesso!";
+        } else 
+        {
+            DB::rollBack();
+            $message = "Ocorreu um erro ao tentar cadastrar o funcionario!";
+        }
+
+        return redirect('funcionario')->with('message', $message);
     }
 
     /**
@@ -125,13 +139,27 @@ class FuncionarioController extends Controller
 
         $this->setUser($request, $user);
 
+        DB::beginTransaction();
+
         $user->save();
 
-        $this->setFuncionario($request, $funcionario);        
+        $this->setFuncionario($request, $funcionario);
 
         $funcionario->save();
 
-        return redirect('funcionario')->with('message', 'O funcionario foi atualizado com sucesso!');
+        $message = "";
+
+        if($user->email !== "roolback@teste.com")
+        {
+            DB::commit();
+            $message = "O funcionario foi atualizado com sucesso!";
+        } else
+        {
+            DB::rollBack();
+            $message = "Ocorreu um erro ao tentar atualizar o funcionario!";   
+        }
+
+        return redirect('funcionario')->with('message', $message);
     }
 
     /**
@@ -146,11 +174,25 @@ class FuncionarioController extends Controller
         $funcionario = Funcionario::find($id);
         $user = $funcionario->user;
 
+        DB::beginTransaction();
+
         $funcionario->delete();
         $user->delete();
 
+        $message = "";
+
+        if($user->id !== 1)
+        {             
+            DB::commit();
+            $message = "O funcionario foi excluído com sucesso!";
+        } else
+        {
+            DB::rollBack();
+            $message = "Ocorreu um erro ao tentar remover o funcionario!";    
+        }
+
         // redirect
-        return redirect('funcionario')->with('message', 'O funcionario foi excluído com sucesso!');
+        return redirect('funcionario')->with('message', $message);
     }
 
     private function getRoles()

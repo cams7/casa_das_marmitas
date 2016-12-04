@@ -47,7 +47,7 @@
 	    		@foreach($entregadores as $i => $entregador)
 	    			<tr>
 	            		<td>{{ $entregador->nome }}</td>
-	            		<td>{{ $entregador->empresa->nome }}</td>
+	            		<td><a href="{{ URL::to('empresa/' . $entregador->empresa->id) }}">{{ $entregador->empresa->nome }}</a></td>
 	            		<td>{{ $entregador->getCpf() }}</td>
 	            		<td>{{ $entregador->getCelular() }}</td>
 
