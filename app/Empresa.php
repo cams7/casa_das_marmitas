@@ -65,7 +65,7 @@ class Empresa extends Model
 
     public function setCep($cep)
     {
-        $this->attributes['cep'] = preg_replace('~.*(\d{2})\.(\d{3})\.(\d{3}).*~', '$1$2$3', $cep);
+        $this->attributes['cep'] = preg_replace('~.*(\d{5})\-(\d{3}).*~', '$1$2', $cep);
     }
 
     public function getCep()
@@ -74,6 +74,6 @@ class Empresa extends Model
         if($cep == null)
             return null;
 
-        return preg_replace('~.*(\d{2})(\d{3})(\d{3}).*~', '$1.$2.$3', $cep);
+        return preg_replace('~.*(\d{5})(\d{3}).*~', '$1-$2', $cep);
     }
 }

@@ -1,15 +1,6 @@
 @extends('layouts.master')
 @section('title', 'Adicionar Cliente')
 
-@section('jquery_content')
-  <script src="{{ URL::asset('js/ui.datepicker-pt-BR.js') }}"></script>
-	<script>
-    jQuery(function($){
-      $("#nascimento").datepicker();
-  	});  
-  </script>
-@endsection
-
 @section('content')	
   <h3 class="page-header">Adicionar Cliente</h3>
 

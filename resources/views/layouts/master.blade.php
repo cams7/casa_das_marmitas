@@ -7,10 +7,16 @@
 	<title>@yield('title')</title>
   	
   	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  	 	
-  	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">	
-  	  
-  	<link rel="stylesheet" type="text/css" href="{{ URL::asset('css/casa_das_marmitas.css') }}">  	
+    
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="{{ URL::asset('js/jquery.maskedinput.min.js') }}"></script>
+    <script src="{{ URL::asset('js/jquery.maskMoney.js') }}"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  	 	  	  
+  	<link rel="stylesheet" type="text/css" href="{{ URL::asset('css/casa_das_marmitas.css') }}">
+
+    @yield('jquery_content')  	
 </head>
 <body>
 	@include('layouts.header')
@@ -32,19 +38,12 @@
   		</div>
 	</div>		
 	  
-	<div id="main" class="container-fluid" style="margin-top: 50px">
+	 <div id="main" class="container-fluid" style="margin-top: 50px">
 	    @yield('content')
-	</div><!-- /#main -->
+	 </div><!-- /#main -->
 
-	<!--footer class="container-fluid text-center">
-  		@include('layouts.footer')
-	</footer-->
-
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  	<script src="https://raw.githubusercontent.com/digitalBush/jquery.maskedinput/1.4.1/dist/jquery.maskedinput.min.js"></script>
-
-  	@yield('jquery_content')
+	 <!--footer class="container-fluid text-center">
+  	 @include('layouts.footer')
+	 </footer-->   
 </body>
 </html>

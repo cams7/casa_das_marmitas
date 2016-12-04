@@ -20,7 +20,7 @@
 <div class="row">
     <div class="form-group col-md-2">
         {{ Form::label('cep', 'CEP:', array()) }}
-    	{{ Form::text('cep', $empresa != null ? $empresa->getCep() : null, array('id' => 'cep', 'class' => 'form-control', 'placeholder' => '99.999.999', 'maxlength' => '10')) }}
+    	{{ Form::text('cep', $empresa != null ? $empresa->getCep() : null, array('id' => 'cep', 'class' => 'form-control', 'placeholder' => '99999-999', 'maxlength' => '10')) }}
     </div>
     <div class="form-group col-md-4">
         {{ Form::label('cidade', 'Cidade:', array()) }}
@@ -53,3 +53,13 @@
         {{ Form::text('ponto_referencia', null, array('id' => 'ponto_referencia', 'class' => 'form-control', 'maxlength' => '30', 'placeholder' => 'Ponto de referência')) }}
     </div>
 </div>
+
+@section('jquery_content')
+    <script>   
+        $(document).ready(function($){
+            $("#cnpj").mask("99.999.999/9999-99");
+            $("#telefone").mask("(99) 9999-9999");
+            $("#cep").mask("99999-999");  
+        });  
+    </script>
+@endsection

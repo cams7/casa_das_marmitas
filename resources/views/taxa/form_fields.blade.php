@@ -8,3 +8,11 @@
         {{ Form::select('tipo_taxa', array('1'=>'Atraso', '2'=> 'Entrega', '3'=> 'Extra'), $taxa == null ? '2' : null, array('class' => 'form-control')) }}
     </div>
 </div>
+
+@section('jquery_content')
+    <script>   
+        $(document).ready(function($){
+            $("#taxa").maskMoney({showSymbol:true, symbol:"R$", decimal:",", thousands:"."});
+        });  
+    </script>
+@endsection

@@ -1,9 +1,6 @@
 @extends('layouts.master')
 @section('title', 'Adicionar Entregador')
 
-@section('jquery_content')	
-@endsection
-
 @section('content')
 	<h3 class="page-header">Adicionar Entregador</h3>
 

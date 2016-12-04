@@ -1,9 +1,6 @@
 @extends('layouts.master')
 @section('title', 'Editar Funcionário')
 
-@section('jquery_content')	
-@endsection
-
 @section('content')
 	<h3 class="page-header">{{'Editar Funcionário #'.$funcionario->id}}</h3>
 

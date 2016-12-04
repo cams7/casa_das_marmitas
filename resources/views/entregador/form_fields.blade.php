@@ -22,3 +22,12 @@
         {{ Form::text('rg', null, array('id' => 'rg', 'class' => 'form-control', 'placeholder' => '99999999', 'maxlength' => '10')) }}
     </div>
 </div>
+
+@section('jquery_content')
+    <script>   
+        $(document).ready(function($){
+            $("#celular").mask("(99) 99999-9999");
+            $("#cpf").mask("999.999.999-99");
+        });  
+    </script>
+@endsection

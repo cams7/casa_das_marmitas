@@ -27,3 +27,6 @@
         {{ Form::text('created_at', $pedido != null ? $pedido->getCadastro() : null, array('readonly' => 'readonly', 'class' => 'form-control')) }}
     </div>    
 </div>
+
+@section('jquery_content')  
+@endsection

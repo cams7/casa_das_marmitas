@@ -1,9 +1,6 @@
 @extends('layouts.master')
 @section('title', 'Adicionar Empresa')
 
-@section('jquery_content')	
-@endsection
-
 @section('content')
 	<h3 class="page-header">Adicionar Empresa</h3>
 

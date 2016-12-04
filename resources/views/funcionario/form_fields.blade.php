@@ -25,3 +25,6 @@
         {{ Form::password('senha_confirmacao', null, array('class' => 'form-control', 'maxlength' => '20', 'placeholder' => 'Confirmação da senha')) }}
     </div>
 </div>
+
+@section('jquery_content')  
+@endsection

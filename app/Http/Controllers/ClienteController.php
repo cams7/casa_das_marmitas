@@ -138,7 +138,7 @@ class ClienteController extends Controller
             'nome' => 'required|max:60',
             'nascimento' => 'date_format:"d/m/Y"',
             'telefone' => 'required|regex:~.*\((\d{2})\) (\d{4})\-(\d{4}).*~',
-            'cep' => 'required|regex:~.*(\d{2})\.(\d{3})\.(\d{3}).*~',
+            'cep' => 'required|regex:~.*(\d{5})\-(\d{3}).*~',
             'cidade' => 'required|max:60',
             'bairro' => 'required|max:60',
             'logradouro' => 'required|max:100',

@@ -6,7 +6,7 @@
 
     <div class="form-group col-md-2">
         {{ Form::label('custo', 'Custo:', array()) }}
-        {{ Form::text('custo', null, array('class' => 'form-control', 'placeholder' => 'Custo da marmita')) }}
+        {{ Form::text('custo', null, array('id' => 'custo', 'class' => 'form-control', 'placeholder' => 'Custo da marmita')) }}
     </div>
     
     <div class="form-group col-md-4">
@@ -21,3 +21,11 @@
         {{ Form::textarea('ingredientes', null, array('class' => 'form-control', 'placeholder' => 'Ingredientes da marmita')) }}
     </div>
 </div>
+
+@section('jquery_content')
+    <script>   
+        $(document).ready(function($){
+            $("#custo").maskMoney({showSymbol:true, symbol:"R$", decimal:",", thousands:"."});
+        });  
+    </script>
+@endsection

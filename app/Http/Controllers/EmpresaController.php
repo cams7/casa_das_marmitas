@@ -137,7 +137,7 @@ class EmpresaController extends Controller
             'cnpj' => 'required|regex:~.*(\d{2})\.(\d{3})\.(\d{3})\/(\d{4})\-(\d{2}).*~',
             'email' => 'required|email|max:50',
             'telefone' => 'required|regex:~.*\((\d{2})\) (\d{4})\-(\d{4}).*~',
-            'cep' => 'required|regex:~.*(\d{2})\.(\d{3})\.(\d{3}).*~',
+            'cep' => 'required|regex:~.*(\d{5})\-(\d{3}).*~',
             'cidade' => 'required|max:60',
             'bairro' => 'required|max:60',
             'logradouro' => 'required|max:100',
