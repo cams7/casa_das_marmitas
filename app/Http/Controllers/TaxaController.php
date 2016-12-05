@@ -23,7 +23,7 @@ class TaxaController extends Controller
      */
     public function index()
     {
-        $taxas = Taxa::orderBy('id', 'desc')->paginate(10);
+        $taxas = Taxa::getTaxas()->paginate(10);
         return view('taxa.index')->with('taxas', $taxas);
     }
 

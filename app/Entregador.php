@@ -57,4 +57,17 @@ class Entregador extends Model
 
         return preg_replace('~.*(\d{2})(\d{5})(\d{4}).*~', '($1) $2-$3', $celular);
     }
+
+    public static function getEntregadores($nome = null)
+    {
+        $entregadores = Entregador::orderBy('id', 'desc');
+
+        if($nome != null && $nome !== '')
+        {
+            $nome = "%". trim($nome) ."%";
+            $entregadores =  $entregadores->where('nome', 'ilike', $nome);
+        }
+
+        return $entregadores;
+    }
 }

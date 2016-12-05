@@ -67,4 +67,17 @@ class Produto extends Model
 
         return $tamanho;
     }
+
+    public static function getProdutos($nome = null) 
+    {
+        $produtos = Produto::orderBy('id', 'desc');
+
+        if($nome != null && $nome !== '')
+        {
+            $nome = "%". trim($nome) ."%";
+            $produtos =  $produtos->where('nome', 'ilike', $nome);
+        }
+
+        return $produtos;
+    }
 }

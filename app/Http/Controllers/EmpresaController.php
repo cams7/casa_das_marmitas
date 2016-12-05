@@ -23,7 +23,7 @@ class EmpresaController extends Controller
      */
     public function index()
     {
-        $empresas = Empresa::orderBy('id', 'desc')->paginate(10);
+        $empresas = Empresa::getEmpresas()->paginate(10);
         return view('empresa.index')->with('empresas', $empresas);
     }
 
@@ -128,6 +128,16 @@ class EmpresaController extends Controller
 
         // redirect
         return redirect('empresa')->with('message', 'A empresa foi excluída com sucesso!');
+    }
+
+    public function getEmpresas(Request $request, $nome)
+    {          
+        if($request->ajax())
+        {
+            $empresas = Empresa::getEmpresas($nome)->select('id','nome')->limit(5)->get();
+
+            return response()->json($empresas, 200);
+        }
     }
 
     private function getRoles()

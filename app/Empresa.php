@@ -76,4 +76,18 @@ class Empresa extends Model
 
         return preg_replace('~.*(\d{5})(\d{3}).*~', '$1-$2', $cep);
     }
+
+    public static function getEmpresas($nome = null)
+    {
+
+        $empresas = Empresa::orderBy('id', 'desc');
+
+        if($nome != null && $nome !== '')
+        {
+            $nome = "%". trim($nome) ."%";
+            $empresas =  $empresas->where('nome', 'ilike', $nome);
+        }
+
+        return $empresas;
+    }
 }

@@ -76,4 +76,17 @@ class Cliente extends Model
 
         return preg_replace('~.*(\d{5})(\d{3}).*~', '$1-$2', $cep);
     }
+
+    public static function getClientes($nome = null)
+    {
+        $clientes = Cliente::orderBy('id', 'desc');
+
+        if($nome != null && $nome !== '') 
+        {
+            $nome = "%". trim($nome) ."%";
+            $clientes =  $clientes->where('nome', 'ILIKE', $nome);
+        }
+
+        return $clientes;
+    }
 }

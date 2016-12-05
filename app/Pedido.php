@@ -91,4 +91,18 @@ class Pedido extends Model
         
         return preg_replace('~.*(\d{4})\-(\d{2})\-(\d{2}).*~', '$3/$2/$1', $cadastro);
     }
+
+    public static function getPedidos($clienteNome = null)
+    {
+        $pedidos = Pedido::orderBy('pedidos.id', 'desc');
+
+        if($clienteNome != null && $clienteNome !== '') 
+        {
+            $clienteNome = "%". trim($clienteNome) ."%";
+            $pedidos =  $pedidos->leftJoin('clientes', 'pedidos.cliente_id', '=', 'clientes.id');
+            $pedidos =  $pedidos->where('clientes.nome', 'ilike', $clienteNome);
+        }
+
+        return $pedidos;
+    }
 }

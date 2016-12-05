@@ -63,4 +63,22 @@ class Taxa extends Model
 
         return $tipo;
     }
+
+    public static function getTaxas($taxa = null)
+    {
+        $taxas = Taxa::orderBy('id', 'desc');
+
+        if($taxa != null && $taxa !== '')
+        {
+            $taxa = trim($taxa);
+            $taxa = str_replace(',', '.', $taxa);
+            $taxa = preg_replace('/[^\d,\.]/', '', $taxa);        
+            
+            if(is_numeric($taxa))
+                $taxas =  $taxas->where('taxa', '>=', $taxa);
+        }
+
+        return $taxas;
+
+    }
 }

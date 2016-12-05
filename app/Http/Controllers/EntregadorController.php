@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 
 use App\Entregador;
+use App\Empresa;
 
 class EntregadorController extends Controller
 {
@@ -23,7 +24,7 @@ class EntregadorController extends Controller
      */
     public function index()
     {
-        $entregadores = Entregador::orderBy('id', 'desc')->paginate(10);
+        $entregadores = Entregador::getEntregadores()->paginate(10);
         return view('entregador.index')->with('entregadores', $entregadores);
     }
 
@@ -51,14 +52,16 @@ class EntregadorController extends Controller
         $this->validate($request, $this->getRoles());
 
         $userId = DB::table('users')->max('id');
-        $empresaId = DB::table('empresas')->max('id');
+        //$empresaId = DB::table('empresas')->max('id');
         
         // store
         $entregador = new Entregador;
         $entregador->user_id = $userId;
+
+        $empresaId = Empresa::where('nome', '=', $request->input('empresa_nome'))->value('id');;
         $entregador->empresa_id = $empresaId;
 
-        $this->setEntregador($request, $entregador);        
+        $this->setEntregador($request, $entregador);             
 
         $entregador->save();
 
@@ -138,7 +141,8 @@ class EntregadorController extends Controller
             'nome' => 'required|max:60',
             'cpf' => 'required|regex:~.*(\d{3})\.(\d{3})\.(\d{3})\-(\d{2}).*~',
             'rg' => 'required|integer|digits_between:6,10',
-            'celular' => 'required|regex:~.*\((\d{2})\) (\d{5})\-(\d{4}).*~'
+            'celular' => 'required|regex:~.*\((\d{2})\) (\d{5})\-(\d{4}).*~',
+            'empresa_nome' => 'required|max:60',
         );
     }
 

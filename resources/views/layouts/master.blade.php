@@ -8,9 +8,11 @@
 	<title>@yield('title')</title>
   	
   	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/casa_das_marmitas.css') }}"> 
     
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="{{ URL::asset('js/jquery.maskedinput.min.js') }}"></script>
     <script src="{{ URL::asset('js/jquery.maskMoney.js') }}"></script>
 
