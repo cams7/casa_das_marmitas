@@ -23,7 +23,7 @@ class PedidoController extends Controller
      */
     public function index()
     {
-        $pedidos = Pedido::paginate(10);
+        $pedidos = Pedido::orderBy('id', 'desc')->paginate(10);
         return view('pedido.index')->with('pedidos', $pedidos);
     }
 

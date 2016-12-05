@@ -29,6 +29,6 @@
 
 <div id="bottom" class="row">
 	<div class="col-md-12">
-		{{$produtos->links()}}
+		{{$produtos->appends(Request::only('q'))->links()}}
 	</div>
 </div> <!-- /#bottom -->

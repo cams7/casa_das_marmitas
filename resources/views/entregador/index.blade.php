@@ -8,9 +8,10 @@
 		</div>
 		<div class="col-sm-6">			
 			<div class="input-group h2">
-				<input name="data[search]" class="form-control" id="search" type="text" placeholder="Pesquisar Entregadores">
+				<input name="data[search]" class="form-control" id="search_query" type="text" placeholder="Pesquisar Entregadores">
+				<input type="hidden" id="query" value="">
 				<span class="input-group-btn">
-					<button class="btn btn-primary" type="submit">
+					<button id="search_btn" class="btn btn-primary" type="submit">
 						<span class="glyphicon glyphicon-search"></span>
 					</button>
 				</span>
@@ -42,16 +43,13 @@
 			getEntregadores(page);
 		});
 
-		function getEntregadores(page) {
-			//console.log('getting entregadores for page = ' + page);	
+		$(document).on('click', '#search_btn', function(e){
+			$("#query").val($("#search_query").val());
+			getEntregadores(1);
+		});
 
-			$.ajax({
-				url: '/ajax/entregador/pagination?page=' + page	
-			}).done(function(data){
-				//console.log(data);
-				$('.content').html(data);
-				location.hash = page;
-			});
-		}	
+		function getEntregadores(page) {
+			loadPage('entregador', page);		
+		}		
 	</script>
 @endsection

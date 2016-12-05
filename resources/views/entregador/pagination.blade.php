@@ -32,6 +32,6 @@
 
 <div id="bottom" class="row">
 	<div class="col-md-12">
-		{{$entregadores->links()}}
+		{{$entregadores->appends(Request::only('q'))->links()}}
 	</div>
 </div> <!-- /#bottom -->

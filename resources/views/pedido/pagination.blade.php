@@ -32,6 +32,6 @@
 
 <div id="bottom" class="row">
 	<div class="col-md-12">
-		{{$pedidos->links()}}
+		{{$pedidos->appends(Request::only('q'))->links()}}
 	</div>
 </div> <!-- /#bottom -->

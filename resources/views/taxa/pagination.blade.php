@@ -28,6 +28,6 @@
 
 <div id="bottom" class="row">
 	<div class="col-md-12">
-		{{$taxas->links()}}
+		{{$taxas->appends(Request::only('q'))->links()}}
 	</div>
 </div> <!-- /#bottom -->

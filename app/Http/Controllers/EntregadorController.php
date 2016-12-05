@@ -23,7 +23,7 @@ class EntregadorController extends Controller
      */
     public function index()
     {
-        $entregadores = Entregador::paginate(10);
+        $entregadores = Entregador::orderBy('id', 'desc')->paginate(10);
         return view('entregador.index')->with('entregadores', $entregadores);
     }
 

@@ -23,7 +23,7 @@ class EmpresaController extends Controller
      */
     public function index()
     {
-        $empresas = Empresa::paginate(10);
+        $empresas = Empresa::orderBy('id', 'desc')->paginate(10);
         return view('empresa.index')->with('empresas', $empresas);
     }
 

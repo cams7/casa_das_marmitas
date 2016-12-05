@@ -75,7 +75,7 @@ class PedidosTableSeeder extends Seeder
 
         foreach (self::$produtos as $p)
         {
-            $totalItens = rand(1, 5);
+            $totalItens = rand(1, 25);
             if (rand(0, 1) == 1 && $count++ < $totalItens)
             {
                 $quantidadePorItem = rand(1, 10);
