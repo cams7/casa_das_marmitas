@@ -11,7 +11,7 @@ class EmpresasTableSeeder extends Seeder
      */
     public function run()
     {
-        $totalEmpresas = rand(2, 5);
+        $totalEmpresas = rand(11, 15);
 
         factory(App\Empresa::class, $totalEmpresas)->create()->each(function($empresa) 
         {

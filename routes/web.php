@@ -39,7 +39,7 @@ Route::get('/ajax/entregador/pagination', function () {
 });
 
 Route::get('/ajax/funcionario/pagination', function () {
-	$funcionarios = App\Entregador::paginate(10);
+	$funcionarios = App\Funcionario::paginate(10);
     return view('funcionario.pagination')->with('funcionarios', $funcionarios)->render();
 });
 

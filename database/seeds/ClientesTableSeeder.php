@@ -11,8 +11,8 @@ class ClientesTableSeeder extends Seeder
      */
     public function run()
     {
-        $totalClientes = rand(300, 500);
-        //$totalClientes = rand(1, 5);
+        //$totalClientes = rand(300, 500);
+        $totalClientes = rand(11, 15);
 
         factory(App\Cliente::class, $totalClientes)->create();            
     }   
