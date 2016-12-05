@@ -14,9 +14,9 @@
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   	 	  	  
-  	<link rel="stylesheet" type="text/css" href="{{ URL::asset('css/casa_das_marmitas.css') }}">
-
-    @yield('jquery_content')  	
+  	<link rel="stylesheet" type="text/css" href="{{ URL::asset('css/casa_das_marmitas.css') }}"> 
+    
+    @yield('jquery_content')     	
 </head>
 <body>
 	@include('layouts.header')
@@ -44,6 +44,6 @@
 
 	 <!--footer class="container-fluid text-center">
   	 @include('layouts.footer')
-	 </footer-->   
+	 </footer-->
 </body>
 </html>

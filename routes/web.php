@@ -22,3 +22,8 @@ Route::resource('empresa', 'EmpresaController');
 Route::resource('entregador', 'EntregadorController');
 Route::resource('taxa', 'TaxaController');
 Route::resource('funcionario', 'FuncionarioController');
+
+Route::get('/ajax/cliente/pagination', function () {
+	$clientes = App\Cliente::paginate(10);
+    return view('cliente.pagination')->with('clientes', $clientes)->render();
+});
