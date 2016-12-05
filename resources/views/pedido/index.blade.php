@@ -1,9 +1,6 @@
 @extends('layouts.master')
 @section('title', 'Lista de Pedidos')
 
-@section('jquery_content')
-@endsection
-
 @section('content')
 	<div id="top" class="row">
 		<div class="col-sm-3">
@@ -31,47 +28,30 @@
 	<div class="alert alert-info">{{ Session::get('message') }}</div>
 @endif	
 
- 	<div id="list" class="row"> 		
-		<div class="table-responsive col-md-12">
-			<table class="table table-striped" cellspacing="0" cellpadding="0">
-				<thead>
-					<tr>
-						<th>Cliente</th>
-	            		<th>Quantidade total</th>
-	            		<th>Custo total + Taxa</th>
-	            		<th>Situação</th>
-						<th class="actions">Ações</th>
-					</tr>
-				</thead>
-				<tbody>
-	    		@foreach($pedidos as $i => $pedido)
-	    			<tr>
-	            		<td><a href="{{ URL::to('cliente/' . $pedido->cliente->id) }}">{{ $pedido->cliente->nome }}</a></td>
-	            		<td>{{ $pedido->quantidade_total }}</td>
-	            		<td>{{ $pedido->getCustoTotal() }}</td>
-	            		<td>{{ $pedido->getSituacao() }}</td>
+<div class="content">
+	@include('pedido.pagination')
+</div> 	
+@endsection
 
-	            		<td class="actions">
-							<a class="btn btn-success btn-xs" href="{{ URL::to('pedido/' . $pedido->id) }}">Visualizar</a>
-							<a class="btn btn-warning btn-xs" href="{{ URL::to('pedido/' . $pedido->id . '/edit') }}">Alterar</a>
-							<a class="btn btn-danger btn-xs"  href="#" data-toggle="modal" data-target="#delete-modal">Excluir</a>
-						</td>
-	            	</tr>	
-	    		@endforeach
-	    		</tbody>
-			</table>
-		</div>
-	</div><!-- /#list -->
+@section('jquery_content')
+	<script type="text/javascript">
+		$(document).on('click', '.pagination a', function(e){
+			e.preventDefault();
+			//console.log($(this).attr('href').split('page='));
+			var page = $(this).attr('href').split('page=')[1];
+			getPedidos(page);
+		});
 
-	<div id="bottom" class="row">
-		<div class="col-md-12">
-			<ul class="pagination">
-				<li class="disabled"><a>&lt; Anterior</a></li>
-				<li class="disabled"><a>1</a></li>
-				<li><a href="#">2</a></li>
-				<li><a href="#">3</a></li>
-				<li class="next"><a href="#" rel="next">Próximo &gt;</a></li>
-			</ul><!-- /.pagination -->
-		</div>
-	</div> <!-- /#bottom -->
+		function getPedidos(page) {
+			//console.log('getting pedidos for page = ' + page);	
+
+			$.ajax({
+				url: '/ajax/pedido/pagination?page=' + page	
+			}).done(function(data){
+				//console.log(data);
+				$('.content').html(data);
+				location.hash = page;
+			});
+		}	
+	</script>
 @endsection

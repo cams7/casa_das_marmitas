@@ -23,7 +23,7 @@ class TaxaController extends Controller
      */
     public function index()
     {
-        $taxas = Taxa::all();
+        $taxas = Taxa::paginate(10);
         return view('taxa.index')->with('taxas', $taxas);
     }
 
