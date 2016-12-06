@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 use App\PedidoItem;
 
@@ -36,7 +37,8 @@ class PedidoItemController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Log::info("Produto: ".$request->input('produto_id'));
+        Log::info("Quantidade: ".$request->input('quantidade'));
     }
 
     /**

@@ -132,6 +132,16 @@ class ClienteController extends Controller
         return redirect('cliente')->with('message', 'O cliente foi excluído com sucesso!');
     }
 
+    public function getClientes(Request $request, $nome)
+    {          
+        if($request->ajax())
+        {
+            $clientes = Cliente::getClientes($nome)->select('id','nome')->limit(5)->get();
+
+            return response()->json($clientes, 200);
+        }
+    }
+
     private function getRoles()
     {
         return array(

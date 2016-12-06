@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Validator;
 use DB;
 
 use App\Pedido;
+use App\Cliente;
+use App\Taxa;
 
 class PedidoController extends Controller
 {
@@ -48,18 +51,23 @@ class PedidoController extends Controller
         // validate
         // read more on validation at http://laravel.com/docs/validation
         
-        $this->validate($request, $this->getRoles());
+        $validator = Validator::make($request->all(), $this->getRoles());
+
+        /*$validator->after(function ($validator) {
+            //if ($this->somethingElseIsInvalid()) {
+                $validator->errors()->add('field', 'Something is wrong with this field!');
+            //}
+        });*/
+
+        if ($validator->fails()) 
+            return redirect()->back()->with('cliente_id', $request->input('cliente_id'))->with('taxa_id', $request->input('taxa_id'))->withInput()->withErrors($validator);
 
         $userId = DB::table('users')->max('id');
-        $clienteId = DB::table('clientes')->max('id');
-        $taxaId = DB::table('taxas')->max('id') - 1;
         
         // store
         $pedido = new Pedido;
-        $pedido->user_id = $userId;
-        $pedido->cliente_id = $clienteId;
-        $pedido->taxa_id = $taxaId;
-
+        $pedido->user_id = $userId;             
+        
         $this->setPedido($request, $pedido);        
 
         $pedido->save();
@@ -107,7 +115,16 @@ class PedidoController extends Controller
         // validate
         // read more on validation at http://laravel.com/docs/validation
         
-        $this->validate($request, $this->getRoles());
+        $validator = Validator::make($request->all(), $this->getRoles());
+
+        /*$validator->after(function ($validator) {
+            //if ($this->somethingElseIsInvalid()) {
+                $validator->errors()->add('field', 'Something is wrong with this field!');
+            //}
+        });*/
+
+        if ($validator->fails()) 
+            return redirect()->back()->with('cliente_id', $request->input('cliente_id'))->with('taxa_id', $request->input('taxa_id'))->withInput()->withErrors($validator);
 
         $pedido = Pedido::find($id);
 
@@ -137,6 +154,8 @@ class PedidoController extends Controller
     private function getRoles()
     {
         return array(
+            'cliente_id' => 'required|integer',
+            'taxa_id' => 'required|integer',
             'quantidade_total' => 'required|integer',
             'total_pedido' => 'required',
             'situacao_pedido' => 'required|integer|between:1,4'
@@ -145,6 +164,8 @@ class PedidoController extends Controller
 
     private function setPedido(Request $request, Pedido &$pedido)
     {   
+        $pedido->cliente_id = $request->input('cliente_id');
+        $pedido->taxa_id = $request->input('taxa_id');
         $pedido->quantidade_total  = $request->input('quantidade_total');
         $pedido->setCustoTotal($request->input('total_pedido'));
         $pedido->situacao_pedido  = $request->input('situacao_pedido');  

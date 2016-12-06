@@ -6,6 +6,7 @@
     <div class="form-group col-md-6">
         {{ Form::label('empresa_nome', 'Empresa:', array()) }}
         {{ Form::text('empresa_nome', $entregador != null ? $entregador->empresa->nome : null, array('id' => 'empresa_nome', 'class' => 'form-control', 'maxlength' => '60', 'placeholder' => 'Nome da empresa')) }}
+        <input type="hidden" id="empresa_id" name="empresa_id" value="{{session('empresa_id') != null ? session('empresa_id') : ($entregador != null ? $entregador->empresa->id : '')}}">
     </div>
 </div>
 <div class="row">
@@ -28,25 +29,26 @@
         $(document).ready(function($){
             $("#celular").mask("(99) 99999-9999");
             $("#cpf").mask("999.999.999-99");
-
-            @if($entregador != null)
-                $('#empresa_nome').prop('readonly', true);
-            @else               
-                $("#empresa_nome").autocomplete({
-                    source : function(request, response) {
-                        $.getJSON( "/ajax/empresas/"+ request.term, function( data ) {
-                            var empresas = [];
-
-                            data.forEach(empresa => {
-                                empresas.push(empresa.nome);
-                            });
-                            
-                            response(empresas);
-                        });
-                    },
-                    minLength : 1
-                });
-            @endif            
+        
+            $("#empresa_nome").autocomplete({
+                source : function(request, response) {
+                    $.getJSON( "/ajax/empresas/"+ request.term, function( data ) {                        
+                        response(
+                            $.map(data, function (empresa, i) {
+                                return {
+                                    id: empresa.id,
+                                    label: empresa.nome,
+                                    value: empresa.nome
+                                };
+                            })
+                        );
+                    });
+                }, 
+                select: function (event, ui) {
+                    $("#empresa_id").val(ui.item.id);
+                },
+                minLength : 1
+            });           
         });  
     </script>
 @endsection

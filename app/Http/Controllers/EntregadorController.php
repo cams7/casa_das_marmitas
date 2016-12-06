@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Validator;
 use DB;
 
 use App\Entregador;
@@ -48,18 +49,23 @@ class EntregadorController extends Controller
     {
         // validate
         // read more on validation at http://laravel.com/docs/validation
-        
-        $this->validate($request, $this->getRoles());
 
+        $validator = Validator::make($request->all(), $this->getRoles());
+
+        /*$validator->after(function ($validator) {
+            //if ($this->somethingElseIsInvalid()) {
+                $validator->errors()->add('field', 'Something is wrong with this field!');
+            //}
+        });*/
+
+        if ($validator->fails()) 
+            return redirect()->back()->with('empresa_id', $request->input('empresa_id'))->withInput()->withErrors($validator);
+        
         $userId = DB::table('users')->max('id');
-        //$empresaId = DB::table('empresas')->max('id');
         
         // store
         $entregador = new Entregador;
         $entregador->user_id = $userId;
-
-        $empresaId = Empresa::where('nome', '=', $request->input('empresa_nome'))->value('id');;
-        $entregador->empresa_id = $empresaId;
 
         $this->setEntregador($request, $entregador);             
 
@@ -108,8 +114,17 @@ class EntregadorController extends Controller
         // validate
         // read more on validation at http://laravel.com/docs/validation
         
-        $this->validate($request, $this->getRoles());
+        $validator = Validator::make($request->all(), $this->getRoles());
 
+        /*$validator->after(function ($validator) {
+            //if ($this->somethingElseIsInvalid()) {
+                $validator->errors()->add('field', 'Something is wrong with this field!');
+            //}
+        });*/
+
+        if ($validator->fails())
+            return redirect()->back()->with('empresa_id', $request->input('empresa_id'))->withInput()->withErrors($validator);
+        
         $entregador = Entregador::find($id);
 
         $this->setEntregador($request, $entregador);        
@@ -138,16 +153,17 @@ class EntregadorController extends Controller
     private function getRoles()
     {   
         return array(
+            'empresa_id' => 'required|integer',
             'nome' => 'required|max:60',
             'cpf' => 'required|regex:~.*(\d{3})\.(\d{3})\.(\d{3})\-(\d{2}).*~',
             'rg' => 'required|integer|digits_between:6,10',
-            'celular' => 'required|regex:~.*\((\d{2})\) (\d{5})\-(\d{4}).*~',
-            'empresa_nome' => 'required|max:60',
+            'celular' => 'required|regex:~.*\((\d{2})\) (\d{5})\-(\d{4}).*~'
         );
     }
 
     private function setEntregador(Request $request, Entregador &$entregador)
     {   
+        $entregador->empresa_id = $request->input('empresa_id');        
         $entregador->nome  = $request->input('nome');
         $entregador->setCpf($request->input('cpf'));
         $entregador->rg = $request->input('rg');

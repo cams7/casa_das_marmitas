@@ -130,6 +130,16 @@ class TaxaController extends Controller
         return redirect('taxa')->with('message', 'A taxa foi excluída com sucesso!');
     }
 
+    public function getTaxas(Request $request, $taxa)
+    {          
+        if($request->ajax())
+        {
+            $taxas = Taxa::getTaxas($taxa)->select('id','taxa')->limit(5)->get();
+
+            return response()->json($taxas, 200);
+        }
+    }
+
     private function getRoles()
     {
         return array(

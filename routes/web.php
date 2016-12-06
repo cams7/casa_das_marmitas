@@ -25,6 +25,9 @@ Route::resource('taxa', 'TaxaController');
 Route::resource('funcionario', 'FuncionarioController');
 
 Route::get('ajax/empresas/{nome}', 'EmpresaController@getEmpresas');
+Route::get('ajax/clientes/{nome}', 'ClienteController@getClientes');
+Route::get('ajax/produtos/{nome}', 'produtoController@getProdutos');
+Route::get('ajax/taxas/{taxa}', 'TaxaController@getTaxas');
 
 Route::get('ajax/cliente/pagination', function () {
     $query = Request::get('q');

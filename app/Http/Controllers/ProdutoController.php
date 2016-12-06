@@ -130,6 +130,16 @@ class ProdutoController extends Controller
         return redirect('produto')->with('message', 'O produto foi excluído com sucesso!');
     }
 
+    public function getProdutos(Request $request, $nome)
+    {          
+        if($request->ajax())
+        {
+            $produtos = Produto::getProdutos($nome)->select('id','nome')->limit(5)->get();
+
+            return response()->json($produtos, 200);
+        }
+    }
+
     private function getRoles()
     {
         return array(
