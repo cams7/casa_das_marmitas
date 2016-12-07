@@ -30,50 +30,6 @@
     </div>    
 </div>
 
-@section('jquery_content')  
-    <script>   
-        $(document).ready(function($){ 
-            $("#cliente_nome").autocomplete({
-                source : function(request, response) {
-                    $.getJSON( "/ajax/clientes/"+ request.term, function( data ) {                        
-                        response(
-                            $.map(data, function (cliente, i) {
-                                return {
-                                    id: cliente.id,
-                                    label: cliente.nome,
-                                    value: cliente.nome
-                                };
-                            })
-                        );
-                    });
-                }, 
-                select: function (event, ui) {
-                    $("#cliente_id").val(ui.item.id);
-                },
-                minLength : 1
-            });
-
-            $("#taxa").maskMoney({showSymbol:true, symbol:"R$", decimal:",", thousands:"."});            
-
-            $("#taxa").autocomplete({
-                source : function(request, response) {
-                    $.getJSON( "/ajax/taxas/"+ request.term, function( data ) {  
-                        response(
-                            $.map(data, function (taxa, i) {
-                                return {
-                                    id: taxa.id,
-                                    label: Number(taxa.taxa).formatMoney(),
-                                    value: Number(taxa.taxa).formatMoney()
-                                };
-                            })
-                        );
-                    });
-                },
-                select: function (event, ui) {
-                    $("#taxa_id").val(ui.item.id);
-                },
-                minLength : 1
-            });
-        });  
-    </script>
+@section('jquery_content')
+    <script src="{{ URL::asset('js/casa_das_marmitas-pedido.js') }}"></script>      
 @endsection

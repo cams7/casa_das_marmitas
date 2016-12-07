@@ -25,4 +25,9 @@ class PedidoItem extends Model
     {
         return $this->belongsTo(Produto::class);
     }
+
+    public static function getPaginacaoByProdutoId($totalPages, $produtoId)
+    {
+        return PedidoItem::where('produto_id', '=', $produtoId)->orderBy('id', 'desc')->paginate($totalPages);
+    }
 }

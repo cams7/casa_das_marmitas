@@ -76,18 +76,28 @@ class Empresa extends Model
 
         return preg_replace('~.*(\d{5})(\d{3}).*~', '$1-$2', $cep);
     }
-
-    public static function getEmpresas($nome = null)
+ 
+    private static function getFiltroByQuery($query = null)
     {
 
         $empresas = Empresa::orderBy('id', 'desc');
 
-        if($nome != null && $nome !== '')
+        if($query != null && $query !== '')
         {
-            $nome = "%". trim($nome) ."%";
-            $empresas =  $empresas->where('nome', 'ilike', $nome);
+            $query = "%". trim($query) ."%";
+            $empresas =  $empresas->where('nome', 'ilike', $query);
         }
 
         return $empresas;
+    }
+
+    public static function getPaginacaoByQuery($totalPages, $query = null)
+    {
+        return self::getFiltroByQuery($query)->paginate($totalPages);
+    }
+
+    public static function getPesquisaByQuery($query)
+    {
+        return self::getFiltroByQuery($query)->select('id','nome', 'cnpj')->limit(5)->get();
     }
 }

@@ -61,23 +61,32 @@ class Produto extends Model
                 $tamanho = "Pequena";
                 break;
             default:
-                # code...
                 break;
         }
 
         return $tamanho;
     }
 
-    public static function getProdutos($nome = null) 
+    private static function getFiltroByQuery($query = null) 
     {
         $produtos = Produto::orderBy('id', 'desc');
 
-        if($nome != null && $nome !== '')
+        if($query != null && $query !== '')
         {
-            $nome = "%". trim($nome) ."%";
-            $produtos =  $produtos->where('nome', 'ilike', $nome);
+            $query = "%". trim($query) ."%";
+            $produtos =  $produtos->where('nome', 'ilike', $query);
         }
 
         return $produtos;
+    }
+
+    public static function getPaginacaoByQuery($totalPages, $query = null)
+    {
+        return self::getFiltroByQuery($query)->paginate($totalPages);
+    }
+
+    public static function getPesquisaByQuery($query)
+    {
+        return self::getFiltroByQuery($query)->select('id','nome','tamanho')->limit(5)->get();
     }
 }

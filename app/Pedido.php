@@ -92,17 +92,27 @@ class Pedido extends Model
         return preg_replace('~.*(\d{4})\-(\d{2})\-(\d{2}).*~', '$3/$2/$1', $cadastro);
     }
 
-    public static function getPedidos($clienteNome = null)
+    private static function getFiltroByQuery($query = null)
     {
         $pedidos = Pedido::orderBy('pedidos.id', 'desc');
 
-        if($clienteNome != null && $clienteNome !== '') 
+        if($query != null && $query !== '') 
         {
-            $clienteNome = "%". trim($clienteNome) ."%";
+            $query = "%". trim($query) ."%";
             $pedidos =  $pedidos->leftJoin('clientes', 'pedidos.cliente_id', '=', 'clientes.id');
-            $pedidos =  $pedidos->where('clientes.nome', 'ilike', $clienteNome);
+            $pedidos =  $pedidos->where('clientes.nome', 'ilike', $query);
         }
 
         return $pedidos;
+    }
+
+    public static function getPaginacaoByQuery($totalPages, $query = null)
+    {
+        return self::getFiltroByQuery($query)->paginate($totalPages);
+    }
+
+    public static function getPaginacaoByClienteId($totalPages, $clienteId)
+    {
+        return Pedido::where('cliente_id', '=', $clienteId)->orderBy('id', 'desc')->paginate($totalPages);
     }
 }

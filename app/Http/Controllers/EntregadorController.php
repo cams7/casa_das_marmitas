@@ -12,6 +12,7 @@ use App\Empresa;
 class EntregadorController extends Controller
 {
     //private $entregador;
+    private static $TOTAL_PAGINACAO = 10;
 
     /*public function __construct(Entregador $entregador)  
     {
@@ -25,7 +26,7 @@ class EntregadorController extends Controller
      */
     public function index()
     {
-        $entregadores = Entregador::getEntregadores()->paginate(10);
+        $entregadores = Entregador::getPaginacaoByQuery(self::$TOTAL_PAGINACAO);
         return view('entregador.index')->with('entregadores', $entregadores);
     }
 
@@ -148,6 +149,20 @@ class EntregadorController extends Controller
 
         // redirect
         return redirect('entregador')->with('message', 'O entregador foi excluído com sucesso!');
+    }
+
+    public function getPaginacao(Request $request)
+    {
+        if($request->ajax())
+        {
+            $query = $request->get('q');
+
+            $entregadores = Entregador::getPaginacaoByQuery(self::$TOTAL_PAGINACAO, $query);
+
+            return view('entregador.pagination')->with('entregadores', $entregadores)->render();
+        } 
+            
+        return response()->json(['message' => 'Método não permitido'], 405);
     }
 
     private function getRoles()

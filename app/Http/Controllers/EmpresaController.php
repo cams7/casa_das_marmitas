@@ -6,10 +6,13 @@ use Illuminate\Http\Request;
 use DB;
 
 use App\Empresa;
+use App\Entregador;
 
 class EmpresaController extends Controller
 {
     //private $empresa;
+    private static $TOTAL_PAGINACAO = 10;
+    private static $TOTAL_ENTREGADORES = 5;
 
     /*public function __construct(Empresa $empresa)  
     {
@@ -23,7 +26,7 @@ class EmpresaController extends Controller
      */
     public function index()
     {
-        $empresas = Empresa::getEmpresas()->paginate(10);
+        $empresas = Empresa::getPaginacaoByQuery(self::$TOTAL_PAGINACAO);
         return view('empresa.index')->with('empresas', $empresas);
     }
 
@@ -73,8 +76,9 @@ class EmpresaController extends Controller
     {
         // get the empresa
         $empresa = Empresa::find($id);
+        $entregadores = Entregador::getPaginacaoByEmpresaId(self::$TOTAL_ENTREGADORES, $id);
 
-        return view('empresa.show')->with('empresa', $empresa);
+        return view('empresa.show', ['empresa' => $empresa, 'entregadores' => $entregadores]);
     }
 
     /**
@@ -130,14 +134,43 @@ class EmpresaController extends Controller
         return redirect('empresa')->with('message', 'A empresa foi excluída com sucesso!');
     }
 
+    public function getPaginacao(Request $request)
+    {
+        if($request->ajax())
+        {
+            $query = $request->get('q');
+
+            $empresas = Empresa::getPaginacaoByQuery(self::$TOTAL_PAGINACAO, $query);
+
+            return view('empresa.pagination')->with('empresas', $empresas)->render();
+        } 
+            
+        return response()->json(['message' => 'Método não permitido'], 405);
+    }
+
+    public function getEntregadores(Request $request)
+    {
+        if($request->ajax())
+        {
+            $empresaId = $request->get('empresa_id');
+
+            $entregadores = Entregador::getPaginacaoByEmpresaId(self::$TOTAL_ENTREGADORES, $empresaId);
+
+            return view('empresa.entregadores')->with('entregadores', $entregadores)->render();
+        }
+            
+        return response()->json(['message' => 'Método não permitido'], 405);
+    }
+
     public function getEmpresas(Request $request, $nome)
     {          
         if($request->ajax())
         {
-            $empresas = Empresa::getEmpresas($nome)->select('id','nome')->limit(5)->get();
-
-            return response()->json($empresas, 200);
-        }
+            $empresas =  Empresa::getPesquisaByQuery($nome);   
+            return response()->json($empresas, 200);          
+        } 
+            
+        return response()->json(['message' => 'Método não permitido'], 405);
     }
 
     private function getRoles()

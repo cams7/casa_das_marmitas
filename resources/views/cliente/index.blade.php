@@ -49,7 +49,7 @@
 		});
 
 		function getClientes(page) {
-			loadPage('cliente', page);		
+			loadPage('clientes', page);		
 		}	
 	</script>
 @endsection

@@ -1,11 +1,10 @@
 @extends('layouts.master')
 @section('title', 'Visualizar Produto')
 
-@section('jquery_content')
-@endsection
-
 @section('content')
 	<h3 class="page-header">{{'Visualizar Produto #'.$produto->id}}</h3>
+
+  <input type="hidden" id="produto_id" value="{{$produto->id}}">
 
 	<div class="row">
 		<div class="col-md-6">
@@ -38,49 +37,29 @@
    		</div>
  	</div>
 
-@if ($produto->itensPedido->count() > 0)
-  <h3 class="page-header">Itens de Pedidos</h3>
-
-  <div id="list" class="row">     
-    <div class="table-responsive col-md-12">
-      <table class="table table-striped" cellspacing="0" cellpadding="0">
-        <thead>
-          <tr>
-            <th>Pedido</th>
-            <th>Cliente</th>
-            <th>Quantidade</th>
-            <th class="actions">Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-          @foreach($produto->itensPedido as $i => $item)
-            <tr>  
-              <td><a href="{{ URL::to('pedido/' . $item->pedido->id) }}">{{ $item->pedido->getCadastro() }}</a></td>
-              <td><a href="{{ URL::to('cliente/' . $item->pedido->cliente->id) }}">{{ $item->pedido->cliente->nome }}</a></td>
-              <td>{{ $item->quantidade }}</td>
-              
-              <td class="actions">
-                <a class="btn btn-success btn-xs" href="{{ URL::to('pedido_item/' . $item->id) }}">Visualizar</a>
-                <a class="btn btn-warning btn-xs" href="{{ URL::to('pedido_item/' . $item->id . '/edit') }}">Alterar</a>
-                <a class="btn btn-danger btn-xs"  href="#" data-toggle="modal" data-target="#delete-modal">Excluir</a>
-              </td>
-            </tr> 
-          @endforeach
-          </tbody>
-      </table>
+    <div class="content">
+        @include('produto.itens')
     </div>
-  </div><!-- /#list -->
+@endsection
 
-  <div id="bottom" class="row">
-    <div class="col-md-12">
-      <ul class="pagination">
-        <li class="disabled"><a>&lt; Anterior</a></li>
-        <li class="disabled"><a>1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li class="next"><a href="#" rel="next">Próximo &gt;</a></li>
-      </ul><!-- /.pagination -->
-    </div>
-  </div> <!-- /#bottom -->
-@endif
+@section('jquery_content')
+    <script type="text/javascript">
+        $(document).on('click', '.pagination a', function(e){
+            e.preventDefault();
+            //console.log($(this).attr('href').split('page='));
+            var page = $(this).attr('href').split('page=')[1];
+            getItens(page);
+        });     
+
+        function getItens(page) {
+            produtoId = $("#produto_id").val(); 
+            //console.log('getting pedidos for page = ' + page + ' and produto_id = ' + produtoId);   
+            
+            $.get('/pagination/produto_itens?page=' + page + '&produto_id=' + produtoId, function(data) {
+                //console.log(data);
+                $('.content').html(data);
+               // location.hash = page;
+            });         
+        }  
+    </script>
 @endsection

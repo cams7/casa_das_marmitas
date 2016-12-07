@@ -37,8 +37,16 @@ class PedidoItemController extends Controller
      */
     public function store(Request $request)
     {
-        Log::info("Produto: ".$request->input('produto_id'));
-        Log::info("Quantidade: ".$request->input('quantidade'));
+
+        $item = new PedidoItem;
+
+        if ($request->isMethod('post') && $request->ajax() && $request->format() == 'json' && $request->wantsJson())
+        {
+            $item->produto_id = $request->input('produto_id');
+            $item->quantidade = $request->input('quantidade');
+        }
+
+        return response()->json($item, 200);
     }
 
     /**

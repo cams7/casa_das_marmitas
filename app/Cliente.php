@@ -77,16 +77,26 @@ class Cliente extends Model
         return preg_replace('~.*(\d{5})(\d{3}).*~', '$1-$2', $cep);
     }
 
-    public static function getClientes($nome = null)
+    private static function getFiltroByQuery($query = null)
     {
         $clientes = Cliente::orderBy('id', 'desc');
 
-        if($nome != null && $nome !== '') 
+        if($query != null && $query !== '') 
         {
-            $nome = "%". trim($nome) ."%";
-            $clientes =  $clientes->where('nome', 'ILIKE', $nome);
+            $query = "%". trim($query) ."%";
+            $clientes =  $clientes->where('nome', 'ILIKE', $query);
         }
 
         return $clientes;
+    }
+
+    public static function getPaginacaoByQuery($totalPages, $query = null)
+    {
+        return self::getFiltroByQuery($query)->paginate($totalPages);
+    }
+
+    public static function getPesquisaByQuery($query)
+    {
+        return self::getFiltroByQuery($query)->select('id','nome', 'telefone')->limit(5)->get();
     }
 }

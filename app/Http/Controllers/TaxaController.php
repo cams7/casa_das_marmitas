@@ -10,6 +10,7 @@ use App\Taxa;
 class TaxaController extends Controller
 {
     //private $taxa;
+    private static $TOTAL_PAGINACAO = 10;
 
     /*public function __construct(Taxa $taxa)  
     {
@@ -23,7 +24,7 @@ class TaxaController extends Controller
      */
     public function index()
     {
-        $taxas = Taxa::getTaxas()->paginate(10);
+        $taxas = Taxa::getPaginacaoByQuery(self::$TOTAL_PAGINACAO);
         return view('taxa.index')->with('taxas', $taxas);
     }
 
@@ -130,14 +131,29 @@ class TaxaController extends Controller
         return redirect('taxa')->with('message', 'A taxa foi excluída com sucesso!');
     }
 
+    public function getPaginacao(Request $request)
+    {
+        if($request->ajax())
+        {
+            $query = $request->get('q');
+
+            $taxas = Taxa::getPaginacaoByQuery(self::$TOTAL_PAGINACAO, $query);
+
+            return view('taxa.pagination')->with('taxas', $taxas)->render();
+        } 
+            
+        return response()->json(['message' => 'Método não permitido'], 405);
+    }
+
     public function getTaxas(Request $request, $taxa)
     {          
         if($request->ajax())
         {
-            $taxas = Taxa::getTaxas($taxa)->select('id','taxa')->limit(5)->get();
-
-            return response()->json($taxas, 200);
-        }
+            $taxas = Taxa::getPesquisaByQuery($taxa);   
+            return response()->json($taxas, 200);          
+        } 
+            
+        return response()->json(['message' => 'Método não permitido'], 405); 
     }
 
     private function getRoles()

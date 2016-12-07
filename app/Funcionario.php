@@ -39,19 +39,23 @@ class Funcionario extends Model
         return $cargo;
     }
 
-    public static function getFuncionarios($nome = null)
+    private static function getFiltroByQuery($query = null)
     {
         $funcionarios = Funcionario::orderBy('funcionarios.id', 'desc');
 
-        if($nome != null && $nome !== '') 
+        if($query != null && $query !== '') 
         {
-            $nome = "%". trim($nome) ."%";
+            $query = "%". trim($query) ."%";
             $funcionarios =  $funcionarios->leftJoin('users', 'funcionarios.id', '=', 'users.id');
-            $funcionarios =  $funcionarios->where('users.name', 'ilike', $nome);
+            $funcionarios =  $funcionarios->where('users.name', 'ilike', $query);
         }
 
         return $funcionarios;
+    }
 
-    }  
+    public static function getPaginacaoByQuery($totalPages, $query = null)
+    {
+        return self::getFiltroByQuery($query)->paginate($totalPages);
+    } 
      
 }

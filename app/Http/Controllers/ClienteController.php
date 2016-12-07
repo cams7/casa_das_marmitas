@@ -8,10 +8,13 @@ use Illuminate\Http\Request;
 use DB;
 
 use App\Cliente;
+use App\Pedido;
 
 class ClienteController extends Controller
 {
     //private $cliente;
+    private static $TOTAL_PAGINACAO = 10;
+    private static $TOTAL_PEDIDOS = 5;
 
     /*public function __construct(Cliente $cliente)  
     {
@@ -25,7 +28,7 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        $clientes = Cliente::getClientes()->paginate(10);
+        $clientes = Cliente::getPaginacaoByQuery(self::$TOTAL_PAGINACAO);
         return view('cliente.index')->with('clientes', $clientes);
     }    
 
@@ -75,8 +78,9 @@ class ClienteController extends Controller
     {
         // get the cliente
         $cliente = Cliente::find($id);
+        $pedidos = Pedido::getPaginacaoByClienteId(self::$TOTAL_PEDIDOS, $id);
 
-        return view('cliente.show')->with('cliente', $cliente);
+        return view('cliente.show', ['cliente' => $cliente, 'pedidos' => $pedidos]);
     }
 
     /**
@@ -132,14 +136,43 @@ class ClienteController extends Controller
         return redirect('cliente')->with('message', 'O cliente foi excluído com sucesso!');
     }
 
-    public function getClientes(Request $request, $nome)
-    {          
+    public function getPaginacao(Request $request)
+    {
         if($request->ajax())
         {
-            $clientes = Cliente::getClientes($nome)->select('id','nome')->limit(5)->get();
+            $query = $request->get('q');
 
-            return response()->json($clientes, 200);
-        }
+            $clientes = Cliente::getPaginacaoByQuery(self::$TOTAL_PAGINACAO, $query);
+
+            return view('cliente.pagination')->with('clientes', $clientes)->render();
+        } 
+            
+        return response()->json(['message' => 'Método não permitido'], 405);
+    }
+
+    public function getPedidos(Request $request)
+    {
+        if($request->ajax())
+        {
+            $clienteId = $request->get('cliente_id');
+
+            $pedidos = Pedido::getPaginacaoByClienteId(self::$TOTAL_PEDIDOS, $clienteId);
+
+            return view('cliente.pedidos')->with('pedidos', $pedidos)->render();
+        } 
+            
+        return response()->json(['message' => 'Método não permitido'], 405);
+    }
+
+    public function getClientes(Request $request, $nome)
+    {   
+        if($request->ajax())
+        {
+            $clientes =  Cliente::getPesquisaByQuery($nome);   
+            return response()->json($clientes, 200);          
+        } 
+            
+        return response()->json(['message' => 'Método não permitido'], 405); 
     }
 
     private function getRoles()

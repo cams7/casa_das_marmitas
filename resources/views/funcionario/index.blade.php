@@ -49,7 +49,7 @@
 		});
 
 		function getFuncionarios(page) {
-			loadPage('funcionario', page);		
+			loadPage('funcionarios', page);		
 		}		
 	</script>
 @endsection

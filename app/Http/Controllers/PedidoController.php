@@ -6,13 +6,16 @@ use Illuminate\Http\Request;
 use Validator;
 use DB;
 
-use App\Pedido;
 use App\Cliente;
 use App\Taxa;
+use App\Pedido;
+use App\PedidoItem;
+
 
 class PedidoController extends Controller
 {
     //private $pedido;
+     private static $TOTAL_PAGINACAO = 10;
 
     /*public function __construct(Pedido $pedido)  
     {
@@ -26,7 +29,8 @@ class PedidoController extends Controller
      */
     public function index()
     {
-        $pedidos = Pedido::getPedidos()->paginate(10);
+        $pedidos = Pedido::getPaginacaoByQuery(self::$TOTAL_PAGINACAO);
+        
         return view('pedido.index')->with('pedidos', $pedidos);
     }
 
@@ -37,7 +41,7 @@ class PedidoController extends Controller
      */
     public function create()
     {
-        return view('pedido.create')->with('pedido', null);
+        return view('pedido.create')->with('pedido', null)->with('itens', null);
     }
 
     /**
@@ -149,6 +153,20 @@ class PedidoController extends Controller
 
         // redirect
         return redirect('pedido')->with('message', 'O pedido foi excluído com sucesso!');
+    }
+
+    public function getPaginacao(Request $request)
+    {
+        if($request->ajax())
+        {
+            $query = $request->get('q');
+
+            $pedidos = Pedido::getPaginacaoByQuery(self::$TOTAL_PAGINACAO, $query);
+
+            return view('pedido.pagination')->with('pedidos', $pedidos)->render();
+        } 
+            
+        return response()->json(['message' => 'Método não permitido'], 405);
     }
 
     private function getRoles()

@@ -64,21 +64,30 @@ class Taxa extends Model
         return $tipo;
     }
 
-    public static function getTaxas($taxa = null)
+    private static function getFiltroByQuery($query = null)
     {
         $taxas = Taxa::orderBy('id', 'desc');
 
-        if($taxa != null && $taxa !== '')
+        if($query != null && $query !== '')
         {
-            $taxa = trim($taxa);
-            $taxa = str_replace(',', '.', $taxa);
-            $taxa = preg_replace('/[^\d,\.]/', '', $taxa);        
+            $query = trim($query);
+            $query = str_replace(',', '.', $query);
+            $query = preg_replace('/[^\d,\.]/', '', $query);        
             
-            if(is_numeric($taxa))
-                $taxas =  $taxas->where('taxa', '>=', $taxa);
+            if(is_numeric($query))
+                $taxas =  $taxas->where('taxa', '>=', $query);
         }
 
         return $taxas;
+    }
 
+    public static function getPaginacaoByQuery($totalPages, $query = null)
+    {
+        return self::getFiltroByQuery($query)->paginate($totalPages);
+    }
+
+    public static function getPesquisaByQuery($query)
+    {
+        return self::getFiltroByQuery($query)->select('id','taxa')->limit(5)->get();
     }
 }

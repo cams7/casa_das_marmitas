@@ -49,7 +49,7 @@
 		});
 
 		function getPedidos(page) {
-			loadPage('pedido', page);		
+			loadPage('pedidos', page);		
 		}		
 	</script>
 @endsection

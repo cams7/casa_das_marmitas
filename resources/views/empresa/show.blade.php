@@ -1,11 +1,10 @@
 @extends('layouts.master')
 @section('title', 'Visualizar Empresa')
 
-@section('jquery_content')
-@endsection
-
 @section('content')	
     <h3 class="page-header">{{'Visualizar Empresa #'.$empresa->id}}</h3>
+
+    <input type="hidden" id="empresa_id" value="{{$empresa->id}}">
 
     <div class="row">
         <div class="col-md-4">
@@ -72,49 +71,29 @@
         </div>
     </div>
 
-@if ($empresa->entregadores->count() > 0)
-    <h3 class="page-header">Entregadores</h3>
+    <div class="content">
+        @include('empresa.entregadores')
+    </div>  
+@endsection
 
-    <div id="list" class="row">         
-        <div class="table-responsive col-md-12">
-            <table class="table table-striped" cellspacing="0" cellpadding="0">
-                <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>CPF</th>
-                        <th>Celular</th>
-                        <th class="actions">Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                @foreach($empresa->entregadores as $i => $entregador)
-                    <tr>
-                        <td>{{ $entregador->nome }}</td>
-                        <td>{{ $entregador->getCpf() }}</td>
-                        <td>{{ $entregador->getCelular() }}</td>
+@section('jquery_content')
+    <script type="text/javascript">
+        $(document).on('click', '.pagination a', function(e){
+            e.preventDefault();
+            //console.log($(this).attr('href').split('page='));
+            var page = $(this).attr('href').split('page=')[1];
+            getEntregadores(page);
+        });     
 
-                        <td class="actions">
-                            <a class="btn btn-success btn-xs" href="{{ URL::to('entregador/' . $entregador->id) }}">Visualizar</a>
-                            <a class="btn btn-warning btn-xs" href="{{ URL::to('entregador/' . $entregador->id . '/edit') }}">Alterar</a>
-                            <a class="btn btn-danger btn-xs"  href="#" data-toggle="modal" data-target="#delete-modal">Excluir</a>
-                        </td>
-                    </tr>   
-                @endforeach
-                </tbody>
-            </table>
-        </div>
-    </div><!-- /#list -->
-
-    <div id="bottom" class="row">
-        <div class="col-md-12">
-            <ul class="pagination">
-                <li class="disabled"><a>&lt; Anterior</a></li>
-                <li class="disabled"><a>1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li class="next"><a href="#" rel="next">Próximo &gt;</a></li>
-            </ul><!-- /.pagination -->
-        </div>
-    </div> <!-- /#bottom -->
-@endif	
+        function getEntregadores(page) {
+            empresaId = $("#empresa_id").val(); 
+            //console.log('getting pedidos for page = ' + page + ' and empresa_id = ' + empresaId);   
+            
+            $.get('/pagination/empresa_entregadores?page=' + page + '&empresa_id=' + empresaId, function(data) {
+                //console.log(data);
+                $('.content').html(data);
+               // location.hash = page;
+            });         
+        }  
+    </script>
 @endsection

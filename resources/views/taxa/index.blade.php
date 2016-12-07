@@ -49,7 +49,7 @@
 		});
 
 		function getTaxas(page) {
-			loadPage('taxa', page);		
+			loadPage('taxas', page);		
 		}		
 	</script>
 @endsection

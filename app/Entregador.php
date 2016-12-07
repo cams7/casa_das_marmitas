@@ -58,16 +58,26 @@ class Entregador extends Model
         return preg_replace('~.*(\d{2})(\d{5})(\d{4}).*~', '($1) $2-$3', $celular);
     }
 
-    public static function getEntregadores($nome = null)
+    private static function getFiltroByQuery($query = null)
     {
         $entregadores = Entregador::orderBy('id', 'desc');
 
-        if($nome != null && $nome !== '')
+        if($query != null && $query !== '')
         {
-            $nome = "%". trim($nome) ."%";
-            $entregadores =  $entregadores->where('nome', 'ilike', $nome);
+            $query = "%". trim($query) ."%";
+            $entregadores =  $entregadores->where('nome', 'ilike', $query);
         }
 
         return $entregadores;
+    }
+
+    public static function getPaginacaoByQuery($totalPages, $query = null)
+    {
+        return self::getFiltroByQuery($query)->paginate($totalPages);
+    }
+
+    public static function getPaginacaoByEmpresaId($totalPages, $empresaId)
+    {
+        return Entregador::where('empresa_id', '=', $empresaId)->orderBy('id', 'desc')->paginate($totalPages);
     }
 }

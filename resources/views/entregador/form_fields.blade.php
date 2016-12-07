@@ -25,30 +25,5 @@
 </div>
 
 @section('jquery_content')
-    <script>   
-        $(document).ready(function($){
-            $("#celular").mask("(99) 99999-9999");
-            $("#cpf").mask("999.999.999-99");
-        
-            $("#empresa_nome").autocomplete({
-                source : function(request, response) {
-                    $.getJSON( "/ajax/empresas/"+ request.term, function( data ) {                        
-                        response(
-                            $.map(data, function (empresa, i) {
-                                return {
-                                    id: empresa.id,
-                                    label: empresa.nome,
-                                    value: empresa.nome
-                                };
-                            })
-                        );
-                    });
-                }, 
-                select: function (event, ui) {
-                    $("#empresa_id").val(ui.item.id);
-                },
-                minLength : 1
-            });           
-        });  
-    </script>
+    <script src="{{ URL::asset('js/casa_das_marmitas-entregador.js') }}"></script>
 @endsection

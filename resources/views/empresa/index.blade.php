@@ -49,7 +49,7 @@
 		});
 
 		function getEmpresas(page) {
-			loadPage('empresa', page);		
+			loadPage('empresas', page);		
 		}		
 	</script>
 @endsection

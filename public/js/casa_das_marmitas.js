@@ -9,13 +9,14 @@ Number.prototype.formatMoney = function(c, d, t){
     return "R$" + (s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : ""));
 };
 
-function loadPage(page, pageNumber) {
+function loadPage(list, page) {
 	query = $("#query").val();
-	//console.log('getting clientes for page = ' + pageNumber + ', query = ' + query);	
+    query = query != undefined ? query : ''; 
+	console.log('getting ' + list + ' for page = ' + page + ' and query = ' + query);	
 	
-	$.get('/ajax/' + page + '/pagination?page=' + pageNumber + '&q=' + query, function(data, state){
+	$.get('/pagination/' + list + '?page=' + page + '&q=' + query, function(data) {
         //console.log(data);
 		$('.content').html(data);
-		location.hash = pageNumber;
+		location.hash = page;
    	});			
 }

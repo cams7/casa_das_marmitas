@@ -1,11 +1,10 @@
 @extends('layouts.master')
 @section('title', 'Visualizar Cliente')
 
-@section('jquery_content')
-@endsection
-
 @section('content')	
     <h3 class="page-header">{{'Visualizar Cliente #'.$cliente->id}}</h3>
+
+    <input type="hidden" id="cliente_id" value="{{$cliente->id}}">
 
     <div class="row">
         <div class="col-md-6">
@@ -68,49 +67,29 @@
         </div>
     </div>	
 
-@if ($cliente->pedidos->count() > 0)
-    <h3 class="page-header">Pedidos</h3>
+    <div class="content">
+        @include('cliente.pedidos')
+    </div>
+@endsection
 
-    <div id="list" class="row">         
-        <div class="table-responsive col-md-12">
-            <table class="table table-striped" cellspacing="0" cellpadding="0">
-                <thead>
-                    <tr>
-                        <th>Quantidade total</th>
-                        <th>Custo total + Taxa</th>
-                        <th>Situação</th>
-                        <th class="actions">Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                @foreach($cliente->pedidos as $i => $pedido)
-                    <tr>
-                        <td>{{ $pedido->quantidade_total }}</td>
-                        <td>{{ $pedido->getCustoTotal() }}</td>
-                        <td>{{ $pedido->getSituacao() }}</td>
+@section('jquery_content')
+    <script type="text/javascript">
+        $(document).on('click', '.pagination a', function(e){
+            e.preventDefault();
+            //console.log($(this).attr('href').split('page='));
+            var page = $(this).attr('href').split('page=')[1];
+            getPedidos(page);
+        });     
 
-                        <td class="actions">
-                            <a class="btn btn-success btn-xs" href="{{ URL::to('pedido/' . $pedido->id) }}">Visualizar</a>
-                            <a class="btn btn-warning btn-xs" href="{{ URL::to('pedido/' . $pedido->id . '/edit') }}">Alterar</a>
-                            <a class="btn btn-danger btn-xs"  href="#" data-toggle="modal" data-target="#delete-modal">Excluir</a>
-                        </td>
-                    </tr>   
-                @endforeach
-                </tbody>
-            </table>
-        </div>
-    </div><!-- /#list -->
-
-    <div id="bottom" class="row">
-        <div class="col-md-12">
-            <ul class="pagination">
-                <li class="disabled"><a>&lt; Anterior</a></li>
-                <li class="disabled"><a>1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li class="next"><a href="#" rel="next">Próximo &gt;</a></li>
-            </ul><!-- /.pagination -->
-        </div>
-    </div> <!-- /#bottom -->
-@endif
+        function getPedidos(page) {
+            clienteId = $("#cliente_id").val(); 
+            //console.log('getting pedidos for page = ' + page + ' and cliente_id = ' + clienteId);   
+            
+            $.get('/pagination/cliente_pedidos?page=' + page + '&cliente_id=' + clienteId, function(data) {
+                //console.log(data);
+                $('.content').html(data);
+               // location.hash = page;
+            });         
+        }  
+    </script>
 @endsection

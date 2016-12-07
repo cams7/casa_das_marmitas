@@ -6,10 +6,13 @@ use Illuminate\Http\Request;
 use DB;
 
 use App\Produto;
+use App\PedidoItem;
 
 class ProdutoController extends Controller
 {
     //private $produto;
+    private static $TOTAL_PAGINACAO = 10;
+    private static $TOTAL_ITENS = 5;
 
     /*public function __construct(Produto $produto)  
     {
@@ -23,7 +26,7 @@ class ProdutoController extends Controller
      */
     public function index()
     {
-        $produtos = Produto::getProdutos()->paginate(10);
+        $produtos = Produto::getPaginacaoByQuery(self::$TOTAL_PAGINACAO);
         return view('produto.index')->with('produtos', $produtos);
     }
 
@@ -73,8 +76,9 @@ class ProdutoController extends Controller
     {
         // get the produto
         $produto = Produto::find($id);
+        $itens = PedidoItem::getPaginacaoByProdutoId(self::$TOTAL_ITENS, $id);
 
-        return view('produto.show')->with('produto', $produto);
+        return view('produto.show', ['produto' => $produto, 'itens' => $itens]);
     }
 
     /**
@@ -130,14 +134,43 @@ class ProdutoController extends Controller
         return redirect('produto')->with('message', 'O produto foi excluído com sucesso!');
     }
 
+    public function getPaginacao(Request $request)
+    {
+        if($request->ajax())
+        {
+            $query = $request->get('q');
+
+            $produtos = Produto::getPaginacaoByQuery(self::$TOTAL_PAGINACAO, $query);
+
+            return view('produto.pagination')->with('produtos', $produtos)->render();
+        } 
+            
+        return response()->json(['message' => 'Método não permitido'], 405);
+    }
+
+    public function getItens(Request $request)
+    {
+        if($request->ajax())
+        {
+            $produtoId = $request->get('produto_id');
+
+            $itens = PedidoItem::getPaginacaoByProdutoId(self::$TOTAL_ITENS, $produtoId);
+
+            return view('produto.itens')->with('itens', $itens)->render();
+        } 
+            
+        return response()->json(['message' => 'Método não permitido'], 405);
+    }
+
     public function getProdutos(Request $request, $nome)
     {          
         if($request->ajax())
         {
-            $produtos = Produto::getProdutos($nome)->select('id','nome')->limit(5)->get();
-
-            return response()->json($produtos, 200);
-        }
+            $produtos = Produto::getPesquisaByQuery($nome);   
+            return response()->json($produtos, 200);          
+        } 
+            
+        return response()->json(['message' => 'Método não permitido'], 405); 
     }
 
     private function getRoles()

@@ -11,6 +11,7 @@ use App\User;
 class FuncionarioController extends Controller
 {
     //private $funcionario;
+    private static $TOTAL_PAGINACAO = 10;
 
     /*public function __construct(Funcionario $funcionario)  
     {
@@ -24,7 +25,7 @@ class FuncionarioController extends Controller
      */
     public function index()
     {
-        $funcionarios = Funcionario::getFuncionarios()->paginate(10);
+        $funcionarios = Funcionario::getPaginacaoByQuery(self::$TOTAL_PAGINACAO);
         return view('funcionario.index')->with('funcionarios', $funcionarios);
     }
 
@@ -195,6 +196,20 @@ class FuncionarioController extends Controller
         return redirect('funcionario')->with('message', $message);
     }
 
+    public function getPaginacao(Request $request)
+    {
+        if($request->ajax())
+        {
+            $query = $request->get('q');
+
+            $funcionarios = Funcionario::getPaginacaoByQuery(self::$TOTAL_PAGINACAO, $query);
+
+            return view('funcionario.pagination')->with('funcionarios', $funcionarios)->render();
+        } 
+            
+        return response()->json(['message' => 'Método não permitido'], 405);
+    }
+
     private function getRoles()
     {
         return array(
@@ -205,7 +220,6 @@ class FuncionarioController extends Controller
             'cargo' => 'required|integer|between:1,2'
         );
     }
-
     
     private function setUser(Request $request, User &$user)
     {

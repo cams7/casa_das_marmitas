@@ -49,7 +49,7 @@
 		});
 
 		function getEntregadores(page) {
-			loadPage('entregador', page);		
+			loadPage('entregadores', page);		
 		}		
 	</script>
 @endsection

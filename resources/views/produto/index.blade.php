@@ -49,7 +49,7 @@
 		});
 
 		function getProdutos(page) {
-			loadPage('produto', page);		
+			loadPage('produtos', page);		
 		}		
 	</script>
 @endsection
