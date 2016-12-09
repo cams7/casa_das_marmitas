@@ -4,8 +4,6 @@
 @section('content')
 	<h3 class="page-header">{{'Editar Entregador #'.$entregador->id}}</h3>
 
-	@include('layouts.errors')
-
 	{{ Form::model($entregador, array('route' => array('entregador.update', $entregador->id), 'method' => 'PUT')) }}
 	    @include('entregador.form_fields')
 

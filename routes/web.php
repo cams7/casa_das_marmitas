@@ -23,10 +23,17 @@ Route::resource('entregador', 'EntregadorController');
 Route::resource('taxa', 'TaxaController');
 Route::resource('funcionario', 'FuncionarioController');
 
-//Route::get('pedido_item/{id}', 'PedidoItemController@show');
+Route::get('pedido_item/{id}', 'PedidoItemController@show');
+Route::get('pedido_item/produto/{id}', 'PedidoItemController@show');
+
 Route::post('pedido_item', 'PedidoItemController@store');
-//Route::put('pedido_item/{id}', 'PedidoItemController@update');
-//Route::delete('pedido_item/{id}', 'PedidoItemController@destroy');
+Route::post('pedido_item/produto', 'PedidoItemController@store');
+
+Route::put('pedido_item/{id}', 'PedidoItemController@update');
+Route::put('pedido_item/produto/{id}', 'PedidoItemController@update');
+
+Route::delete('pedido_item/{id}', 'PedidoItemController@destroy');
+Route::delete('pedido_item/produto/{id}', 'PedidoItemController@destroy');
 
 Route::get('empresas/{nome}', 'EmpresaController@getEmpresas');
 Route::get('clientes/{nome}', 'ClienteController@getClientes');
@@ -40,6 +47,7 @@ Route::get('pagination/empresa_entregadores', 'EmpresaController@getEntregadores
 Route::get('pagination/entregadores', 'EntregadorController@getPaginacao');
 Route::get('pagination/funcionarios', 'FuncionarioController@getPaginacao');
 Route::get('pagination/pedidos', 'PedidoController@getPaginacao');
+Route::get('pagination/pedido_itens', 'PedidoController@getItens');
 Route::get('pagination/produtos', 'ProdutoController@getPaginacao');
 Route::get('pagination/produto_itens', 'ProdutoController@getItens');
 Route::get('pagination/taxas', 'TaxaController@getPaginacao');

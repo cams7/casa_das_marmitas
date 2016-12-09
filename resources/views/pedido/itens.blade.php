@@ -1,5 +1,5 @@
-@if ($itens != null && $itens->count() > 0)
-    <h3 class="page-header">Itens do Pedido</h3>
+@if ($itens != null && count($itens) > 0)
+    <h3 class="page-header">Itens do Pedido ({{count($itens)}})</h3>
 
 	<div id="list" class="row"> 		
 		<div class="table-responsive col-md-12">
@@ -9,6 +9,7 @@
 						<th>Quantidade</th>
 	            		<th>Custo</th>
 	            		<th>Produto</th>
+	            		<th>Tamanho</th>
 						<th class="actions">Ações</th>
 					</tr>
 				</thead>
@@ -16,17 +17,17 @@
 	    		@foreach($itens as $i => $item)
 	    			<tr>
 	            		<td>{{ $item->quantidade }}</td>
-	            		<td>{{ $item->produto->getCusto() }}</td>
+	            		<td>{{ $item->produto->getCustoByQuantidade($item->quantidade) }}</td>
 	            		<td><a href="{{ URL::to('produto/' . $item->produto->id) }}">{{ $item->produto->nome }}</a></td>
+	            		<td>{{ $item->produto->getTamanho() }}</td>
 	            		<td class="actions">
-							<a class="btn btn-success btn-xs" href="{{ URL::to('pedido_item/' . $item->id) }}">Visualizar</a>
-							<a class="btn btn-warning btn-xs" href="{{ URL::to('pedido_item/' . $item->id . '/edit') }}">Alterar</a>
-							<a class="btn btn-danger btn-xs"  href="#" data-toggle="modal" data-target="#delete-modal">Excluir</a>
+							<button class="btn btn-warning btn-xs item-updade" value="{{$item->id != null ? $item->id : ('produto/'.$item->produto->id)}}">Alterar</button>
+							<button class="btn btn-danger btn-xs item-delete" value="{{$item->id != null ? $item->id : ('produto/'.$item->produto->id)}}">Excluir</button>
 						</td>
 	            	</tr>	
 	    		@endforeach
 	    		</tbody>
 			</table>
 		</div>
-	</div><!-- /#list -->	
+	</div>	
 @endif

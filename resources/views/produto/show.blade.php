@@ -44,10 +44,10 @@
 
 @section('jquery_content')
     <script type="text/javascript">
-        $(document).on('click', '.pagination a', function(e){
-            e.preventDefault();
+        $(document).on('click', '.pagination a', event => {
+            event.preventDefault();
             //console.log($(this).attr('href').split('page='));
-            var page = $(this).attr('href').split('page=')[1];
+            var page = event.target.href.split('page=')[1];
             getItens(page);
         });     
 
@@ -55,7 +55,7 @@
             produtoId = $("#produto_id").val(); 
             //console.log('getting pedidos for page = ' + page + ' and produto_id = ' + produtoId);   
             
-            $.get('/pagination/produto_itens?page=' + page + '&produto_id=' + produtoId, function(data) {
+            $.get('/pagination/produto_itens?page=' + page + '&produto_id=' + produtoId, data => {
                 //console.log(data);
                 $('.content').html(data);
                // location.hash = page;

@@ -6,6 +6,7 @@
 					<tr>
 						<th>Nome</th>
 	            		<th>Telefone</th>
+	            		<th>CEP</th>
 	            		<th>Cidade</th>
 	            		<th>Bairro</th>
 						<th class="actions">Ações</th>
@@ -16,6 +17,7 @@
 	    			<tr>
 	            		<td>{{ $cliente->nome }}</td>
 	            		<td>{{ $cliente->getTelefone() }}</td>
+	            		<td>{{ $cliente->getCep() }}</td>
 	            		<td>{{ $cliente->cidade }}</td>
 	            		<td>{{ $cliente->bairro }}</td>
 

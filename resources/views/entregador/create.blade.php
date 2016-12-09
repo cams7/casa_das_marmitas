@@ -4,8 +4,6 @@
 @section('content')
 	<h3 class="page-header">Adicionar Entregador</h3>
 
-  	@include('layouts.errors')
-
 	{{ Form::open(array('url' => 'entregador')) }}
 	    @include('entregador.form_fields')
 

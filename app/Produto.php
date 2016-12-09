@@ -37,13 +37,20 @@ class Produto extends Model
         $this->attributes['custo'] = $custo;
     }
 
-    public function getCusto()
+    public function getCustoByQuantidade($quantidade)
     {
-        $custo = $this->attributes['custo'];
+        $custo = $this->attributes['custo'];        
         if($custo == null)
             return null;
 
+        $custo *= $quantidade;
+
         return "R$".number_format($custo, 2, ',', '.');
+    }
+
+    public function getCusto()
+    {
+        return $this->getCustoByQuantidade(1);
     }
 
     public function getTamanho()

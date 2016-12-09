@@ -4,8 +4,6 @@
 @section('content')
 	<h3 class="page-header">{{'Editar Funcionário #'.$funcionario->id}}</h3>
 
-	@include('layouts.errors')
-
 	{{ Form::model($funcionario, array('route' => array('funcionario.update', $funcionario->id), 'method' => 'PUT')) }}
 	    @include('funcionario.form_fields')
 

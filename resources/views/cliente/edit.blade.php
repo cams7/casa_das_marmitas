@@ -4,8 +4,6 @@
 @section('content')
 	<h3 class="page-header">{{'Editar Cliente #'.$cliente->id}}</h3>
 
-	@include('layouts.errors')
-
 	{{ Form::model($cliente, array('route' => array('cliente.update', $cliente->id), 'method' => 'PUT')) }}
 	    @include('cliente.form_fields')
 

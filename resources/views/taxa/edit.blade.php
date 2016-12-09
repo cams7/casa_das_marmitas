@@ -4,8 +4,6 @@
 @section('content')
 	<h3 class="page-header">{{'Editar Taxa #'.$taxa->id}}</h3>
 
-	@include('layouts.errors')
-
 	{{ Form::model($taxa, array('route' => array('taxa.update', $taxa->id), 'method' => 'PUT')) }}
 	    @include('taxa.form_fields')
 

@@ -164,7 +164,7 @@ class TaxaController extends Controller
         );
     }
 
-    private function setTaxa(Request $request, Taxa &$taxa)
+    private function setTaxa(Request &$request, Taxa &$taxa)
     {   
         $taxa->setTaxa($request->input('taxa'));
         $taxa->tipo_taxa = $request->input('tipo_taxa');       

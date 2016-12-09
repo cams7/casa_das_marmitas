@@ -4,8 +4,6 @@
 @section('content')
 	<h3 class="page-header">Adicionar Produto</h3>
 
-	@include('layouts.errors')
-
 	{{ Form::open(array('url' => 'produto')) }}
 	    @include('produto.form_fields')
 

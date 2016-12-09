@@ -1,7 +1,7 @@
 $(document).ready(function($){ 
     $("#cliente_nome").autocomplete({
         source : function(request, response) {
-            $.getJSON( "/clientes/" + request.term, function( data ) {                        
+            $.getJSON( "/clientes/" + request.term, data => {                        
                 response(
                     $.map(data, function (cliente, i) {
                         telefone = " < " + cliente.telefone.replace(/^(\d{2})(\d{4})(\d{4})/, "($1) $2-$3") + " >";
@@ -24,13 +24,14 @@ $(document).ready(function($){
 
     $("#taxa").autocomplete({
         source : function(request, response) {
-            $.getJSON( "/taxas/" + request.term, function( data ) {  
+            $.getJSON( "/taxas/" + request.term, data => {  
                 response(
                     $.map(data, function (taxa, i) {
+                        taxa = Number(taxa.taxa).formatMoney();
                         return {
                             id: taxa.id,
-                            label: Number(taxa.taxa).formatMoney(),
-                            value: Number(taxa.taxa).formatMoney()
+                            label: taxa,
+                            value: taxa
                         };
                     })
                 );

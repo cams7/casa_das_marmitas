@@ -4,8 +4,6 @@
 @section('content')
 	<h3 class="page-header">Adicionar Funcionário</h3>
 
-  	@include('layouts.errors')
-
 	{{ Form::open(array('url' => 'funcionario')) }}
 	    @include('funcionario.form_fields')
 

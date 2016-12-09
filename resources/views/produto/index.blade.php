@@ -36,14 +36,15 @@
 
 @section('jquery_content')
 	<script type="text/javascript">
-		$(document).on('click', '.pagination a', function(e){
-			e.preventDefault();
+		$(document).on('click', '.pagination a', event => {
+            event.preventDefault();
 			//console.log($(this).attr('href').split('page='));
-			var page = $(this).attr('href').split('page=')[1];
+			var page = event.target.href.split('page=')[1];
 			getProdutos(page);
 		});
 
-		$(document).on('click', '#search_btn', function(e){
+		$(document).on('click', '#search_btn', event => {
+			event.preventDefault();
 			$("#query").val($("#search_query").val());
 			getProdutos(1);
 		});

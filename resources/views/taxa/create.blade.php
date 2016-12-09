@@ -4,8 +4,6 @@
 @section('content')
 	<h3 class="page-header">Adicionar Taxa</h3>
 
- 	@include('layouts.errors')
-
 	{{ Form::open(array('url' => 'taxa')) }}
 	    @include('taxa.form_fields')
 

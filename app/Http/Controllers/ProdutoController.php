@@ -183,7 +183,7 @@ class ProdutoController extends Controller
         );
     }
 
-    private function setProduto(Request $request, Produto &$produto)
+    private function setProduto(Request &$request, Produto &$produto)
     {   
         $produto->nome  = $request->input('nome');
         $produto->ingredientes = $request->input('ingredientes');

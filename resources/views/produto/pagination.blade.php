@@ -5,8 +5,8 @@
 				<thead>
 					<tr>
 						<th>Nome</th>
-		            	<th>Custo</th>
-		            	<th>Tamanho</th>
+						<th>Tamanho</th>
+		            	<th>Custo</th>		            	
 						<th class="actions">Ações</th>
 					</tr>
 				</thead>
@@ -14,8 +14,8 @@
 	    		@foreach($produtos as $i => $produto)
 	    			<tr>
 	            		<td>{{ $produto->nome }}</td>
-	            		<td>{{ $produto->getCusto() }}</td>
 	            		<td>{{ $produto->getTamanho() }}</td>
+	            		<td>{{ $produto->getCusto() }}</td>	            		
 	            		<td class="actions">
 							<a class="btn btn-success btn-xs" href="{{ URL::to('produto/' . $produto->id) }}">Visualizar</a>
 							<a class="btn btn-warning btn-xs" href="{{ URL::to('produto/' . $produto->id . '/edit') }}">Alterar</a>

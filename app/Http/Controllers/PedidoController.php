@@ -3,14 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+//use Illuminate\Support\Facades\Input;
 use Validator;
 use DB;
 
-use App\Cliente;
-use App\Taxa;
 use App\Pedido;
-use App\PedidoItem;
-
 
 class PedidoController extends Controller
 {
@@ -39,10 +37,19 @@ class PedidoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        return view('pedido.create')->with('pedido', null)->with('itens', null);
+    public function create(Request $request)
+    {   
+        $itens = null;
+
+        if($this->isPostback())
+            $itens = PedidoItemController::getItensBySession($request); 
+        else
+            $request->session()->forget('pedido_itens');            
+
+        return view('pedido.create', ['pedido' => null, 'itens' => $itens]);
     }
+
+    
 
     /**
      * Store a newly created resource in storage.
@@ -62,7 +69,7 @@ class PedidoController extends Controller
                 $validator->errors()->add('field', 'Something is wrong with this field!');
             //}
         });*/
-
+    
         if ($validator->fails()) 
             return redirect()->back()->with('cliente_id', $request->input('cliente_id'))->with('taxa_id', $request->input('taxa_id'))->withInput()->withErrors($validator);
 
@@ -168,6 +175,18 @@ class PedidoController extends Controller
             
         return response()->json(['message' => 'Método não permitido'], 405);
     }
+ 
+    public function getItens(Request $request)
+    {
+        if($request->ajax())
+        {
+            $itens = PedidoItemController::getItensBySession($request);      
+
+            return view('pedido.itens')->with('itens', $itens)->render();
+        } 
+            
+        return response()->json(['message' => 'Método não permitido'], 405);
+    }
 
     private function getRoles()
     {
@@ -180,12 +199,23 @@ class PedidoController extends Controller
         );
     }
 
-    private function setPedido(Request $request, Pedido &$pedido)
+    private function setPedido(Request &$request, Pedido &$pedido)
     {   
         $pedido->cliente_id = $request->input('cliente_id');
         $pedido->taxa_id = $request->input('taxa_id');
         $pedido->quantidade_total  = $request->input('quantidade_total');
         $pedido->setCustoTotal($request->input('total_pedido'));
         $pedido->situacao_pedido  = $request->input('situacao_pedido');  
+    }    
+
+    private function isPostback()
+    {
+        $url = url()->previous();
+        //Log::info("url previous : ".$url);   
+
+        if(strrpos($url, "/create") > -1)        
+            return true;
+
+        return false;
     }
 }

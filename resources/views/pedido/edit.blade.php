@@ -4,8 +4,6 @@
 @section('content')
 	<h3 class="page-header">{{'Editar Predido #'.$pedido->id}}</h3>
 
-	@include('layouts.errors')
-
 	{{ Form::model($pedido, array('route' => array('pedido.update', $pedido->id), 'method' => 'PUT')) }}
 	    @include('pedido.form_fields')
 

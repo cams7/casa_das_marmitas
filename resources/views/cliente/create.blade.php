@@ -4,8 +4,6 @@
 @section('content')	
   <h3 class="page-header">Adicionar Cliente</h3>
 
-	@include('layouts.errors')
-
 	{{ Form::open(array('url' => 'cliente')) }}
 	    @include('cliente.form_fields')
 

@@ -221,14 +221,14 @@ class FuncionarioController extends Controller
         );
     }
     
-    private function setUser(Request $request, User &$user)
+    private function setUser(Request &$request, User &$user)
     {
         $user->name  = $request->input('nome');
         $user->email = $request->input('email');
         $user->password = bcrypt($request->input('senha'));  
     }
 
-    private function setFuncionario(Request $request, Funcionario &$funcionario)
+    private function setFuncionario(Request &$request, Funcionario &$funcionario)
     {   
         $funcionario->cargo = $request->input('cargo');       
     }

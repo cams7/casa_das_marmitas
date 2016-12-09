@@ -190,7 +190,7 @@ class EmpresaController extends Controller
         );
     }
 
-    private function setEmpresa(Request $request, Empresa &$empresa)
+    private function setEmpresa(Request &$request, Empresa &$empresa)
     {   
         $empresa->nome = $request->input('nome');
         $empresa->setCnpj($request->input('cnpj'));

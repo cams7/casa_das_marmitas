@@ -78,10 +78,10 @@
 
 @section('jquery_content')
     <script type="text/javascript">
-        $(document).on('click', '.pagination a', function(e){
-            e.preventDefault();
+        $(document).on('click', '.pagination a', event =>  {
+            event.preventDefault();
             //console.log($(this).attr('href').split('page='));
-            var page = $(this).attr('href').split('page=')[1];
+            var page = event.target.href.split('page=')[1];
             getEntregadores(page);
         });     
 
@@ -89,7 +89,7 @@
             empresaId = $("#empresa_id").val(); 
             //console.log('getting pedidos for page = ' + page + ' and empresa_id = ' + empresaId);   
             
-            $.get('/pagination/empresa_entregadores?page=' + page + '&empresa_id=' + empresaId, function(data) {
+            $.get('/pagination/empresa_entregadores?page=' + page + '&empresa_id=' + empresaId, data => {
                 //console.log(data);
                 $('.content').html(data);
                // location.hash = page;

@@ -12,9 +12,9 @@ Number.prototype.formatMoney = function(c, d, t){
 function loadPage(list, page) {
 	query = $("#query").val();
     query = query != undefined ? query : ''; 
-	console.log('getting ' + list + ' for page = ' + page + ' and query = ' + query);	
+	//console.log('getting ' + list + ' for page = ' + page + ' and query = ' + query);	
 	
-	$.get('/pagination/' + list + '?page=' + page + '&q=' + query, function(data) {
+	$.get('/pagination/' + list + '?page=' + page + '&q=' + query, data => {
         //console.log(data);
 		$('.content').html(data);
 		location.hash = page;

@@ -176,7 +176,7 @@ class EntregadorController extends Controller
         );
     }
 
-    private function setEntregador(Request $request, Entregador &$entregador)
+    private function setEntregador(Request &$request, Entregador &$entregador)
     {   
         $entregador->empresa_id = $request->input('empresa_id');        
         $entregador->nome  = $request->input('nome');

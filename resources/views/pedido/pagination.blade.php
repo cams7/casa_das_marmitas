@@ -5,6 +5,7 @@
 				<thead>
 					<tr>
 						<th>Cliente</th>
+						<th>Telefone</th>
 	            		<th>Quantidade total</th>
 	            		<th>Custo total + Taxa</th>
 	            		<th>Situação</th>
@@ -15,6 +16,7 @@
 	    		@foreach($pedidos as $i => $pedido)
 	    			<tr>
 	            		<td><a href="{{ URL::to('cliente/' . $pedido->cliente->id) }}">{{ $pedido->cliente->nome }}</a></td>
+	            		<td>{{ $pedido->cliente->getTelefone() }}</td>
 	            		<td>{{ $pedido->quantidade_total }}</td>
 	            		<td>{{ $pedido->getCustoTotal() }}</td>
 	            		<td>{{ $pedido->getSituacao() }}</td>

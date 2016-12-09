@@ -74,10 +74,10 @@
 
 @section('jquery_content')
     <script type="text/javascript">
-        $(document).on('click', '.pagination a', function(e){
-            e.preventDefault();
+        $(document).on('click', '.pagination a', event =>  {
+            event.preventDefault();
             //console.log($(this).attr('href').split('page='));
-            var page = $(this).attr('href').split('page=')[1];
+            var page = event.target.href.split('page=')[1];
             getPedidos(page);
         });     
 
@@ -85,10 +85,9 @@
             clienteId = $("#cliente_id").val(); 
             //console.log('getting pedidos for page = ' + page + ' and cliente_id = ' + clienteId);   
             
-            $.get('/pagination/cliente_pedidos?page=' + page + '&cliente_id=' + clienteId, function(data) {
+            $.get('/pagination/cliente_pedidos?page=' + page + '&cliente_id=' + clienteId, data => {
                 //console.log(data);
                 $('.content').html(data);
-               // location.hash = page;
             });         
         }  
     </script>

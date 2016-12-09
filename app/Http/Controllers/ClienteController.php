@@ -191,7 +191,7 @@ class ClienteController extends Controller
         );
     }
 
-    private function setCliente(Request $request, Cliente &$cliente)
+    private function setCliente(Request &$request, Cliente &$cliente)
     {   
         $cliente->nome  = $request->input('nome');
         $cliente->setNascimento($request->input('nascimento'));
