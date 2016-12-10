@@ -14,7 +14,7 @@ function loadPage(list, page) {
     query = query != undefined ? query : ''; 
 	//console.log('getting ' + list + ' for page = ' + page + ' and query = ' + query);	
 	
-	$.get('/pagination/' + list + '?page=' + page + '&q=' + query, data => {
+	$.get('/paginacao/' + list + '?page=' + page + '&q=' + query, data => {
         //console.log(data);
 		$('.content').html(data);
 		location.hash = page;

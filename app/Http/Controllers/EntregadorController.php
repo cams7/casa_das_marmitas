@@ -159,7 +159,7 @@ class EntregadorController extends Controller
 
             $entregadores = Entregador::getPaginacaoByQuery(self::$TOTAL_PAGINACAO, $query);
 
-            return view('entregador.pagination')->with('entregadores', $entregadores)->render();
+            return view('entregador.paginacao')->with('entregadores', $entregadores)->render();
         } 
             
         return response()->json(['message' => 'Método não permitido'], 405);

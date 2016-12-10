@@ -27,9 +27,10 @@ $(document).ready(function($){
             $.getJSON( "/taxas/" + request.term, data => {  
                 response(
                     $.map(data, function (taxa, i) {
+                        id = taxa.id;
                         taxa = Number(taxa.taxa).formatMoney();
                         return {
-                            id: taxa.id,
+                            id: id,
                             label: taxa,
                             value: taxa
                         };

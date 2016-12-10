@@ -14,7 +14,7 @@ class PedidoItem extends Model
     	'pedido_id',
     	'produto_id',
     	'quantidade'
-    ];
+    ];    
 
     public function pedido()
     {
@@ -29,5 +29,10 @@ class PedidoItem extends Model
     public static function getPaginacaoByProdutoId($totalPages, $produtoId)
     {
         return PedidoItem::where('produto_id', '=', $produtoId)->orderBy('id', 'desc')->paginate($totalPages);
+    }
+
+    public static function getPaginacaoByPedidoId($totalPages, $pedidoId)
+    {
+        return PedidoItem::where('pedido_id', '=', $pedidoId)->orderBy('id', 'desc')->paginate($totalPages);
     }
 }

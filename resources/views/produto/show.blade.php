@@ -38,7 +38,7 @@
  	</div>
 
     <div class="content">
-        @include('produto.itens')
+        @include('produto.paginacao_itens')
     </div>
 @endsection
 
@@ -55,7 +55,7 @@
             produtoId = $("#produto_id").val(); 
             //console.log('getting pedidos for page = ' + page + ' and produto_id = ' + produtoId);   
             
-            $.get('/pagination/produto_itens?page=' + page + '&produto_id=' + produtoId, data => {
+            $.get('/paginacao/produto_itens?page=' + page + '&produto_id=' + produtoId, data => {
                 //console.log(data);
                 $('.content').html(data);
                // location.hash = page;

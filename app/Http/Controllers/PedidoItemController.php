@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
+use App\Pedido;
 use App\PedidoItem;
 use App\Produto;
 
@@ -44,9 +45,7 @@ class PedidoItemController extends Controller
            
         if($this->isAdicionaPedido($request))
         {
-            $item = new PedidoItem;
-
-            $this->setPedidoItem($request, $item);
+            $item = $this->getNewPedidoItem($request);
 
             $itens = self::getItensBySession($request);
             
@@ -65,9 +64,9 @@ class PedidoItemController extends Controller
                 }, $itens);
 
             $request->session()->put('pedido_itens', $itens);
-
+            
             //200 OK
-            return response()->json($item, 200);
+            return response()->json(self::getPedido($itens), 200);
         } else
         {   
             //200 OK         
@@ -147,19 +146,15 @@ class PedidoItemController extends Controller
             if(count($itens) == 0) 
                 return response()->json(['message' => 'Itens não encontrado na sessão do usuário'], 404);
             
-            $itens = array_filter($itens, function($i) use ($id){
-                return $i->produto_id == $id;
-            });
-
             //404 Não encontrado
-            if(count($itens) == 0)
+            if(count(
+                array_filter($itens, function($i) use ($id){
+                    return $i->produto_id == $id;
+                })) == 0)
                 return response()->json(['message' => 'O item de pedido foi excluído anteriormente'], 404);
 
-            $item = array_values($itens)[0];
-
-            $this->setPedidoItem($request, $item);
-
-            /*
+            $item = $this->getNewPedidoItem($request);
+            
             $itens = array_map(function($i) use (&$item) {
                 if($i->produto_id == $item->produto_id)
                     return $item;        
@@ -168,10 +163,9 @@ class PedidoItemController extends Controller
             }, $itens);
 
             $request->session()->put('pedido_itens', $itens);
-            */
-
+            
             //200 OK
-            return response()->json($item, 200);
+            return response()->json(self::getPedido($itens), 200);
         }
         else
         {
@@ -207,7 +201,7 @@ class PedidoItemController extends Controller
             $request->session()->put('pedido_itens', $itens);
             
             //200 OK
-            return response()->json(['produto_id' => $id], 200);
+            return response()->json(self::getPedido($itens), 200);
         } else
         {
             //200 OK
@@ -215,12 +209,16 @@ class PedidoItemController extends Controller
         } 
     }
 
-    private function setPedidoItem(Request &$request, PedidoItem &$item)
+    private function getNewPedidoItem(Request &$request)
     {
+        $item = new PedidoItem;
+
         $item->id = null;
         $item->produto_id = $request->input('produto_id');
         $item->quantidade = $request->input('quantidade');
         $item->produto = Produto::find($request->input('produto_id'));
+
+        return $item;
     }
 
     private function isAdicionaPedido(Request &$request) {
@@ -230,7 +228,7 @@ class PedidoItemController extends Controller
             return true;
 
         return false;
-    } 
+    }
 
     public static function getItensBySession(Request &$request)
     {
@@ -239,5 +237,22 @@ class PedidoItemController extends Controller
             $itens = $request->session()->get('pedido_itens'); 
 
         return $itens;
+    } 
+
+    public static function getPedido(&$itens)
+    {
+        $pedido = new Pedido;
+
+        $pedido->quantidade_total = array_reduce($itens, function($carry, $i){
+            $carry += $i->quantidade; 
+            return $carry;
+        }, 0);
+
+        $pedido->total_pedido = array_reduce($itens, function($carry, $i){
+            $carry += $i->quantidade * $i->produto->custo; 
+            return $carry;
+        }, 0);
+
+        return $pedido;
     }      
 }

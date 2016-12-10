@@ -6,7 +6,7 @@
         <input type="hidden" id="cliente_id" name="cliente_id" value="{{session('cliente_id') != null ? session('cliente_id') : ($pedido != null ? $pedido->cliente->id : '')}}">
     </div>
     <div class="form-group col-md-2 {{$errors->has('taxa_id') ? 'has-error has-danger' : ''}}">
-        {{ Form::label('taxa', 'Taxa:', array('class' => 'control-label')) }}
+        {{ Form::label('taxa', 'Taxa atual:', array('class' => 'control-label')) }}
         {{ Form::text('taxa', $pedido != null ? $pedido->taxa->getTaxa() : null, array('id' => 'taxa', 'class' => 'form-control', 'placeholder' => 'Valor da taxa')) }}
         <div class="help-block with-errors">{{ $errors->first('taxa_id') }}</div>
         <input type="hidden" id="taxa_id" name="taxa_id" value="{{session('taxa_id') != null ? session('taxa_id') : ($pedido != null ? $pedido->taxa->id : '')}}">
@@ -21,12 +21,12 @@
 <div class="row">
     <div class="form-group col-md-4 {{$errors->has('quantidade_total') ? 'has-error has-danger' : ''}}">
         {{ Form::label('quantidade_total', 'Quantidade total:', array('class' => 'control-label')) }}
-        {{ Form::text('quantidade_total', null, array('readonly' => 'readonly', 'class' => 'form-control')) }}
+        {{ Form::text('quantidade_total', null, array('id' => 'quantidade_total', 'class' => 'form-control', 'readonly')) }}
         <div class="help-block with-errors">{{ $errors->first('quantidade_total') }}</div>
     </div>
     <div class="form-group col-md-4 {{$errors->has('total_pedido') ? 'has-error has-danger' : ''}}">
-        {{ Form::label('total_pedido', 'Custo total:', array('class' => 'control-label')) }}
-        {{ Form::text('total_pedido', $pedido != null ? $pedido->getCustoTotal() : null, array('readonly' => 'readonly', 'class' => 'form-control')) }}
+        {{ Form::label('total_pedido', 'Custo total c/ taxa:', array('class' => 'control-label')) }}
+        {{ Form::text('total_pedido', $pedido != null ? $pedido->getCustoTotal() : null, array('id' => 'total_pedido', 'class' => 'form-control', 'readonly')) }}
         <div class="help-block with-errors">{{ $errors->first('total_pedido') }}</div>
     </div>
     <div class="form-group col-md-4">

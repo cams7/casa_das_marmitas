@@ -68,7 +68,7 @@
     </div>	
 
     <div class="content">
-        @include('cliente.pedidos')
+        @include('cliente.paginacao_pedidos')
     </div>
 @endsection
 
@@ -85,7 +85,7 @@
             clienteId = $("#cliente_id").val(); 
             //console.log('getting pedidos for page = ' + page + ' and cliente_id = ' + clienteId);   
             
-            $.get('/pagination/cliente_pedidos?page=' + page + '&cliente_id=' + clienteId, data => {
+            $.get('/paginacao/cliente_pedidos?page=' + page + '&cliente_id=' + clienteId, data => {
                 //console.log(data);
                 $('.content').html(data);
             });         

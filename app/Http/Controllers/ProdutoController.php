@@ -142,13 +142,13 @@ class ProdutoController extends Controller
 
             $produtos = Produto::getPaginacaoByQuery(self::$TOTAL_PAGINACAO, $query);
 
-            return view('produto.pagination')->with('produtos', $produtos)->render();
+            return view('produto.paginacao')->with('produtos', $produtos)->render();
         } 
             
         return response()->json(['message' => 'Método não permitido'], 405);
     }
 
-    public function getItens(Request $request)
+    public function getPaginacaoItens(Request $request)
     {
         if($request->ajax())
         {
@@ -156,7 +156,7 @@ class ProdutoController extends Controller
 
             $itens = PedidoItem::getPaginacaoByProdutoId(self::$TOTAL_ITENS, $produtoId);
 
-            return view('produto.itens')->with('itens', $itens)->render();
+            return view('produto.paginacao_itens')->with('itens', $itens)->render();
         } 
             
         return response()->json(['message' => 'Método não permitido'], 405);

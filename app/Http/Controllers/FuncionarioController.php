@@ -204,7 +204,7 @@ class FuncionarioController extends Controller
 
             $funcionarios = Funcionario::getPaginacaoByQuery(self::$TOTAL_PAGINACAO, $query);
 
-            return view('funcionario.pagination')->with('funcionarios', $funcionarios)->render();
+            return view('funcionario.paginacao')->with('funcionarios', $funcionarios)->render();
         } 
             
         return response()->json(['message' => 'Método não permitido'], 405);

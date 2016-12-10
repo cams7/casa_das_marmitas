@@ -30,7 +30,7 @@
 @endif	
 
 <div class="content">
-	@include('produto.pagination')
+	@include('produto.paginacao')
 </div> 	
 @endsection
 

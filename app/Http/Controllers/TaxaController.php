@@ -139,7 +139,7 @@ class TaxaController extends Controller
 
             $taxas = Taxa::getPaginacaoByQuery(self::$TOTAL_PAGINACAO, $query);
 
-            return view('taxa.pagination')->with('taxas', $taxas)->render();
+            return view('taxa.paginacao')->with('taxas', $taxas)->render();
         } 
             
         return response()->json(['message' => 'Método não permitido'], 405);

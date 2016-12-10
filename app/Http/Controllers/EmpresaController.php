@@ -142,13 +142,13 @@ class EmpresaController extends Controller
 
             $empresas = Empresa::getPaginacaoByQuery(self::$TOTAL_PAGINACAO, $query);
 
-            return view('empresa.pagination')->with('empresas', $empresas)->render();
+            return view('empresa.paginacao')->with('empresas', $empresas)->render();
         } 
             
         return response()->json(['message' => 'Método não permitido'], 405);
     }
 
-    public function getEntregadores(Request $request)
+    public function getPaginacaoEntregadores(Request $request)
     {
         if($request->ajax())
         {
@@ -156,7 +156,7 @@ class EmpresaController extends Controller
 
             $entregadores = Entregador::getPaginacaoByEmpresaId(self::$TOTAL_ENTREGADORES, $empresaId);
 
-            return view('empresa.entregadores')->with('entregadores', $entregadores)->render();
+            return view('empresa.paginacao_entregadores')->with('entregadores', $entregadores)->render();
         }
             
         return response()->json(['message' => 'Método não permitido'], 405);

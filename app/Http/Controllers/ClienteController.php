@@ -144,13 +144,13 @@ class ClienteController extends Controller
 
             $clientes = Cliente::getPaginacaoByQuery(self::$TOTAL_PAGINACAO, $query);
 
-            return view('cliente.pagination')->with('clientes', $clientes)->render();
+            return view('cliente.paginacao')->with('clientes', $clientes)->render();
         } 
             
         return response()->json(['message' => 'Método não permitido'], 405);
     }
 
-    public function getPedidos(Request $request)
+    public function getPaginacaoPedidos(Request $request)
     {
         if($request->ajax())
         {
@@ -158,7 +158,7 @@ class ClienteController extends Controller
 
             $pedidos = Pedido::getPaginacaoByClienteId(self::$TOTAL_PEDIDOS, $clienteId);
 
-            return view('cliente.pedidos')->with('pedidos', $pedidos)->render();
+            return view('cliente.paginacao_pedidos')->with('pedidos', $pedidos)->render();
         } 
             
         return response()->json(['message' => 'Método não permitido'], 405);

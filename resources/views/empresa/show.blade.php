@@ -72,7 +72,7 @@
     </div>
 
     <div class="content">
-        @include('empresa.entregadores')
+        @include('empresa.paginacao_entregadores')
     </div>  
 @endsection
 
@@ -89,7 +89,7 @@
             empresaId = $("#empresa_id").val(); 
             //console.log('getting pedidos for page = ' + page + ' and empresa_id = ' + empresaId);   
             
-            $.get('/pagination/empresa_entregadores?page=' + page + '&empresa_id=' + empresaId, data => {
+            $.get('/paginacao/empresa_entregadores?page=' + page + '&empresa_id=' + empresaId, data => {
                 //console.log(data);
                 $('.content').html(data);
                // location.hash = page;

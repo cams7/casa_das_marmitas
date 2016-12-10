@@ -1,11 +1,10 @@
 @extends('layouts.master')
 @section('title', 'Visualiza Pedido')
 
-@section('jquery_content')
-@endsection
-
 @section('content')	
 	<h3 class="page-header">{{'Visualizar Pedido #'.$pedido->id}}</h3>
+
+  <input type="hidden" id="pedido_id" value="{{$pedido->id}}">
 
 	<div class="row">
 		<div class="col-md-6">
@@ -46,5 +45,29 @@
    		</div>
  	</div>
 
- 	@include('pedido.itens', ['itens' => $pedido->itens])
+  <div class="content">
+      @include('pedido.paginacao_itens')
+  </div>
+@endsection
+
+@section('jquery_content')
+  <script type="text/javascript">
+        $(document).on('click', '.pagination a', event => {
+            event.preventDefault();
+            //console.log($(this).attr('href').split('page='));
+            var page = event.target.href.split('page=')[1];
+            getItens(page);
+        });     
+
+        function getItens(page) {
+            pedidoId = $("#pedido_id").val(); 
+            //console.log('getting pedidos for page = ' + page + ' and pedido_id = ' + pedidoId);   
+            
+            $.get('/paginacao/pedido_itens?page=' + page + '&pedido_id=' + pedidoId, data => {
+                //console.log(data);
+                $('.content').html(data);
+               // location.hash = page;
+            });         
+        }  
+    </script>
 @endsection

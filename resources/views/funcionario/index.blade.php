@@ -30,7 +30,7 @@
 @endif	
 
 <div class="content">
-	@include('funcionario.pagination')
+	@include('funcionario.paginacao')
 </div> 	
 @endsection
 

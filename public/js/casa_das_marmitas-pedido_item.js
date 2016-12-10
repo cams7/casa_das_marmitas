@@ -4,10 +4,22 @@ getNomeProduto = function (nome, tamanho) {
 }
 
 loadItens = function () {
-    $.get('/pagination/pedido_itens', data => {
+    $.get('/lista/pedido_itens', data => {
         //console.log(data);
         $('.content').html(data);
     });
+}
+
+setPedido = function(data) { 
+    $('#quantidade_total').val(data.quantidade_total > 0 ? data.quantidade_total : '');
+
+    if(data.total_pedido > 0) {
+        taxa = $('#taxa').val().trim();
+        taxa = taxa != '' ? Number(taxa.replace(/[,]/g, '.').replace(/[\R\$]/g, '')) : 0;
+
+        $('#total_pedido').val(Number(data.total_pedido + taxa).formatMoney());
+    } else
+        $('#total_pedido').val('');
 }
 
 $(document).ready(function() {
@@ -105,6 +117,7 @@ $(document).ready(function() {
             success: data => {
                 //console.log('Sucess:');
                 //console.log(data);
+                setPedido(data);                
 
                 loadItens();
             },
@@ -122,7 +135,9 @@ $(document).ready(function() {
         event.preventDefault();
 
         var produtoId = $('#produto_id').val();
-        if(produtoId == '')
+        var quantidade = $('#quantidade').val();
+
+        if(produtoId == '' || quantidade < 1)
             return;
 
         $.ajaxSetup({
@@ -155,8 +170,9 @@ $(document).ready(function() {
             dataType: 'JSON',
             cache: false,          
             success: data => {
-                console.log('Sucess:');
-                console.log(data);               
+                //console.log('Sucess:');
+                //console.log(data);
+                setPedido(data);               
 
                 loadItens();
 
