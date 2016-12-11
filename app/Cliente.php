@@ -35,6 +35,11 @@ class Cliente extends Model
         return $this->hasMany(Pedido::class);
     }
 
+    public static function getNomeWithTelefoneFormatado($nome, $telefone)
+    {
+        return $nome . " < " . self::getTelefoneFormatado($telefone) . " >";
+    }
+
     public function setNascimento($nascimento)
     {
         $this->attributes['nascimento'] = preg_replace('~.*(\d{2})\/(\d{2})\/(\d{4}).*~', '$3-$2-$1', $nascimento);
@@ -56,7 +61,11 @@ class Cliente extends Model
 
     public function getTelefone()
     {
-        $telefone = $this->attributes['telefone'];
+        return self::getTelefoneFormatado($this->attributes['telefone']);
+    }
+
+    public static function getTelefoneFormatado($telefone)
+    {
         if($telefone == null)
             return null;
 

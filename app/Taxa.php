@@ -36,7 +36,11 @@ class Taxa extends Model
 
     public function getTaxa()
     {
-        $taxa = $this->attributes['taxa'];
+        return self::getTaxaFormatada($this->attributes['taxa']);
+    }
+
+    public static function getTaxaFormatada($taxa)
+    {
         if($taxa == null)
             return null;
 

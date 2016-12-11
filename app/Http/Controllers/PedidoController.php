@@ -8,8 +8,9 @@ use Illuminate\Support\Facades\Log;
 use Validator;
 use DB;
 
-use App\Pedido;
+use App\Cliente;
 use App\Taxa;
+use App\Pedido;
 use App\PedidoItem;
 
 class PedidoController extends Controller
@@ -47,7 +48,7 @@ class PedidoController extends Controller
         if($this->isPostback())
             $itens = PedidoItemController::getItensBySession($request); 
         else
-            $request->session()->forget('pedido_itens');            
+            PedidoItemController::removeItensOfSession($request);         
 
         return view('pedido.create', ['pedido' => null, 'itens' => $itens]);
     }
@@ -61,59 +62,46 @@ class PedidoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {           
-             
+    {        
         $validator = Validator::make($request->all(), $this->getRoles());
     
         $itens = PedidoItemController::getItensBySession($request);
         $pedido = PedidoItemController::getPedido($itens); 
 
-        $taxaId = $request->input('taxa_id');
-        if($taxaId !== '' && $pedido->total_pedido > 0)
-        {   
-            $taxa = Taxa::where('id', '=', $taxaId)->pluck('taxa')[0];
-            $pedido->total_pedido += $taxa;
-        }
+        $this->setNomeCliente($request);
+        $this->setTaxa($request, $pedido);
+        $this->setQuantidadeAndCusto($request, $pedido);
         
-
-        /*$validator->after(function ($validator) use (&$pedido) {
+        $validator->after(function ($validator) use (&$pedido) {
 
             if($pedido->quantidade_total < 1)
                 $validator->errors()->add('quantidade_total', 'A quantidade total é maior que zero');
 
             if($pedido->total_pedido < 1)
                 $validator->errors()->add('total_pedido', 'O custo total é maior que zero');
-        });*/ 
-
-        //$request->replace(['quantidade_total' => $pedido->quantidade_total, 'total_pedido' => $pedido->total_pedido]);
-        $request->merge(['quantidade_total' => $pedido->quantidade_total > 0 ? $pedido->quantidade_total : null, 'total_pedido' => $pedido->getCustoTotal()]);     
+        });     
     
         if ($validator->fails()) 
             return redirect()->back()->with('cliente_id', $request->input('cliente_id'))->with('taxa_id', $request->input('taxa_id'))->withInput()->withErrors($validator);
 
         $userId = DB::table('users')->max('id');
         
-        //$pedido = new Pedido;
         $pedido->user_id = $userId;             
         
         $this->setPedido($request, $pedido);
+
+        $itens = array_reverse($itens);
 
         DB::beginTransaction();
 
         $pedido->save();
 
-        foreach ($itens as $key => $i)
-        {
-            $item = new PedidoItem;
-
-            $item->pedido_id = $pedido->id;
-            $item->produto_id = $i->produto_id;
-            $item->quantidade = $i->quantidade;
-
-            $item->save();
-        }  
+        foreach ($itens as $i => $item)
+            $this->getPedidoItem($pedido->id, $item)->save();
 
         DB::commit();
+
+        PedidoItemController::removeItensOfSession($request);
 
         return redirect('pedido')->with('message', 'O pedido foi cadastrado com sucesso!');
     }
@@ -140,12 +128,19 @@ class PedidoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         // get the pedido
         $pedido = Pedido::find($id);
 
-        return view('pedido.edit', ['pedido' => $pedido, 'itens' => null]);
+        $itens = null;
+
+        if($this->isPostback())
+            $itens = PedidoItemController::getItensBySession($request); 
+        else
+            $itens = PedidoItemController::getItens($request, $id);
+
+        return view('pedido.edit', ['pedido' => $pedido, 'itens' => $itens]);
     }
 
     /**
@@ -162,20 +157,47 @@ class PedidoController extends Controller
         
         $validator = Validator::make($request->all(), $this->getRoles());
 
-        /*$validator->after(function ($validator) {
-            //if ($this->somethingElseIsInvalid()) {
-                $validator->errors()->add('field', 'Something is wrong with this field!');
-            //}
-        });*/
+        $itens = PedidoItemController::getItensBySession($request);
+        $pedido = PedidoItemController::getPedidoById($itens, $id); 
+
+        $this->setNomeCliente($request);
+        $this->setTaxa($request, $pedido);
+        $this->setQuantidadeAndCusto($request, $pedido);
+
+        $validator->after(function ($validator) use (&$pedido) {
+
+            if($pedido->quantidade_total < 1)
+                $validator->errors()->add('quantidade_total', 'A quantidade total é maior que zero');
+
+            if($pedido->total_pedido < 1)
+                $validator->errors()->add('total_pedido', 'O custo total é maior que zero');
+        });
 
         if ($validator->fails()) 
             return redirect()->back()->with('cliente_id', $request->input('cliente_id'))->with('taxa_id', $request->input('taxa_id'))->withInput()->withErrors($validator);
 
-        $pedido = Pedido::find($id);
-
         $this->setPedido($request, $pedido);        
 
+        $itens = array_reverse($itens);
+
+        DB::beginTransaction();
+
         $pedido->save();
+
+        foreach ($itens as $i => $item)  
+            if($item->id == 0)
+                $item = $this->getPedidoItem($pedido->id, $item)->save();               
+            else
+                $item->update(['quantidade' => $item->quantidade]); 
+
+        $itens = PedidoItemController::getItensExcluidosBySession($request);
+
+        foreach ($itens as $i => $item)
+            $item->delete(); 
+
+        DB::commit();
+
+        PedidoItemController::removeItensOfSession($request);
 
         return redirect('pedido')->with('message', 'O pedido foi atualizado com sucesso!');
     }
@@ -254,6 +276,46 @@ class PedidoController extends Controller
         //$pedido->quantidade_total  = $request->input('quantidade_total');
         //$pedido->setCustoTotal($request->input('total_pedido'));
         $pedido->situacao_pedido  = $request->input('situacao_pedido');  
+    }
+
+    private function setNomeCliente(Request &$request)
+    {
+        $clienteId = $request->input('cliente_id');
+        if($clienteId !== '')
+        {   
+            $cliente = Cliente::where('id', '=', $clienteId)->select('nome', 'telefone')->get()[0];
+            $request->merge(['cliente_nome' => Cliente::getNomeWithTelefoneFormatado($cliente->nome, $cliente->telefone)]);
+        }
+    }
+
+    private function setTaxa(Request &$request, Pedido &$pedido)
+    {
+        $taxaId = $request->input('taxa_id');
+        if($taxaId !== '')
+        {   
+            $taxa = Taxa::where('id', '=', $taxaId)->select('taxa')->get()[0];
+            $request->merge(['taxa' => Taxa::getTaxaFormatada($taxa->taxa)]);
+            
+            if($pedido->total_pedido > 0)
+                $pedido->total_pedido += $taxa->taxa;
+        }
+    }
+
+    private function setQuantidadeAndCusto(Request &$request, Pedido &$pedido)
+    {
+        //$request->replace(['quantidade_total' => $pedido->quantidade_total, 'total_pedido' => $pedido->total_pedido]);
+        $request->merge(['quantidade_total' => $pedido->quantidade_total > 0 ? $pedido->quantidade_total : null, 'total_pedido' => $pedido->getCustoTotal()]);
+    }
+
+    private function getPedidoItem($pedidoId, &$i)
+    {
+        $item = new PedidoItem;
+
+        $item->pedido_id = $pedidoId;        
+        $item->produto_id = $i->produto_id;
+        $item->quantidade = $i->quantidade;
+
+        return $item;
     }    
 
     private function isPostback()
@@ -261,7 +323,7 @@ class PedidoController extends Controller
         $url = url()->previous();
         //Log::info("url previous : ".$url);   
 
-        if(strrpos($url, "/create") > -1)        
+        if(strrpos($url, "/create") > -1 || strrpos($url, "/edit") > -1)        
             return true;
 
         return false;

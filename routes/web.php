@@ -26,7 +26,7 @@ Route::resource('funcionario', 'FuncionarioController');
 Route::get('pedido_item/{id}', 'PedidoItemController@show');
 Route::get('pedido_item/produto/{id}', 'PedidoItemController@show');
 
-Route::post('pedido_item', 'PedidoItemController@store');
+//Route::post('pedido_item', 'PedidoItemController@store');
 Route::post('pedido_item/produto', 'PedidoItemController@store');
 
 Route::put('pedido_item/{id}', 'PedidoItemController@update');

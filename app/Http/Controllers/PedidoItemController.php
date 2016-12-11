@@ -42,36 +42,31 @@ class PedidoItemController extends Controller
         //405 Método não permitido
         if (!$request->isMethod('post') || !$request->ajax() || !$request->format() == 'json' || !$request->wantsJson())
             return response()->json(['message' => 'Método não permitido'], 405);
-           
-        if($this->isAdicionaPedido($request))
-        {
-            $item = $this->getNewPedidoItem($request);
+        
+        $itens = self::getAllItensBySession($request);
 
-            $itens = self::getItensBySession($request);
-            
-            if(count(
-                array_filter($itens, function($i) use (&$item) {
-                    return $i->produto_id == $item->produto_id;
-                })
-            ) == 0)
-                array_unshift($itens, $item);
-            else
-                $itens = array_map(function($i) use (&$item) {
-                    if($i->produto_id == $item->produto_id)
-                        $i->quantidade += $item->quantidade;        
+        $item = $this->getNewPedidoItem($request);            
+        
+        if(count(
+            array_filter($itens, function($i) use (&$item) {
+                return !$i->isExcluido() && $i->produto_id == $item->produto_id;
+            })
+        ) == 0)
+            array_unshift($itens, $item);
+        else
+            $itens = array_map(function($i) use (&$item) {
+                if(!$i->isExcluido() && $i->produto_id == $item->produto_id)
+                    $i->quantidade += $item->quantidade;        
 
-                    return $i;
-                }, $itens);
+                return $i;
+            }, $itens);
 
-            $request->session()->put('pedido_itens', $itens);
-            
-            //200 OK
-            return response()->json(self::getPedido($itens), 200);
-        } else
-        {   
-            //200 OK         
-            return response()->json(['id' => 0], 200);           
-        }
+        $request->session()->put('pedido_itens', $itens);
+
+        $itens = self::getItensBySession($request);
+        
+        //200 OK
+        return response()->json(self::getPedido($itens), 200);    
     }
 
     /**
@@ -85,33 +80,27 @@ class PedidoItemController extends Controller
         //405 Método não permitido
         if (!$request->isMethod('get') || !$request->ajax())
             return response()->json(['message' => 'Método não permitido'], 405);
+
+        $itens = self::getItensBySession($request);
+
+        //404 Não encontrado
+        if(count($itens) == 0) 
+            return response()->json(['message' => 'Itens não encontrado na sessão do usuário'], 404);
         
-        if($this->isAdicionaPedido($request))
-        {
+        $itemCadastrado = $this->isItemCadastrado($request);
 
-            $itens = self::getItensBySession($request);
+        $item = array_filter($itens, function($i) use ($id, $itemCadastrado){
+            return $itemCadastrado ? $i->id == $id : $i->produto_id == $id;
+        });       
 
-            //404 Não encontrado
-            if(count($itens) == 0) 
-                return response()->json(['message' => 'Itens não encontrado na sessão do usuário'], 404);
-            
-            $itens = array_filter($itens, function($i) use ($id){
-                return $i->produto_id == $id;
-            });
+        //404 Não encontrado
+        if(count($item) == 0)
+            return response()->json(['message' => 'O item de pedido foi excluído anteriormente da sessão'], 404);
 
-            //404 Não encontrado
-            if(count($itens) == 0)
-                return response()->json(['message' => 'O item de pedido foi excluído anteriormente'], 404);
+        $item = array_values($item)[0];
 
-            $item = array_values($itens)[0];
-
-           //200 OK
-           return response()->json($item, 200);            
-        } else
-        {   
-            //200 OK       
-            return response()->json(['id' => $id], 200);    
-        }
+        //200 OK
+        return response()->json($item, 200);
     }
 
     /**
@@ -137,41 +126,38 @@ class PedidoItemController extends Controller
         //405 Método não permitido
         if (!$request->isMethod('put') || !$request->ajax() || !$request->format() == 'json' || !$request->wantsJson())
             return response()->json(['message' => 'Método não permitido'], 405);
+
+        $itens = self::getItensBySession($request);
+
+        //404 Não encontrado
+        if(count($itens) == 0) 
+            return response()->json(['message' => 'Itens não encontrado na sessão do usuário'], 404);
+
+        $itemCadastrado = $this->isItemCadastrado($request); 
+
+        $item = array_filter($itens, function($i) use ($id, $itemCadastrado){
+            return $itemCadastrado ? $i->id == $id : $i->produto_id == $id;
+        });           
+
+        //404 Não encontrado
+        if(count($item) == 0)
+            return response()->json(['message' => 'O item de pedido foi excluído anteriormente da sessão'], 404);
+
+        $item = array_values($item)[0];
+
+        $this->setQuantidade($request , $item);
         
-        if($this->isAdicionaPedido($request))
-        {
-            $itens = self::getItensBySession($request);
+        /*$itens = array_map(function($i) use (&$item, $itemCadastrado) {
+            if($itemCadastrado ? $i->id == $item->id : $i->produto_id == $item->produto_id)
+                return $item;        
 
-            //404 Não encontrado
-            if(count($itens) == 0) 
-                return response()->json(['message' => 'Itens não encontrado na sessão do usuário'], 404);
-            
-            //404 Não encontrado
-            if(count(
-                array_filter($itens, function($i) use ($id){
-                    return $i->produto_id == $id;
-                })) == 0)
-                return response()->json(['message' => 'O item de pedido foi excluído anteriormente'], 404);
+            return $i;
+        }, $itens);*/
 
-            $item = $this->getNewPedidoItem($request);
-            
-            $itens = array_map(function($i) use (&$item) {
-                if($i->produto_id == $item->produto_id)
-                    return $item;        
-
-                return $i;
-            }, $itens);
-
-            $request->session()->put('pedido_itens', $itens);
-            
-            //200 OK
-            return response()->json(self::getPedido($itens), 200);
-        }
-        else
-        {
-            //200 OK
-            return response()->json(['id' => $id], 200);
-        }    
+        //$request->session()->put('pedido_itens', $itens);
+        
+        //200 OK
+        return response()->json(self::getPedido($itens), 200);  
     }
 
     /**
@@ -185,64 +171,105 @@ class PedidoItemController extends Controller
         //405 Método não permitido
         if (!$request->isMethod('delete') || !$request->ajax() || !$request->format() == 'json' || !$request->wantsJson())
             return response()->json(['message' => 'Método não permitido'], 405);
+
+        $itens = self::getItensBySession($request);
+
+        //404 Não encontrado
+        if(count($itens) == 0) 
+            return response()->json(['message' => 'Itens não encontrado na sessão do usuário'], 404);
+
+        $itemCadastrado = $this->isItemCadastrado($request);
         
-        if($this->isAdicionaPedido($request))
-        {
-            $itens = self::getItensBySession($request);
+        $itens = array_map(function($item) use ($id, $itemCadastrado) {
+            if($itemCadastrado ? $item->id == $id : $item->produto_id == $id)
+                 $item->setExcluido(true);        
 
-            //404 Não encontrado
-            if(count($itens) == 0) 
-                return response()->json(['message' => 'Itens não encontrado na sessão do usuário'], 404);
+            return $item;
+        }, $itens);
 
-            $itens = array_filter($itens, function($i) use ($id){
-                return $i->produto_id != $id;
-            });
+        //$request->session()->put('pedido_itens', $itens);
+        $itens = self::getItensBySession($request);
+        
+        //200 OK
+        return response()->json(self::getPedido($itens), 200);   
+    }
 
-            $request->session()->put('pedido_itens', $itens);
-            
-            //200 OK
-            return response()->json(self::getPedido($itens), 200);
-        } else
-        {
-            //200 OK
-            return response()->json(['id' => $id], 200);  
-        } 
+    private function setQuantidade(Request &$request , PedidoItem &$item)
+    {        
+        $item->quantidade = $request->input('quantidade');        
     }
 
     private function getNewPedidoItem(Request &$request)
     {
-        $item = new PedidoItem;
+        $item = new PedidoItem;  
 
-        $item->id = null;
+        $this->setQuantidade($request , $item);
+
         $item->produto_id = $request->input('produto_id');
-        $item->quantidade = $request->input('quantidade');
         $item->produto = Produto::find($request->input('produto_id'));
 
         return $item;
     }
 
-    private function isAdicionaPedido(Request &$request) {
+    private function isItemCadastrado(Request &$request) {
         $uri = $request->path();
 
-        if(strrpos($uri, "/produto") > -1)        
-            return true;
+        if(strrpos($uri, "/produto") > 0)        
+            return false;
 
-        return false;
+        return true;
     }
 
-    public static function getItensBySession(Request &$request)
+    private static function getAllItensBySession(Request &$request)
     {
         $itens = [];
         if($request->session()->has('pedido_itens'))
             $itens = $request->session()->get('pedido_itens'); 
 
         return $itens;
-    } 
+    }
 
-    public static function getPedido(&$itens)
+    public static function getItensBySession(Request &$request)
     {
-        $pedido = new Pedido;
+        $itens = self::getAllItensBySession($request);
 
+        $itens = array_filter($itens, function($item){
+            return !$item->isExcluido();
+        });
+
+        return $itens;
+    }
+
+    public static function getItensExcluidosBySession(Request &$request)
+    {
+        $itens = self::getAllItensBySession($request);
+
+        $itens = array_filter($itens, function($item){
+            return $item->isExcluido() && $item->id != null;
+        });
+
+        return $itens;
+    }
+
+    public static function getItens(Request &$request, $pedidoId)
+    {
+        $itens = [];
+
+        foreach (PedidoItem::getItensByPedidoId($pedidoId) as $i => $item)
+            array_push($itens, $item);
+
+        $request->session()->put('pedido_itens', $itens);
+
+        return $itens;
+    }
+
+    public static function removeItensOfSession(Request &$request)
+    {
+        $request->session()->forget('pedido_itens');
+    }
+
+    private static function setPedido(Pedido &$pedido, &$itens)
+    {
         $pedido->quantidade_total = array_reduce($itens, function($carry, $i){
             $carry += $i->quantidade; 
             return $carry;
@@ -252,6 +279,22 @@ class PedidoItemController extends Controller
             $carry += $i->quantidade * $i->produto->custo; 
             return $carry;
         }, 0);
+    }
+
+    public static function getPedido(&$itens)
+    {
+        $pedido = new Pedido;
+
+        self::setPedido($pedido, $itens);
+
+        return $pedido;
+    }
+
+    public static function getPedidoById(&$itens, $pedidoId)
+    {
+        $pedido = Pedido::find($pedidoId);
+
+        self::setPedido($pedido, $itens);
 
         return $pedido;
     }      

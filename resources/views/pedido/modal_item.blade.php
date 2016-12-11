@@ -19,6 +19,7 @@
 					        {{ Form::label('quantidade', 'Quantidade:', array('class' => 'control-label')) }}
 					        {{ Form::text('quantidade', null, array('id' => 'quantidade', 'class' => 'form-control', 'placeholder' => 'Qtd de marmitas', 'pattern' => '^\d+$', 'required')) }}
 					        <div class="help-block with-errors"></div>
+					        <input type="hidden" id="item_id" name="item_id" value="">
 					    </div>
 					</div>
       			</div>

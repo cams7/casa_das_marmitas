@@ -35,14 +35,23 @@ class Empresa extends Model
         return $this->hasMany(Entregador::class);
     }
 
+    public static function getNomeWithCnjpFormatado($nome, $cnpj)
+    {
+        return $nome . " < " . self::getCnjpFormatado($cnpj) . " >";
+    }
+
     public function setCnpj($cnpj)
     {
         $this->attributes['cnpj'] = preg_replace('~.*(\d{2})\.(\d{3})\.(\d{3})\/(\d{4})\-(\d{2}).*~', '$1$2$3$4$5', $cnpj);
-    }
+    }    
 
     public function getCnpj()
     {
-        $cnpj = $this->attributes['cnpj'];
+        return self::getCnjpFormatado($this->attributes['cnpj']);
+    }
+
+    public static function getCnjpFormatado($cnpj)
+    {
         if($cnpj == null)
             return null;
 
@@ -75,7 +84,7 @@ class Empresa extends Model
             return null;
 
         return preg_replace('~.*(\d{5})(\d{3}).*~', '$1-$2', $cep);
-    }
+    } 
  
     private static function getFiltroByQuery($query = null)
     {

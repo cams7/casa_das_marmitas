@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Validator;
 use DB;
 
@@ -52,12 +53,15 @@ class EntregadorController extends Controller
         // read more on validation at http://laravel.com/docs/validation
 
         $validator = Validator::make($request->all(), $this->getRoles());
+        
+        $this->setNomeEmpresa($request);      
 
         /*$validator->after(function ($validator) {
             //if ($this->somethingElseIsInvalid()) {
                 $validator->errors()->add('field', 'Something is wrong with this field!');
             //}
-        });*/
+        });*/ 
+              
 
         if ($validator->fails()) 
             return redirect()->back()->with('empresa_id', $request->input('empresa_id'))->withInput()->withErrors($validator);
@@ -116,6 +120,8 @@ class EntregadorController extends Controller
         // read more on validation at http://laravel.com/docs/validation
         
         $validator = Validator::make($request->all(), $this->getRoles());
+
+        $this->setNomeEmpresa($request);
 
         /*$validator->after(function ($validator) {
             //if ($this->somethingElseIsInvalid()) {
@@ -183,5 +189,15 @@ class EntregadorController extends Controller
         $entregador->setCpf($request->input('cpf'));
         $entregador->rg = $request->input('rg');
         $entregador->setCelular($request->input('celular'));       
+    }
+
+    private function setNomeEmpresa(Request &$request)
+    {
+        $empresaId = $request->input('empresa_id');
+        if($empresaId !== '')
+        {   
+            $empresa = Empresa::where('id', '=', $empresaId)->select('nome', 'cnpj')->get()[0];
+            $request->merge(['empresa_nome' => Empresa::getNomeWithCnjpFormatado($empresa->nome, $empresa->cnpj)]);
+        }
     }
 }
